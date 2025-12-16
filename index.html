@@ -185,7 +185,7 @@
         }
 
         .content p {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .content ul, .content ol {
@@ -195,6 +195,15 @@
 
         .content li {
             margin-bottom: 0.5rem;
+        }
+
+        .content h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content h3:first-of-type {
+            margin-top: 0;
         }
 
         /* Featured image styling */
@@ -215,6 +224,79 @@
             font-size: 0.9rem;
             color: var(--color-text-light);
             font-style: italic;
+        }
+
+        /* Tagline styling */
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--color-accent-primary);
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--color-accent-secondary) 0%, #d4e8ed 100%);
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--color-accent-primary);
+            margin: 1.5rem 0;
+        }
+
+        /* Checkmark list styling */
+        .checkmark-list {
+            margin: 1rem 0 1.5rem 0;
+        }
+
+        .checkmark-list p {
+            margin-bottom: 0.4rem;
+            padding-left: 0.5rem;
+        }
+
+        /* Steps container styling */
+        .steps-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 200px;
+            background: var(--color-surface);
+            border-radius: 8px;
+            padding: 1.5rem;
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: box-shadow 0.3s;
+        }
+
+        .step:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .step-number {
+            background: var(--color-accent-primary);
+            color: white;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content strong {
+            color: var(--color-accent-primary);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content p {
+            margin: 0;
+            color: var(--color-text-light);
         }
 
         /* Team section */
@@ -273,6 +355,16 @@
             text-decoration: underline;
         }
 
+        /* Content links */
+        .content a {
+            color: var(--color-text-light);
+            text-decoration: underline;
+        }
+
+        .content a:hover {
+            color: var(--color-accent-primary);
+        }
+
         /* Hidden sections */
         .hidden {
             display: none;
@@ -322,6 +414,8 @@
             <li><a onclick="showSection('team')" class="nav-text" data-en="Team" data-ja="チーム"></a></li>
             <li><a onclick="showSection('getting-started')" class="nav-text" data-en="Getting Started" data-ja="はじめに"></a></li>
             <li><a onclick="showSection('partners')" class="nav-text" data-en="Partners" data-ja="協力機関"></a></li>
+            <li><a onclick="showSection('resources')" class="nav-text" data-en="Resources" data-ja="調査リソース"></a></li>
+            <li><a onclick="showSection('sdgs')" class="nav-text" data-en="SDGs" data-ja="持続可能性"></a></li>
             <li><a onclick="showSection('blog')" class="nav-text" data-en="Blog" data-ja="ブログ"></a></li>
         </ul>
         <div class="language-switch">
@@ -347,9 +441,10 @@
                 <div class="lang-en">
                     <h2>Drawing from the Crowd</h2>
                     <p><strong>A Citizen Science Platform for Mapping Ukiyo-e Cultural Geography</strong></p>
-                    <p>Drawing from the Crowd began as a six-month research initiative (August 2024–January 2025) funded by The Nippon Foundation's Social Innovators Collaboration (NSIC), developed in collaboration with the University of Zurich's Chair of East Asian Art History. Building on this foundation, we secured implementation funding through a Career Grant from the Graduate Campus at the University of Zurich.</p>
-                    <p>The platform launched publicly in October 2025. We invite you to join our growing community of citizen scientists helping to reveal how Edo-period prints positioned their viewers to experience Japan's famous landscapes.</p>
-                    <p>By exploring the relationship between depicted and actual landscapes, we deepen our understanding of Japan's historical geography while highlighting the importance of cultural and environmental preservation. Your contributions help scholars across disciplines refine our understanding of spatial representation in early modern Japanese visual culture.</p>
+                    <p class="tagline">Mapping Japan's Historical Landscapes: Join Our Citizen Science Project!</p>
+                    <p><em>Drawing from the Crowd</em> began as a six-month research initiative (August 2024–January 2025) funded by The Nippon Foundation's Social Innovators Collaboration (NSIC), developed in collaboration with the University of Zurich's Chair of East Asian Art History. Building on this foundation, we secured implementation funding through a Career Grant from the Graduate Campus at the University of Zurich.</p>
+                    <p>The platform launched publicly in October 2025. We invite you to join our growing community of citizen scientists helping to reveal how Edo-period (1603–1868) prints (<em>ukiyo-e</em>) positioned their viewers to experience Japan's famous landscapes.</p>
+                    <p>By exploring the relationship between depicted landscapes and modern-day topological models, we deepen our understanding of Japan's historical geography while highlighting the importance of cultural and environmental preservation. Your contributions help scholars across disciplines refine our understanding of spatial representation in early modern Japanese visual culture.</p>
                     
                     <figure class="featured-image">
                         <img src="smapshotScreenshot.png" alt="Smapshot platform showing a Hokusai print of Lake Suwa aligned with modern 3D terrain">
@@ -358,11 +453,12 @@
                 </div>
                 <!-- Japanese content -->
                 <div class="lang-ja hidden japanese-text">
-                    <h2>集合知を描く</h2>
+                    <h2>Drawing from the Crowd / 集合知を描く</h2>
                     <p><strong>市民科学による浮世絵文化地理マッピングプラットフォーム</strong></p>
-                    <p>「集合知を描く」は、日本財団ソーシャル・イノベーター・コラボレーション（NSIC）の助成を受け、チューリッヒ大学東アジア美術史講座との国際協力の下、6ヶ月間の研究イニシアチブ（2024年8月～2025年1月）として始まりました。その後、チューリッヒ大学大学院キャンパスからのキャリア・グラントによる実装資金を獲得しました。</p>
-                    <p>プラットフォームは2025年10月に一般公開いたしました。江戸時代の版画が鑑賞者をどのような視点に置いて日本の名所を体験させたかを解明する、市民科学者コミュニティへのご参加をお待ちしております。</p>
-                    <p>描かれた風景と実際の風景との関係を探ることで、日本の歴史的地理への理解を深め、文化遺産および環境保全の重要性を浮き彫りにすることができます。皆様のご協力により、近世日本の視覚文化における空間表現についての学際的な理解がより深まることが期待されます。</p>
+                    <p class="tagline">日本の歴史的景観をマッピング：市民科学プロジェクトに参加してみませんか？</p>
+                    <p>「Drawing from the Crowd / 集合知を描く」は、日本財団ソーシャル・イノベーター・コラボレーション（NSIC）の助成を受け、チューリッヒ大学東アジア美術史講座との国際協力の下、6ヶ月間の研究イニシアチブ（2024年8月〜2025年1月）として始まりました。その後、チューリッヒ大学大学院キャンパスからのキャリア・グラントによる実装資金を得て、さらなる発展を遂げています。</p>
+                    <p>プラットフォームは2025年10月に一般公開いたしました。江戸時代（1603–1868）の版画（浮世絵）が鑑賞者をどのような視点に置いて日本の名所を体験させたかを解明する、市民科学者コミュニティへのご参加をお待ちしております。</p>
+                    <p>描かれた風景と現代の地形モデルとの関係を探ることで、日本の歴史的地理への理解を深め、文化遺産および環境保全の重要性を浮き彫りにすることができます。皆様のご協力により、近世日本の視覚文化における空間表現についての学際的な理解がより深まることが期待されます。</p>
                     
                     <figure class="featured-image">
                         <img src="smapshotScreenshot.png" alt="Smapshotプラットフォーム：北斎の諏訪湖の風景を現代の3D地形と照合">
@@ -380,10 +476,10 @@
                 <!-- English -->
                 <div class="lang-en">
                     <h2>Project Overview: Discovering Japan's Historical Landscapes</h2>
-                    <p>Join us in uncovering how Japanese woodblock prints positioned their viewers to experience landscapes during the Tokugawa period (1603–1868). Our platform invites you to participate in research that combines citizen science with digital humanities to map and analyze the spatial relationships encoded in ukiyo-e prints.</p>
+                    <p>Join us in uncovering how Japanese woodblock prints positioned their viewers to experience landscapes during the Edo period (1603–1868). Our platform invites you to participate in research that combines citizen science with digital humanities to map and analyze the spatial relationships encoded in <em>ukiyo-e</em> prints.</p>
                     
                     <h3>The Project</h3>
-                    <p>"Drawing from the Crowd: A Citizen Science Platform for Mapping Ukiyo-e Cultural Geography" began as one of five projects selected for the 2024 Nippon Social Innovator's Collaboration (NSIC), funded by The Nippon Foundation. Building on this foundation, we secured implementation funding through a Career Grant from the Graduate Campus at the University of Zurich.</p>
+                    <p>"<em>Drawing from the Crowd</em>: A Citizen Science Platform for Mapping Ukiyo-e Cultural Geography" began as one of five projects selected for the 2024 Nippon Social Innovator's Collaboration (NSIC), funded by The Nippon Foundation. Building on this foundation, we secured implementation funding through a Career Grant from the Graduate Campus at the University of Zurich.</p>
                     <p>The platform launched publicly in October 2025, and we began citizen science outreach in December 2025. We are now actively building our community of contributors while expanding our print collection through partnerships with institutions worldwide.</p>
                     <p>This project aligns with Sustainable Development Goals 4: Quality Education and 11: Sustainable Communities, demonstrating how citizen-generated data can bridge the gap between academic research and public engagement.</p>
 
@@ -391,11 +487,11 @@
                     <ul>
                         <li><strong>Build Community through Citizen Science:</strong> Foster appreciation for Japanese cultural heritage and awareness of historical landscapes at local and international levels.</li>
                         <li><strong>Grow Knowledge Among Project Members:</strong> Enhance expertise in interdisciplinary, multilingual research at the intersection of art history and digital humanities.</li>
-                        <li><strong>Advance Print Scholarship:</strong> Establish a methodology to assess how ukiyo-e prints encoded spatial relationships and positioned viewers to experience landscapes.</li>
+                        <li><strong>Advance Print Scholarship:</strong> Establish a methodology to assess how <em>ukiyo-e</em> prints encoded spatial relationships and positioned viewers to experience landscapes.</li>
                     </ul>
 
                     <h3>Our Mission</h3>
-                    <p>To create an engaging, accessible platform where anyone interested in Japanese landscapes and culture can contribute to genuine scholarship. Through collaborative georeferencing, we aim to distinguish between prints grounded in topographic observation and those shaped primarily by visual conventions and artistic templates.</p>
+                    <p>To create an engaging, accessible platform where anyone interested in Japanese landscapes and culture can contribute to scholarship. Through collaborative georeferencing, we aim to distinguish between prints grounded in topographic observation and those shaped primarily by visual conventions and artistic templates.</p>
 
                     <h3>How You Can Contribute</h3>
                     <ul>
@@ -408,7 +504,7 @@
                     <p>Our project addresses two key questions:</p>
                     <ol>
                         <li>How can we collectively identify which print features reflect actual topography and which are rooted in visual conventions?</li>
-                        <li>What can this reveal about how Edo-period prints positioned their viewers to experience Japan's famous places (meisho)?</li>
+                        <li>What can this reveal about how Edo-period prints positioned their viewers to experience Japan's famous places (<em>meisho</em>)?</li>
                     </ol>
 
                     <h3>Platform Features</h3>
@@ -421,12 +517,16 @@
                     </ul>
 
                     <h3>Data and Resources</h3>
-                    <p>We work with:</p>
+                    <p><strong>Image and metadata sourced from:</strong></p>
                     <ul>
-                        <li>A growing collection of digitized prints from the <strong>Metropolitan Museum of Art (New York)</strong> and the <strong>Art Research Center at Ritsumeikan University (Kyoto)</strong></li>
-                        <li>Modern terrain data from the <strong>Geospatial Information Authority of Japan (GSI)</strong></li>
-                        <li>The <strong>Smapshot</strong> georeferencing platform developed by <strong>HEIG-VD/EPFL</strong></li>
+                        <li><a href="https://www.metmuseum.org/art/collection/search" target="_blank"><strong>Metropolitan Museum of Art</strong></a> (New York)</li>
+                        <li><a href="https://www.dh-jac.net/db/nishikie/search_portal.php?lang=en" target="_blank"><strong>Japanese Prints (Ukiyo-e) and Paintings Portal Database</strong></a> at the Art Research Center, Ritsumeikan University (Kyoto)</li>
+                        <li><a href="https://jpsearch.go.jp/" target="_blank"><strong>Japan Search</strong></a>: <a href="https://www.ndl.go.jp/en/" target="_blank">National Diet Library</a>, <a href="https://www.culture.city.taito.lg.jp/en" target="_blank">Taito City Lifelong Learning Center</a></li>
                     </ul>
+                    <p><strong>Terrain data from:</strong> <a href="https://www.gsi.go.jp/ENGLISH/" target="_blank">Geospatial Information Authority of Japan (GSI)</a></p>
+                    <p><strong>Data enrichment utilizing:</strong> <a href="https://www.wikidata.org/wiki/" target="_blank">Wikidata</a> and <a href="https://geohack.toolforge.org/" target="_blank">GeoHack Toolforge</a></p>
+                    <p><strong>Visualization and citizen science platform:</strong> <a href="https://smapshot.heig-vd.ch/" target="_blank">Smapshot (HEIG-VD)</a></p>
+                    <p><em>The project would like to thank all partners – only together, Digital Humanities become possible.</em></p>
                 </div>
 
                 <!-- Japanese -->
@@ -435,7 +535,7 @@
                     <p>当プラットフォームは、浮世絵に描かれた日本の歴史的景観をマッピングし分析することを目的としています。市民科学とデジタル人文学を組み合わせた研究への皆様の参加を歓迎します。江戸時代（1603〜1868年）の版画が鑑賞者をどのような視点に置いて風景を体験させたのか、我々と一緒に解明しませんか。</p>
                     
                     <h3>プロジェクト</h3>
-                    <p>当プロジェクト「集合知を描く：市民科学による浮世絵文化地理マッピングプラットフォーム」は、2024年度日本財団ソーシャル・イノベーター・コラボレーション（NSIC）に採択された5つの事業のうちの1つとして始まりました。この基盤の上に、チューリッヒ大学大学院キャンパスからのキャリア・グラントによる実装資金を獲得しました。</p>
+                    <p>当プロジェクト「集合知を描く [<em>Drawing from the Crowd</em>]」は、2024年度日本財団ソーシャル・イノベーター・コラボレーション（NSIC）に採択された5つの事業のうちの1つとして始まりました。この基盤の上に、チューリッヒ大学大学院キャンパスからのキャリア・グラントによる実装資金を獲得しました。</p>
                     <p>プラットフォームは2025年10月に一般公開され、2025年12月より市民科学アウトリーチを開始しました。現在、世界中の機関とのパートナーシップを通じて版画コレクションを拡大しながら、貢献者コミュニティの構築を積極的に進めています。</p>
                     <p>このプラットフォームは、国連の持続可能な開発目標（SDGs）の目標4「質の高い教育をみんなに」及び目標11「住み続けられるまちづくりを」に貢献するものであり、市民により生成されたデータが学術研究と市民参加の橋渡しをいかにできるかを実証しています。</p>
 
@@ -447,7 +547,7 @@
                     </ul>
 
                     <h3>我々の使命</h3>
-                    <p>日本の風景や文化に興味を持つ人々が、真の学術研究に貢献できる、魅力的でアクセスし易いプラットフォームの構築に努めます。共同マッピングと分析を通じて、地形観察に基づいた作品と視覚的な伝統に触発された作品とを区別することを目指します。</p>
+                    <p>日本の風景や文化に興味を持つ人々が、学術研究に貢献できる、魅力的でアクセスし易いプラットフォームの構築に努めます。共同マッピングと分析を通じて、地形観察に基づいた作品と視覚的な伝統に触発された作品とを区別することを目指します。</p>
 
                     <h3>市民による貢献</h3>
                     <ul>
@@ -473,12 +573,16 @@
                     </ul>
 
                     <h3>データとリソース</h3>
-                    <p>当プロジェクトは、以下のリソースを使用しています：</p>
+                    <p><strong>画像・メタデータの提供元：</strong></p>
                     <ul>
-                        <li><strong>メトロポリタン美術館（ニューヨーク）</strong>や<strong>立命館大学アートリサーチセンター（京都）</strong>などの機関提供の浮世絵デジタル画像</li>
-                        <li><strong>国土地理院（GSI）</strong>提供の現代の地形データ</li>
-                        <li><strong>HEIG-VD/EPFL</strong>が開発した<strong>Smapshot</strong>ジオリファレンス・プラットフォーム</li>
+                        <li><a href="https://www.metmuseum.org/art/collection/search" target="_blank"><strong>メトロポリタン美術館</strong></a>（ニューヨーク）</li>
+                        <li><a href="https://www.dh-jac.net/db/nishikie/search_portal.php?lang=en" target="_blank"><strong>浮世絵・日本絵画ポータルデータベース</strong></a>（立命館大学アートリサーチセンター、京都）</li>
+                        <li><a href="https://jpsearch.go.jp/" target="_blank"><strong>ジャパンサーチ</strong></a>：<a href="https://www.ndl.go.jp/en/" target="_blank">国立国会図書館</a>、<a href="https://www.culture.city.taito.lg.jp/en" target="_blank">台東区生涯学習センター</a></li>
                     </ul>
+                    <p><strong>地形データの提供元：</strong><a href="https://www.gsi.go.jp/ENGLISH/" target="_blank">国土地理院（GSI）</a></p>
+                    <p><strong>データエンリッチメント：</strong><a href="https://www.wikidata.org/wiki/" target="_blank">Wikidata</a>および<a href="https://geohack.toolforge.org/" target="_blank">GeoHack Toolforge</a></p>
+                    <p><strong>可視化・市民科学プラットフォーム：</strong><a href="https://smapshot.heig-vd.ch/" target="_blank">Smapshot（HEIG-VD）</a></p>
+                    <p>本プロジェクトはすべてのパートナーに感謝申し上げます。協力があってこそ、デジタル・ヒューマニティーズは可能になります。</p>
                 </div>
             </div>
         </div>
@@ -495,7 +599,7 @@
                     <div class="team-grid">
                         <div class="team-member">
                             <h4>Dr. Stephanie Santschi</h4>
-                            <p><strong>Responsible for project conception, management, publishing, and networking; currently postdoctoral researcher at the Chair of East Asian Art History, Department of Art History, University of Zurich (specializing in Japanese art history).</strong></p>
+                            <p><strong>Responsible for project conception, management, publishing, and networking; currently postdoctoral researcher at the <a href="https://www.khist.uzh.ch/en/chairs/ostasien/team/Stephanie-Santschi.html" target="_blank">Chair of East Asian Art History</a>, Department of Art History, University of Zurich (specializing in Japanese art history).</strong></p>
                             <p>She received her PhD from the University of Zurich (2023), and holds an MA Museum Studies from the University of East Anglia (2016). Her research interests include art history and digital humanities, particularly the representation of Japanese geography in early modern reproductive visual culture. She also supports citizen science as a research methodology in the humanities.</p>
                             <p><a href="mailto:stephanie@theprintlab.org" class="contact">stephanie@theprintlab.org</a></p>
                             <p><em>"We see this research community as a way to connect academic research with the general public. Please contact us with any inquiries or suggestions about participation."</em></p>
@@ -507,11 +611,11 @@
                         <div class="team-member">
                             <h4>Dr. Drew Richardson</h4>
                             <p><strong>Team Collaborator</strong></p>
-                            <p>Instructor for Cowell College and the Department of History at the University of California Santa Cruz, serving as Director for Curriculum Development in the Okinawa Memories Initiative. Research examines media and place-making practices in native Japanese ethnography, folklore and monsters.</p>
+                            <p>Instructor for Cowell College and the Department of History at the University of California Santa Cruz, serving as Director for Curriculum Development in the <em>Okinawa Memories Initiative</em>. Research examines media and place-making practices in native Japanese ethnography, folklore and monsters.</p>
                         </div>
                         <div class="team-member">
                             <h4>Himanshu Panday</h4>
-                            <p><strong>Co-founder of Dignity in Difference, specializing in digital prototyping, coding, and AI-assisted workflows</strong></p>
+                            <p><strong>Co-founder of <a href="https://www.dignityindifference.org/" target="_blank">Dignity in Difference</a>, specializing in digital prototyping, coding, and AI-assisted workflows</strong></p>
                             <p>PhD from Indian Institute of Technology, Kanpur. Specializes in digital anthropology, particularly citizen science platform development.</p>
                             <p><em>"I'm interested in curating and exploring new algorithms for citizen science in this project."</em></p>
                         </div>
@@ -536,10 +640,10 @@
                     <div class="team-grid">
                         <div class="team-member">
                             <h4>サンチ・ステファニー</h4>
-                            <p><strong>プロジェクトの構想、管理、出版、ネットワーキングを担当。現在、チューリッヒ大学美術史学科東アジア美術史講座の博士研究員（日本美術史専門）。</strong></p>
+                            <p><strong>プロジェクトの構想、管理、出版、ネットワーキングを担当。現在、チューリッヒ大学美術史学科<a href="https://www.khist.uzh.ch/en/chairs/ostasien/team/Stephanie-Santschi.html" target="_blank">東アジア美術史講座</a>の博士研究員（日本美術史専門）。</strong></p>
                             <p>チューリッヒ大学で博士号取得（2023年）、イースト・アングリア大学で博物館学修士号取得（2016年）。研究分野は美術史とデジタル人文学、特に近世複製視覚文化における日本地理の表象。人文学における研究方法論としての市民科学も推進している。</p>
                             <p><a href="mailto:stephanie@theprintlab.org" class="contact">stephanie@theprintlab.org</a></p>
-                            <p><em>「この研究コミュニティを、学術研究と一般市民をつなぐ場として捉えています。参加に関するお問い合わせやご提案がございましたら、お気軽にご連絡ください。」</em></p>
+                            <p>「この研究コミュニティを、学術研究と一般市民をつなぐ場として捉えています。参加に関するお問い合わせやご提案がございましたら、お気軽にご連絡ください。」</p>
                         </div>
                     </div>
 
@@ -548,13 +652,13 @@
                         <div class="team-member">
                             <h4>リチャードソン・ドリュー</h4>
                             <p><strong>チームコラボレーター</strong></p>
-                            <p>カリフォルニア大学サンタクルーズ校歴史学部及びコウェル・カレッジ講師。Okinawa Memories Initiative カリキュラム開発ディレクター。民俗学、特に妖怪、超自然的な歴史、地域のアイデンティティなどが研究対象。</p>
+                            <p>カリフォルニア大学サンタクルーズ校歴史学部及びコウェル・カレッジ講師。<em>Okinawa Memories Initiative</em> カリキュラム開発ディレクター。民俗学、特に妖怪、超自然的な歴史、地域のアイデンティティなどが研究対象。</p>
                         </div>
                         <div class="team-member">
                             <h4>パンダイ・ヒマンシュ</h4>
-                            <p><strong>Dignity in Difference共同創設者。デジタルプロトタイピング、コーディング、AI支援ワークフロー担当</strong></p>
+                            <p><strong><a href="https://www.dignityindifference.org/" target="_blank">Dignity in Difference</a>共同創設者。デジタルプロトタイピング、コーディング、AI支援ワークフロー担当</strong></p>
                             <p>インド工科大学カーンプル校より博士号取得。デジタル人類学、特に市民科学プラットフォーム開発を専門。</p>
-                            <p><em>「このプロジェクトで市民科学の為の新しいアルゴリズムをキュレーションし、探求することに興味があります。」</em></p>
+                            <p>「このプロジェクトで市民科学の為の新しいアルゴリズムをキュレーションし、探求することに興味があります。」</p>
                         </div>
                         <div class="team-member">
                             <h4>辻 博仁</h4>
@@ -567,7 +671,7 @@
                     <h3>資金提供・ご支援</h3>
                     <p><strong>プロトタイプ開発：</strong>日本財団奨学金受賞者の同窓会ネットワークである日本財団スカラーズ・アソシエーション (TNFSA) より研究助成金が提供されました。</p>
                     <p><strong>実装資金：</strong>チューリッヒ大学大学院キャンパスより、研究代表者サンチへのキャリア・グラントとして提供されました。</p>
-                    <p><em>両機関のご支援に深く感謝申し上げます。</em></p>
+                    <p>両機関のご支援に深く感謝申し上げます。</p>
                 </div>
             </div>
         </div>
@@ -579,19 +683,43 @@
             <div class="content">
                 <!-- English -->
                 <div class="lang-en">
-                    <h2>Getting Started: How to Participate</h2>
-                    <h3>How It Works: 3 Simple Steps</h3>
-                    <p><strong>Step 1: SELECT</strong> — Choose a print from our collection</p>
-                    <p><strong>Step 2: LOCATE</strong> — Identify where you would stand to see this view</p>
-                    <p><strong>Step 3: ALIGN</strong> — Match the print with modern terrain</p>
+                    <h2>Getting Started</h2>
+                    <p><strong>How to Participate</strong></p>
+                    <p class="tagline">Three simple steps to contribute to our research!</p>
+
+                    <div class="steps-container">
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <strong>SELECT</strong>
+                                <p>Choose a print from our collection</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <strong>LOCATE</strong>
+                                <p>Identify where you would stand to see this view</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <strong>ALIGN</strong>
+                                <p>Match the print with modern terrain</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>Want to see the full process? Check out our <a href="https://docs.google.com/document/d/1L7O5tMp37jLTeEAryeUKlki5N8v0qTrIXv9ugi_bIR0/edit?usp=sharing" target="_blank">extended case study</a> showing the research process step by step.</p>
 
                     <h3>Your Contribution Matters!</h3>
-                    <ul>
-                        <li>✓ No Japanese language required</li>
-                        <li>✓ No art history expertise needed</li>
-                        <li>✓ 15–30 minutes per print</li>
-                        <li>✓ Every attempt helps—even "failed" ones provide valuable data!</li>
-                    </ul>
+                    <div class="checkmark-list">
+                        <p>✓ No Japanese language required</p>
+                        <p>✓ No art history expertise needed</p>
+                        <p>✓ 15–30 minutes per print</p>
+                        <p>✓ Every attempt helps—even "failed" ones provide valuable data!</p>
+                    </div>
 
                     <h3>What You'll Need</h3>
                     <ul>
@@ -620,24 +748,48 @@
 
                 <!-- Japanese -->
                 <div class="lang-ja hidden japanese-text">
-                    <h2>参加方法：ガイド</h2>
-                    <h3>参加方法：3つの簡単なステップ</h3>
-                    <p><strong>ステップ1：選ぶ</strong> — コレクションから版画を選択</p>
-                    <p><strong>ステップ2：探す</strong> — この風景を見る視点（立ち位置）を特定</p>
-                    <p><strong>ステップ3：合わせる</strong> — 版画と現代の地形を照合</p>
+                    <h2>参加方法</h2>
+                    <p><strong>ガイド</strong></p>
+                    <p class="tagline">3つの簡単なステップで研究に貢献できます！</p>
+
+                    <div class="steps-container">
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <strong>選ぶ</strong>
+                                <p>コレクションから版画を選択</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <strong>探す</strong>
+                                <p>この風景を見る視点（立ち位置）を特定</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <strong>合わせる</strong>
+                                <p>版画と現代の地形を照合</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>詳しいプロセスをご覧になりたい方は、研究過程をステップバイステップで紹介した<a href="https://docs.google.com/document/d/1L7O5tMp37jLTeEAryeUKlki5N8v0qTrIXv9ugi_bIR0/edit?usp=sharing" target="_blank">詳細なケーススタディ</a>をご参照ください。</p>
 
                     <h3>あなたの参加が研究を前進させます！</h3>
-                    <ul>
-                        <li>✓ 日本語能力は不要です</li>
-                        <li>✓ 美術史の専門知識は必要ありません</li>
-                        <li>✓ 1作品あたり15～30分</li>
-                        <li>✓ 「失敗」した試みでも貴重なデータになります！</li>
-                    </ul>
+                    <div class="checkmark-list">
+                        <p>✓ 日本語能力は不要です</p>
+                        <p>✓ 美術史の専門知識は必要ありません</p>
+                        <p>✓ 1作品あたり15～30分</p>
+                        <p>✓ 「失敗」した試みでも貴重なデータになります！</p>
+                    </div>
 
                     <h3>必要なもの</h3>
                     <ul>
                         <li>Google ChromeまたはMicrosoft Edgeブラウザ（最近はEdgeの動作が安定しています）</li>
-                        <li><em>ヒント：エラーが発生した場合は、ブラウザのキャッシュをクリアしてみてください</em></li>
+                        <li>ヒント：エラーが発生した場合は、ブラウザのキャッシュをクリアしてみてください</li>
                         <li>15～30分のお時間</li>
                         <li>日本の文化や風景への関心</li>
                         <li>任意：貢献を記録するためのアカウント作成</li>
@@ -688,12 +840,19 @@
                     <p><strong>Geospatial Information Authority of Japan (GSI)</strong></p>
                     <p>Modern Japanese terrain data enabling comparison between historical prints and contemporary topography.</p>
                     <p><a href="https://fgd.gsi.go.jp/" target="_blank">Website: https://fgd.gsi.go.jp/</a></p>
+
+                    <h3>Additional Data Sources</h3>
+                    <ul>
+                        <li><a href="https://jpsearch.go.jp/" target="_blank">JapanSearch (National Diet Library)</a></li>
+                        <li><a href="https://www.city.taito.lg.jp/" target="_blank">Taito City Lifelong Learning Center</a></li>
+                        <li>Data enrichment via <a href="https://www.wikidata.org/" target="_blank">Wikidata</a> and <a href="https://www.mediawiki.org/wiki/GeoHack" target="_blank">GeoHack Toolforge</a></li>
+                    </ul>
                 </div>
 
                 <!-- Japanese -->
                 <div class="lang-ja hidden japanese-text">
                     <h2>協力機関・リソース</h2>
-                    <p>「集合知を描く」は、デジタル人文学、文化遺産、地理空間研究の分野における主要機関との協力により実現しています。</p>
+                    <p>「集合知を描く [<em>Drawing from the Crowd</em>]」は、デジタル人文学、文化遺産、地理空間研究の分野における主要機関との協力により実現しています。</p>
 
                     <h3>技術パートナー</h3>
                     <p><strong>Smapshot Lab（HEIG-VD、EPFL）</strong></p>
@@ -712,6 +871,131 @@
                     <p><strong>国土地理院（GSI）</strong></p>
                     <p>歴史的版画と現代の地形を比較するための日本の地形データを提供。</p>
                     <p><a href="https://fgd.gsi.go.jp/" target="_blank">ウェブサイト: https://fgd.gsi.go.jp/</a></p>
+
+                    <h3>その他のデータソース</h3>
+                    <ul>
+                        <li><a href="https://jpsearch.go.jp/" target="_blank">ジャパンサーチ（国立国会図書館）</a></li>
+                        <li><a href="https://www.city.taito.lg.jp/" target="_blank">台東区生涯学習センター</a></li>
+                        <li><a href="https://www.wikidata.org/" target="_blank">Wikidata</a>・<a href="https://www.mediawiki.org/wiki/GeoHack" target="_blank">GeoHack Toolforge</a> によるデータ拡充</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Resources Section -->
+    <section id="resources">
+        <div class="container">
+            <div class="content">
+                <!-- English -->
+                <div class="lang-en">
+                    <h2>Research Resources</h2>
+                    <p><strong>External tools for citizen scientists</strong></p>
+                    <p class="tagline">Helpful resources to consult when researching print alignments</p>
+                    <p>When working on georeferencing <em>ukiyo-e</em> prints, these external resources can help you identify locations, verify place names, and understand the historical context of the landscapes depicted.</p>
+
+                    <h3>For Participants</h3>
+                    <ul>
+                        <li><strong>Google Maps</strong> (enable "Historical landmarks" layer) — useful for identifying modern-day landmarks and terrain features</li>
+                        <li><strong>Google Street View</strong> — helpful for finding commemorative plaques and monuments that mark historical sites</li>
+                        <li><strong>Wikipedia</strong> — excellent for researching Japanese place names, historical background, and famous locations (<em>meisho</em>)</li>
+                        <li><strong>Online museum databases</strong> — compare different impressions of the same print and read curatorial notes</li>
+                    </ul>
+
+                    <h3>Historical Sources</h3>
+                    <ul>
+                        <li><strong>Edo period maps</strong> — many are available digitally and can help understand historical geography and place names</li>
+                        <li><strong><em>Meisho zue</em> (名所図会)</strong> — illustrated guides to famous places from the Edo period, providing contemporary descriptions of locations</li>
+                        <li><strong>Temple and shrine records</strong> — useful for verifying historical structures and their locations</li>
+                        <li><strong>Historical photographs</strong> — Meiji and Taisho era photos can bridge the gap between Edo prints and modern landscapes</li>
+                    </ul>
+                </div>
+
+                <!-- Japanese -->
+                <div class="lang-ja hidden japanese-text">
+                    <h2>調査リソース</h2>
+                    <p><strong>市民科学者向け外部ツール</strong></p>
+                    <p class="tagline">版画の位置合わせを調査する際に役立つリソース</p>
+                    <p>浮世絵版画のジオリファレンス作業を行う際、以下の外部リソースが場所の特定、地名の確認、描かれた風景の歴史的背景の理解に役立ちます。</p>
+
+                    <h3>参加者向け</h3>
+                    <ul>
+                        <li><strong>Googleマップ</strong>（「歴史的建造物」レイヤーを有効化）— 現代のランドマークや地形の特定に便利</li>
+                        <li><strong>Googleストリートビュー</strong> — 歴史的な場所を示す記念碑やプレートの発見に役立ちます</li>
+                        <li><strong>Wikipedia</strong> — 日本の地名、歴史的背景、名所の調査に最適</li>
+                        <li><strong>オンライン美術館データベース</strong> — 同じ版画の異なる摺りを比較し、学芸員の解説を読むことができます</li>
+                    </ul>
+
+                    <h3>歴史資料</h3>
+                    <ul>
+                        <li><strong>江戸時代の地図</strong> — 多くがデジタル公開されており、歴史的な地理や地名の理解に役立ちます</li>
+                        <li><strong>名所図会</strong> — 江戸時代の名所案内図で、当時の場所の説明が記載されています</li>
+                        <li><strong>寺社の記録</strong> — 歴史的建造物とその所在地の確認に有用</li>
+                        <li><strong>歴史写真</strong> — 明治・大正時代の写真は、江戸時代の版画と現代の風景をつなぐ手がかりになります</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SDGs Section -->
+    <section id="sdgs">
+        <div class="container">
+            <div class="content">
+                <!-- English -->
+                <div class="lang-en">
+                    <h2>Contributing to Global Sustainability</h2>
+                    <p><strong>Aligning with the United Nations Sustainable Development Goals</strong></p>
+                    <p class="tagline">How cultural heritage research contributes to broader social and environmental objectives</p>
+
+                    <h3>SDG 4: Quality Education</h3>
+                    <p><strong>Democratizing Research Through Citizen Science</strong></p>
+                    <p>Our platform makes academic research accessible to anyone with curiosity and an internet connection. Participants learn about Japanese art history, geography, and digital humanities while contributing to scholarship. The bilingual interface (Japanese/English) ensures global accessibility, while our detailed guides transform complex research methods into approachable, step-by-step processes.</p>
+
+                    <h3>SDG 11: Sustainable Cities and Communities</h3>
+                    <p><strong>Preserving Cultural Heritage Digitally</strong></p>
+                    <p>By georeferencing historical prints, we create a digital record of how landscapes were perceived and represented centuries ago. This data reveals environmental changes—rivers that have been filled in, mountains quarried, coastlines altered—providing valuable context for understanding urban development and environmental transformation. Our work supports cultural preservation by making historical knowledge accessible and by documenting the relationship between artistic heritage and physical places.</p>
+
+                    <h3>Bridging the Digital Divide</h3>
+                    <p>In an age of rapid AI advancement, <em>Drawing from the Crowd</em> demonstrates how citizen-generated data can bridge the gap between humanity and its digital environment. Our participatory approach shows that meaningful contributions to knowledge don't require technical expertise—just careful observation and cultural curiosity.</p>
+
+                    <h3>Your Impact</h3>
+                    <p>By participating, you help:</p>
+                    <div class="checkmark-list">
+                        <p>✓ Preserve cultural heritage for future generations</p>
+                        <p>✓ Document environmental and landscape changes over centuries</p>
+                        <p>✓ Make art history research accessible at global scale</p>
+                        <p>✓ Connect local knowledge with international scholarship</p>
+                        <p>✓ Reveal how Japanese prints positioned viewers to experience landscapes</p>
+                    </div>
+                </div>
+
+                <!-- Japanese -->
+                <div class="lang-ja hidden japanese-text">
+                    <h2>グローバルな持続可能性への貢献</h2>
+                    <p><strong>国連の持続可能な開発目標（SDGs）との連携</strong></p>
+                    <p class="tagline">文化遺産研究がより広範な社会的・環境的目標にどのように貢献できるか</p>
+
+                    <h3>SDG 4：質の高い教育をみんなに</h3>
+                    <p><strong>市民科学を通じた研究の民主化</strong></p>
+                    <p>当プラットフォームは、好奇心とインターネット環境さえあれば、誰でも学術研究に参加できる機会を提供します。参加者は、日本美術史、地理学、デジタル人文学について学びながら、学術的貢献を行うことができます。日本語と英語のバイリンガル・インターフェースにより、グローバルなアクセシビリティを確保し、詳細なガイドにより複雑な研究手法を段階的に理解しやすいプロセスに変換しています。</p>
+
+                    <h3>SDG 11：住み続けられるまちづくりを</h3>
+                    <p><strong>文化遺産のデジタル保存</strong></p>
+                    <p>歴史的版画をジオリファレンスすることで、数世紀前の風景がどのように認識され、表現されていたかのデジタル記録を作成します。このデータは、埋め立てられた河川、採掘された山、変化した海岸線など、環境の変化を明らかにし、都市開発と環境変化を理解するための貴重な文脈を提供します。</p>
+
+                    <h3>デジタルデバイドの橋渡し</h3>
+                    <p>AI技術が急速に進歩する時代において、「集合知を描く [<em>Drawing from the Crowd</em>]」は、市民が生成したデータが人類とデジタル環境との間のギャップをどのように埋めることができるかを示しています。参加型アプローチにより、知識への有意義な貢献には技術的専門知識は必要なく、注意深い観察と文化的好奇心があれば十分であることを証明しています。</p>
+
+                    <h3>あなたの参加がもたらす影響</h3>
+                    <p>参加することで、以下に貢献できます：</p>
+                    <div class="checkmark-list">
+                        <p>✓ 将来の世代のための文化遺産の保存</p>
+                        <p>✓ 数世紀にわたる環境と景観の変化の記録</p>
+                        <p>✓ グローバル規模での美術史研究のアクセシビリティ向上</p>
+                        <p>✓ 地域の知識と国際的な学術研究の結びつけ</p>
+                        <p>✓ 日本の版画が鑑賞者をどのような視点に置いて風景を体験させたかの解明</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -724,42 +1008,118 @@
                 <!-- English -->
                 <div class="lang-en">
                     <h2>Blog</h2>
+                    <p><strong>Project updates and research insights</strong></p>
+                    
                     <h3>From Prototype to Platform: Our Journey So Far</h3>
                     <p><em>December 2025 | By the Drawing from the Crowd Team</em></p>
                     <p>We're excited to launch the blog for <em>Drawing from the Crowd</em>! This space will share project updates, research insights, and stories from our growing community of citizen scientists.</p>
 
                     <h3>Where It All Began</h3>
                     <p>In August 2024, <em>Drawing from the Crowd</em> was selected as one of five projects for The Nippon Foundation's Social Innovators Collaboration (NSIC). This six-month grant enabled our interdisciplinary team—spanning digital anthropology, spatial history, and Japanese (art) history—to develop a prototype platform for georeferencing ukiyo-e prints.</p>
-
-                    <p>The challenge we set ourselves was ambitious: could we adapt existing crowdsourcing technology, designed for historical photographs, to work with stylized Japanese woodblock prints? Unlike photographs, ukiyo-e prints encode space through cultural conventions—artists might move Mt. Fuji for better composition, elongate beaches for dramatic effect, or combine multiple viewpoints into a single image.</p>
+                    <p>The challenge we set ourselves was ambitious: could we adapt existing crowdsourcing technology, designed for historical photographs, to work with stylized Japanese woodblock prints? Unlike photographs, <em>ukiyo-e</em> prints encode space through cultural conventions—artists might move Mt. Fuji for better composition, elongate beaches for dramatic effect, or combine multiple viewpoints into a single image.</p>
 
                     <h3>Building the Prototype (August 2024–January 2025)</h3>
-                    <p>Working with our technical partners at Smapshot Lab (HEIG-VD), we adapted their monoplotting technology for Japanese prints. Beta testing revealed something exciting: while foreground elements in prints are often manipulated for artistic effect, middle and background terrain maintains consistent relationships with actual geography.</p>
+                    <p>Working with our technical partners at Smapshot Lab (HEIG-VD), we adapted their monoplotting technology for Japanese prints. We sourced images from the Metropolitan Museum of Art's Open Access collection and terrain data from Japan's Geospatial Information Authority. The PI's Postdoctoral Research at the University of Zurich's Chair of East Asian Art History provided the art historical expertise to understand how Edo-period prints encoded spatial relationships and positioned viewers.</p>
+                    <p>Beta testing revealed something exciting: while foreground elements in prints are often manipulated for artistic effect, middle and background terrain maintains consistent relationships with actual geography. This means citizen scientists can successfully georeference prints by focusing on terrain contours rather than iconic features like Mt. Fuji.</p>
+
+                    <h3>Sharing Our Work</h3>
+                    <p>Throughout 2024–2025, PI Santschi, sometimes together with team members, presented <em>Drawing from the Crowd</em> at conferences and workshops across Europe, Japan, and online:</p>
+                    
+                    <p><strong>Late 2025 — Refining details:</strong></p>
+                    <ul>
+                        <li>Sept 2025: "Moving Mountains: Analyzing Spatial Narratives in Ukiyo-e through Citizen Science," <em>International Symposium of the Nihon kinsei bungaku kai</em>, University of Cambridge (UK)</li>
+                        <li>Aug 2025: "<em>Drawing from the Crowd</em>," 19. Deutschsprachiger Japanologentag, Goethe-Universität Frankfurt (DE)</li>
+                        <li>July 2025: "Reconstructing Japan's Scenic Past from Prints," <em>ADHO Digital Humanities Conference</em> (DH2025), with Himanshu Panday, Lisbon (PT)</li>
+                    </ul>
+                    
+                    <p><strong>Early 2025 — Spreading the word:</strong></p>
+                    <ul>
+                        <li>May 2025: "<a href="https://digitalorientalist.com/2025/12/12/from-print-to-place-creating-an-integrative-geolocalization-workflow-using-citizen-scientists-and-computer-vision-ai/" target="_blank">From Print to Place</a>," <em>The Digital Orientalist</em> Virtual Conference, with Drew Richardson (online)</li>
+                        <li>Feb 2025: Project report, <em>Ritsumeikan ARC FY2024 Annual Report Meeting</em>, Kyoto (JP)</li>
+                        <li>Jan 2025: 9th Digital Humanities Research Meeting「浮世絵、市民科学、DH」, Hibiya Library, Tokyo (JP)</li>
+                        <li>Jan 2025: <em>Citizen Science Webinar</em>, The Nippon Foundation Scholars Association, Tokyo (JP)</li>
+                    </ul>
+                    
+                    <p><strong>2024 — Conceiving the idea:</strong></p>
+                    <ul>
+                        <li>July 2024: "Viewed at a distance: geography in ukiyo-e prints," <em>Charting the European D-SEA Conference</em>, Max Planck / Staatsbibliothek Berlin (DE)</li>
+                    </ul>
+                    
+                    <p>The response has been encouraging—scholars and non-specialists alike are excited about contributing to research that reveals how Edo-period prints positioned their viewers to experience landscapes.</p>
 
                     <h3>Implementation Phase (August 2025–July 2026)</h3>
-                    <p><em>Drawing from the Crowd</em> has secured implementation funding through a Career Grant from the Graduate Campus at the University of Zurich. The platform launched publicly in October 2025, and we began citizen science outreach in December 2025.</p>
+                    <p><em>Drawing from the Crowd</em> has secured implementation funding through a Career Grant from the Graduate Campus at the University of Zurich. This support allows us to move beyond the prototype stage and build a fully functional platform.</p>
+                    <p><strong>In the last couple of months, we have:</strong></p>
+                    <ul>
+                        <li>Launched the platform publicly in October 2025</li>
+                        <li>Started Citizen Science outreach in December 2025</li>
+                    </ul>
+                    <p><strong>Going forward, we will:</strong></p>
+                    <ul>
+                        <li>Expand our print collection with data from additional institutional partners (especially ARC Ritsumeikan)</li>
+                        <li>Refine the user interface based on feedback</li>
+                        <li>Develop educational resources and community features</li>
+                    </ul>
 
                     <h3>Join Us</h3>
-                    <p>Whether you're a specialist in Japanese art, a geography enthusiast, or simply someone who enjoys visual puzzles, we'd love your help in mapping the landscapes of ukiyo-e. Visit our Getting Started page to learn how to participate, and follow this blog for updates on our progress.</p>
+                    <p>Whether you're a specialist in Japanese art, a geography enthusiast, or simply someone who enjoys visual puzzles, we'd love your help in mapping the landscapes of <em>ukiyo-e</em>. Visit our Getting Started page to learn how to participate, and follow this blog for updates on our progress.</p>
                 </div>
 
                 <!-- Japanese -->
                 <div class="lang-ja hidden japanese-text">
                     <h2>ブログ</h2>
+                    <p><strong>プロジェクトの最新情報と研究の知見</strong></p>
+                    
                     <h3>プロトタイプからプラットフォームへ：これまでの歩み</h3>
-                    <p><em>2025年12月 | 「集合知を描く」チーム</em></p>
-                    <p>「集合知を描く」のブログを開設しました！ここでは、プロジェクトの最新情報、研究の知見、そして成長を続ける市民科学者コミュニティからのストーリーを共有していきます。</p>
+                    <p>2025年12月 | 「集合知を描く [<em>Drawing from the Crowd</em>]」チーム</p>
+                    <p>「集合知を描く [<em>Drawing from the Crowd</em>]」のブログを開設しました！ここでは、プロジェクトの最新情報、研究の知見、そして成長を続ける市民科学者コミュニティからのストーリーを共有していきます。</p>
 
                     <h3>すべての始まり</h3>
-                    <p>2024年8月、「集合知を描く」は日本財団のソーシャル・イノベーター・コラボレーション（NSIC）の5つのプロジェクトの一つに選ばれました。この6ヶ月間の研究助成により、デジタル人類学、空間史、日本（美術）史にまたがる学際的なチームが、浮世絵版画をジオリファレンスするためのプロトタイプ・プラットフォームを開発することができました。</p>
+                    <p>2024年8月、「集合知を描く [<em>Drawing from the Crowd</em>]」は日本財団のソーシャル・イノベーター・コラボレーション（NSIC）の5つのプロジェクトの一つに選ばれました。この6ヶ月間の研究助成により、デジタル人類学、空間史、日本（美術）史にまたがる学際的なチームが、浮世絵版画をジオリファレンスするためのプロトタイプ・プラットフォームを開発することができました。</p>
+                    <p>私たちが設定した課題は野心的なものでした：歴史的写真用に設計された既存のクラウドソーシング技術を、様式化された日本の木版画で機能するように適応させることができるか？写真とは異なり、浮世絵版画は文化的慣習を通じて空間を表現します。絵師は構図を良くするために富士山を移動させたり、劇的な効果のために海岸を引き延ばしたり、複数の視点を一つの画像に統合したりすることがありました。</p>
 
-                    <p>私たちが設定した課題は野心的なものでした：歴史的写真用に設計された既存のクラウドソーシング技術を、様式化された日本の木版画で機能するように適応させることができるか？写真とは異なり、浮世絵版画は文化的慣習を通じて空間を表現します。</p>
+                    <h3>プロトタイプの構築（2024年8月〜2025年1月）</h3>
+                    <p>技術パートナーであるSmapshot Lab（HEIG-VD）と協力し、彼らのモノプロッティング技術を日本版画用に適応させました。メトロポリタン美術館のオープンアクセス・コレクションから画像を、国土地理院から地形データを取得しました。研究代表者のチューリッヒ大学東アジア美術史講座での博士研究員としての研究が、江戸時代の版画がどのように空間関係を表現し、鑑賞者を位置づけたかを理解するための美術史的専門知識を提供しました。</p>
+                    <p>ベータテストで興味深いことが明らかになりました：版画の前景要素は芸術的効果のために操作されることが多いものの、中景と背景の地形は実際の地理と一貫した関係を維持しています。これは、市民科学者が富士山のような象徴的な特徴ではなく、地形の輪郭に焦点を当てることで、版画を成功裏にジオリファレンスできることを意味します。</p>
 
-                    <h3>プロトタイプの構築（2024年8月～2025年1月）</h3>
-                    <p>技術パートナーであるSmapshot Lab（HEIG-VD）と協力し、彼らのモノプロッティング技術を日本版画用に適応させました。ベータテストで興味深いことが明らかになりました：版画の前景要素は芸術的効果のために操作されることが多いものの、中景と背景の地形は実際の地理と一貫した関係を維持しています。</p>
+                    <h3>研究成果の共有</h3>
+                    <p>2024年から2025年にかけて、研究代表者サンチは、時にはチームメンバーと共に、ヨーロッパ、日本、オンラインの学会やワークショップで「集合知を描く [<em>Drawing from the Crowd</em>]」を発表してきました：</p>
+                    
+                    <p><strong>2025年後半 — 詳細の調整:</strong></p>
+                    <ul>
+                        <li>9月："Moving Mountains" 日本近世文学会国際シンポジウム、ケンブリッジ大学（英国）</li>
+                        <li>8月：「Drawing from the Crowd」第19回ドイツ語圏日本学会、フランクフルト（独）</li>
+                        <li>7月："Reconstructing Japan's Scenic Past" <em>ADHO DH2025</em>、ヒマンシュ・パンダイと共同発表、リスボン（ポルトガル）</li>
+                    </ul>
+                    
+                    <p><strong>2025年前半 — 情報発信：</strong></p>
+                    <ul>
+                        <li>5月："<a href="https://digitalorientalist.com/2025/12/12/from-print-to-place-creating-an-integrative-geolocalization-workflow-using-citizen-scientists-and-computer-vision-ai/" target="_blank">From Print to Place</a>" <em>The Digital Orientalist</em> バーチャル会議、ドリュー・リチャードソンと共同発表（オンライン）</li>
+                        <li>2月：プロジェクト報告、立命館ARC 2024年度成果報告会、京都</li>
+                        <li>1月：第9回DH研究会「浮世絵、市民科学、DH」日比谷図書文化館、東京</li>
+                        <li>1月：市民科学ウェビナー、日本財団スカラーズ・アソシエーション、東京</li>
+                    </ul>
+                    
+                    <p><strong>2024年 — アイデアの構想：</strong></p>
+                    <ul>
+                        <li>7月："Viewed at a distance" Charting the European D-SEA会議、マックス・プランク研究所/ベルリン国立図書館（独）</li>
+                    </ul>
+                    
+                    <p>反応は心強いものでした。専門家も非専門家も、江戸時代の版画が鑑賞者をどのような視点に置いて風景を体験させたかを明らかにする研究に貢献することに興奮しています。</p>
 
-                    <h3>実装フェーズ（2025年8月～2026年7月）</h3>
-                    <p>「集合知を描く」はチューリッヒ大学大学院キャンパスからのキャリア・グラントを通じて実装資金を獲得しました。プラットフォームは2025年10月に一般公開され、2025年12月に市民科学アウトリーチを開始しました。</p>
+                    <h3>実装フェーズ（2025年8月〜2026年7月）</h3>
+                    <p>「集合知を描く [<em>Drawing from the Crowd</em>]」はチューリッヒ大学大学院キャンパスからのキャリア・グラントを通じて実装資金を獲得しました。このご支援により、プロトタイプ段階を超えて、完全に機能するプラットフォームを構築することが可能になりました。</p>
+                    <p><strong>この数ヶ月で達成したこと：</strong></p>
+                    <ul>
+                        <li>2025年10月にプラットフォームを一般公開</li>
+                        <li>2025年12月に市民科学アウトリーチを開始</li>
+                    </ul>
+                    <p><strong>今後の予定：</strong></p>
+                    <ul>
+                        <li>追加の機関パートナー（特に立命館ARC）からのデータで版画コレクションを拡大</li>
+                        <li>フィードバックに基づくユーザーインターフェースの改良</li>
+                        <li>教育リソースとコミュニティ機能の開発</li>
+                    </ul>
 
                     <h3>ご参加ください</h3>
                     <p>日本美術の専門家であれ、地理愛好家であれ、単にビジュアルパズルを楽しむ方であれ、浮世絵の風景をマッピングするお手伝いをお願いします。参加方法については「はじめに」ページをご覧いただき、進捗状況についてはこのブログをフォローしてください。</p>
