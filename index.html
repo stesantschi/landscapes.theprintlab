@@ -3,7 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drawing from the Crowd - The Print Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Noto+Serif+JP:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Drawing from the Crowd — Mapping Japan's Historical Landscapes</title>
+    <meta name="description" content="A citizen science platform where anyone can help map how Edo-period ukiyo-e prints pictured Japan's famous places. No experience needed. Available in English and Japanese.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://landscapes.theprintlab.org">
+    <meta property="og:title" content="Drawing from the Crowd — Mapping Japan's Historical Landscapes">
+    <meta property="og:description" content="A citizen science platform where anyone can help map how Edo-period ukiyo-e prints pictured Japan's famous places. No experience needed. Also available in Japanese.">
+    <meta property="og:image" content="https://landscapes.theprintlab.org/og-image.png">
+    <meta property="og:locale" content="en">
+    <meta property="og:locale:alternate" content="ja">
+
+    <!-- Twitter/X card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Drawing from the Crowd — Mapping Japan's Historical Landscapes">
+    <meta name="twitter:description" content="Help map how Edo-period ukiyo-e prints pictured Japan's famous places. A citizen science platform, no experience needed.">
+    <meta name="twitter:image" content="https://landscapes.theprintlab.org/og-image.png">
     <style>
         :root {
             --color-bg: #F1EFE6;
@@ -14,11 +38,29 @@
             --color-accent-secondary: #ADCDD9;
             --color-link: #5D90BB;
             --color-border: #D4CCC0;
-            --font-size-h1: 2.5rem;
-            --font-size-h2: 2rem;
-            --font-size-h3: 1.5rem;
-            --font-size-body: 1rem;
-            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --color-accent-deep: #2D3820;
+            --color-rule: #C9BFAE;
+
+            /* Booklike serif for reading; Inter as a quiet utility face for nav and labels */
+            --font-serif: 'Source Serif 4', 'Noto Serif JP', Georgia, 'Times New Roman', serif;
+            --font-utility: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-family: var(--font-serif);
+
+            /* One modular scale (ratio ≈ 1.25). Every size in the site is one of these. */
+            --step--1: 0.875rem;   /* 14px — captions, meta, fine print */
+            --step-0:  1.1875rem;  /* 19px — body */
+            --step-1:  1.375rem;   /* 22px — lead, sub-headings (h4) */
+            --step-2:  1.625rem;   /* 26px — h3 */
+            --step-3:  2.15rem;    /* 34px — h2 */
+            --step-4:  2.85rem;    /* 46px — h1 */
+
+            /* Legacy aliases, mapped onto the scale so nothing is off-grid */
+            --font-size-h1: var(--step-4);
+            --font-size-h2: var(--step-3);
+            --font-size-h3: var(--step-2);
+            --font-size-body: var(--step-0);
+
+            --measure: 68ch;   /* comfortable line length for sustained reading */
         }
  
         * {
@@ -32,10 +74,13 @@
         }
  
         body {
-            font-family: var(--font-family);
+            font-family: var(--font-serif);
+            font-size: var(--font-size-body);
             background-color: var(--color-bg);
             color: var(--color-text);
-            line-height: 1.6;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
  
         /* Navigation */
@@ -52,8 +97,10 @@
         }
  
         .logo {
+            font-family: var(--font-serif);
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 700;
+            letter-spacing: -0.005em;
             color: var(--color-accent-primary);
         }
  
@@ -65,6 +112,10 @@
         }
  
         .nav-links a {
+            font-family: var(--font-utility);
+            font-size: var(--step--1);
+            font-weight: 500;
+            letter-spacing: 0.01em;
             color: var(--color-text);
             text-decoration: none;
             transition: color 0.3s;
@@ -76,26 +127,31 @@
         }
  
         .language-switch {
-            display: flex;
-            gap: 0.5rem;
-            background: var(--color-accent-secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            display: inline-flex;
+            gap: 0.25rem;
+            background: transparent;
+            border: 1px solid var(--color-rule);
+            padding: 0.2rem 0.35rem;
+            border-radius: 999px;
         }
  
         .language-switch button {
             background: none;
             border: none;
             cursor: pointer;
-            padding: 0.25rem 0.5rem;
+            font-family: var(--font-utility);
+            font-size: var(--step--1);
+            padding: 0.2rem 0.7rem;
+            border-radius: 999px;
             color: var(--color-text);
             font-weight: 500;
-            transition: opacity 0.3s;
+            transition: background 0.2s, color 0.2s, opacity 0.2s;
         }
  
         .language-switch button.active {
             opacity: 1;
-            color: var(--color-accent-primary);
+            background: var(--color-accent-primary);
+            color: #fff;
         }
  
         .language-switch button:not(.active) {
@@ -133,33 +189,56 @@
  
         /* Main container */
         .container {
-            max-width: 1200px;
+            width: min(92vw, 780px);
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1.5rem;
         }
  
         /* Hero section */
         .hero {
-            padding: 4rem 0;
+            padding: 6rem 0 5.5rem;
             text-align: center;
-            background: linear-gradient(135deg, #F1EFE6 0%, #ADCDD9 100%);
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-rule);
         }
+
+        /* Visible keyboard focus rings (accessibility) */
+        a:focus-visible,
+        button:focus-visible,
+        summary:focus-visible,
+        .btn:focus-visible,
+        .language-switch button:focus-visible {
+            outline: 2px solid var(--color-accent-primary);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+        summary:focus:not(:focus-visible) { outline: none; }
  
         .hero h1 {
-            font-size: var(--font-size-h1);
+            font-family: var(--font-serif);
+            font-size: var(--step-4);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
             color: var(--color-accent-primary);
-            margin-bottom: 1rem;
+            margin: 0 auto 1.25rem;
+            max-width: 16ch;
         }
  
         .hero p {
-            font-size: 1.2rem;
-            color: var(--color-text-light);
-            margin-bottom: 2rem;
+            font-size: var(--step-1);
+            font-style: italic;
+            color: var(--color-accent-primary);
+            opacity: 0.85;
+            margin: 0 auto 2rem;
+            max-width: 46ch;
         }
  
         .btn {
             display: inline-block;
-            padding: 0.75rem 1.5rem;
+            font-family: var(--font-utility);
+            font-weight: 500;
+            padding: 0.8rem 1.75rem;
             background: var(--color-accent-primary);
             color: white;
             text-decoration: none;
@@ -167,13 +246,29 @@
             transition: background 0.3s, transform 0.2s;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: var(--step-0);
         }
  
         .btn:hover {
             background: #2D3820;
             transform: translateY(-2px);
         }
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-accent-primary);
+            border: 1px solid var(--color-accent-primary);
+        }
+        .btn-secondary:hover {
+            background: var(--color-accent-primary);
+            color: #fff;
+        }
+
  
         .btn-secondary {
             background: var(--color-accent-secondary);
@@ -195,27 +290,56 @@
         }
  
         h2 {
-            font-size: var(--font-size-h2);
+            font-family: var(--font-serif);
+            font-size: var(--step-3);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
             color: var(--color-accent-primary);
             margin-bottom: 1.5rem;
         }
  
         h3 {
-            font-size: var(--font-size-h3);
+            font-family: var(--font-serif);
+            font-size: var(--step-2);
+            font-weight: 600;
+            line-height: 1.3;
             color: var(--color-accent-primary);
             margin-top: 1.5rem;
             margin-bottom: 1rem;
         }
  
+        h4 {
+            font-family: var(--font-serif);
+            font-size: var(--step-1);
+            font-weight: 600;
+            line-height: 1.35;
+            color: var(--color-text);
+        }
+ 
+        /* Timeline / section sub-headings (was 18 inline styles) */
+        .sub-heading {
+            font-family: var(--font-serif);
+            font-size: var(--step-1);
+            font-weight: 600;
+            line-height: 1.35;
+            color: var(--color-accent-primary);
+            margin: 1.75rem 0 0.5rem;
+        }
+ 
         /* Content sections */
         .content {
-            line-height: 1.8;
+            line-height: 1.75;
             color: var(--color-text);
         }
  
         .content p {
-            margin-bottom: 1rem;
+            margin-bottom: 1.15rem;
+            max-width: var(--measure);
         }
+        .content ul, .content ol { max-width: var(--measure); }
+        .content h4 { max-width: var(--measure); }
+        /* legal text sets its own tighter measure below */
  
         .content ul, .content ol {
             margin-left: 1.5rem;
@@ -244,27 +368,26 @@
         .featured-image img {
             max-width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 4px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
         }
  
         .featured-image figcaption {
             margin-top: 1rem;
-            font-size: 0.9rem;
+            font-size: var(--step--1);
             color: var(--color-text-light);
             font-style: italic;
         }
  
         /* Tagline styling */
         .tagline {
-            font-size: 1.3rem;
+            font-size: var(--step-1);
             color: var(--color-accent-primary);
             font-weight: 600;
-            background: linear-gradient(135deg, var(--color-accent-secondary) 0%, #d4e8ed 100%);
-            padding: 1rem 1.5rem;
-            border-radius: 6px;
-            border-left: 4px solid var(--color-accent-primary);
-            margin: 1.5rem 0;
+            background: transparent;
+            padding: 0.5rem 0 1.25rem;
+            border-bottom: 1px solid var(--color-rule);
+            margin: 1rem 0 1.75rem;
         }
  
         /* Checkmark list styling */
@@ -289,7 +412,7 @@
             flex: 1;
             min-width: 280px;
             background: var(--color-surface);
-            border-radius: 8px;
+            border-radius: 4px;
             padding: 1.5rem;
             border: 1px solid var(--color-border);
             display: flex;
@@ -311,8 +434,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 700;
+            font-size: var(--step-1);
             flex-shrink: 0;
         }
  
@@ -322,7 +445,7 @@
  
         .step-content strong {
             color: var(--color-accent-primary);
-            font-size: 1.1rem;
+            font-size: var(--step-1);
             display: block;
             margin-bottom: 0.5rem;
         }
@@ -335,13 +458,52 @@
         .step-image {
             width: 100%;
             height: auto;
-            border-radius: 6px;
+            border-radius: 4px;
             margin-top: 1rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: transform 0.3s ease;
         }
  
+        /* Start Mapping spine */
+        .start-reassure {
+            font-size: var(--step-1);
+            color: var(--color-accent-primary);
+            max-width: var(--measure);
+            margin: 1.5rem 0;
+        }
+        .start-cta {
+            margin: 2rem 0 2.5rem;
+        }
+        .start-cta .btn {
+            font-size: var(--step-1);
+            padding: 0.9rem 2rem;
+        }
+        .start-need {
+            font-size: var(--step--1);
+            color: var(--color-text);
+            opacity: 0.75;
+            margin-top: 0.75rem;
+            max-width: var(--measure);
+        }
+        .start-extra {
+            margin-top: 2rem;
+            border-top: 1px solid var(--color-rule);
+            padding-top: 1rem;
+        }
+        .start-extra summary {
+            font-family: var(--font-utility);
+            font-size: var(--step--1);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: var(--color-accent-primary);
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+        .start-extra summary:hover { opacity: 0.7; }
+        .start-extra .video-container { margin-top: 1rem; }
+
         .step-image:hover {
             transform: scale(2.5);
             z-index: 100;
@@ -365,15 +527,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 8px;
+            border-radius: 4px;
         }
  
         .result-image {
             margin-top: 2.5rem;
             background: var(--color-surface);
-            border-radius: 8px;
+            border-radius: 4px;
             overflow: hidden;
-            border: 2px solid var(--color-accent-primary);
+            border: 1px solid var(--color-border);
         }
  
         .result-image img {
@@ -382,7 +544,7 @@
  
         .result-image figcaption {
             padding: 1.25rem;
-            background: linear-gradient(135deg, var(--color-accent-secondary) 0%, #d4e8ed 100%);
+            background: #E4EEF1;
             font-style: normal;
             text-align: left;
         }
@@ -413,7 +575,7 @@
             border-radius: 50%;
             object-fit: cover;
             object-position: center top;
-            border: 3px solid var(--color-accent-secondary);
+            border: 1px solid var(--color-border);
             display: block;
             margin: 0 auto;
         }
@@ -436,11 +598,11 @@
         .team-member h4 {
             color: var(--color-accent-primary);
             margin: 1rem 0 0.5rem 0;
-            font-size: 1.1rem;
+            font-size: var(--step-1);
         }
  
         .team-member p {
-            font-size: 0.95rem;
+            font-size: var(--step--1);
             line-height: 1.6;
             margin-bottom: 0.5rem;
         }
@@ -448,7 +610,7 @@
         .team-member .contact {
             color: var(--color-link);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: var(--step--1);
         }
  
         /* Footer */
@@ -457,7 +619,7 @@
             color: white;
             padding: 2rem;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: var(--step--1);
         }
  
         footer a {
@@ -483,22 +645,258 @@
         .hidden {
             display: none;
         }
+
+        /* Privacy / Terms styling */
+        .needs-review {
+            background: #FFE9A8;
+            border-bottom: 2px dotted #B8860B;
+            padding: 0 0.2em;
+            font-weight: 500;
+        }
+        .plain-summary {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 1.75rem 2rem;
+            margin: 1.5rem 0 2.5rem 0;
+            max-width: 68ch;
+        }
+        .plain-summary h4 {
+            color: var(--color-accent-primary);
+            margin-bottom: 0.75rem;
+            font-size: var(--step-1);
+        }
+        .plain-summary ul {
+            margin-bottom: 0;
+        }
+        /* Legal text as Part accordions */
+        .legal-part {
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+        .legal-part[open] { border-color: var(--color-rule); }
+        .legal-part summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1.25rem 3rem 1.25rem 1.5rem;
+            display: block;
+            position: relative;
+        }
+        .legal-part summary::before {
+            content: "";
+            position: absolute;
+            top: 1.55rem;
+            right: 1.5rem;
+            width: 0.55rem;
+            height: 0.55rem;
+            border-right: 2px solid var(--color-accent-primary);
+            border-bottom: 2px solid var(--color-accent-primary);
+            transform: rotate(45deg);
+            transition: transform 0.2s ease;
+            opacity: 0.6;
+        }
+        .legal-part[open] summary::before {
+            transform: rotate(225deg);
+        }
+        .legal-part summary::-webkit-details-marker { display: none; }
+        .legal-part summary::marker { content: ""; }
+        .part-label {
+            display: block;
+            font-family: var(--font-utility);
+            font-size: var(--step--1);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-accent-primary);
+            opacity: 0.65;
+            margin-bottom: 0.2rem;
+        }
+        .part-name {
+            display: block;
+            font-family: var(--font-serif);
+            font-size: var(--step-1);
+            font-weight: 600;
+            color: var(--color-accent-primary);
+        }
+        .part-desc {
+            display: block;
+            margin-top: 0.35rem;
+            font-size: var(--step--1);
+            color: var(--color-text);
+            opacity: 0.8;
+        }
+        .legal-part summary::after {
+            content: "Show articles →";
+            display: inline-block;
+            margin-top: 0.6rem;
+            font-family: var(--font-utility);
+            font-size: var(--step--1);
+            font-weight: 500;
+            color: var(--color-link);
+        }
+        .legal-part[open] summary::after { content: "Hide articles ↑"; }
+        .lang-ja .legal-part summary::after { content: "条文を表示 →"; }
+        .lang-ja .legal-part[open] summary::after { content: "条文を隠す ↑"; }
+        .part-body {
+            padding: 0 1.5rem 1.5rem;
+        }
+        .part-body > h4:first-child { margin-top: 0.5rem; }
+
+        .legal-text {
+            font-size: var(--step-0);
+            line-height: 1.7;
+            max-width: 64ch;
+        }
+        .legal-text h3 {
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--color-rule);
+        }
+        .legal-text h4 {
+            color: var(--color-accent-primary);
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            font-size: var(--step-0);
+        }
+        .legal-text dl {
+            margin: 0 0 1.5rem 0;
+        }
+        .legal-text dt {
+            font-weight: 600;
+            margin-top: 0.75rem;
+        }
+        .legal-text dd {
+            margin: 0 0 0 1.5rem;
+        }
+        .cite-line {
+            font-size: var(--step--1);
+            color: var(--color-text);
+            opacity: 0.8;
+            max-width: var(--measure);
+            padding: 1rem 1.25rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+        }
+        .policy-meta {
+            font-family: var(--font-utility);
+            color: var(--color-accent-primary);
+            opacity: 0.8;
+            font-size: var(--step--1);
+            margin-bottom: 1.5rem;
+        }
  
         /* Language-specific styling */
         .japanese-text {
             font-feature-settings: 'palt' on;
-            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Noto Serif JP', 'Source Serif 4', serif;
+            line-height: 1.85;
         }
  
+        /* Blog as a card index */
+        .blog-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s;
+        }
+        .blog-card[open] {
+            border-color: var(--color-rule);
+        }
+        .blog-card summary:hover::before {
+            opacity: 1;
+        }
+        .legal-part summary:hover::before {
+            opacity: 1;
+        }
+        .blog-card summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 1.5rem 3.25rem 1.5rem 1.75rem;
+            display: block;
+            position: relative;
+        }
+        .blog-card summary::before {
+            content: "";
+            position: absolute;
+            top: 1.9rem;
+            right: 1.75rem;
+            width: 0.6rem;
+            height: 0.6rem;
+            border-right: 2px solid var(--color-accent-primary);
+            border-bottom: 2px solid var(--color-accent-primary);
+            transform: rotate(45deg);
+            transition: transform 0.2s ease;
+            opacity: 0.6;
+        }
+        .blog-card[open] summary::before {
+            transform: rotate(225deg);
+        }
+        .blog-card summary::-webkit-details-marker { display: none; }
+        .blog-card summary::marker { content: ""; }
+        .card-date {
+            display: block;
+            font-family: var(--font-utility);
+            font-size: var(--step--1);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            color: var(--color-accent-primary);
+            opacity: 0.7;
+            margin-bottom: 0.35rem;
+        }
+        .card-author {
+            text-transform: none;
+            letter-spacing: 0;
+            font-style: italic;
+            opacity: 0.85;
+        }
+        .card-author::before {
+            content: "· ";
+            font-style: normal;
+        }
+        .card-title {
+            display: block;
+            font-family: var(--font-serif);
+            font-size: var(--step-1);
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--color-accent-primary);
+        }
+        .card-title em { font-style: italic; }
+        .card-teaser {
+            display: block;
+            margin-top: 0.5rem;
+            color: var(--color-text);
+            opacity: 0.85;
+            max-width: var(--measure);
+        }
+        .blog-card[open] .card-teaser { display: none; }
+        .blog-card summary::after {
+            content: "Read →";
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-family: var(--font-utility);
+            font-size: var(--step--1);
+            font-weight: 500;
+            color: var(--color-link);
+        }
+        .blog-card[open] summary::after { content: "Close ↑"; }
+        .card-body {
+            padding: 0 1.75rem 1.75rem;
+            max-width: var(--measure);
+        }
+        .card-body > *:first-child { margin-top: 0; }
+
         /* Blog post styling */
         .blog-post {
             background: var(--color-surface);
             border: 1px solid var(--color-border);
-            border-radius: 8px;
-            padding: 2rem;
+            border-radius: 4px;
+            padding: 2.5rem;
             margin-bottom: 2rem;
             transition: box-shadow 0.3s;
         }
+        .blog-post p { max-width: 68ch; }
  
         .blog-post:hover {
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
@@ -506,23 +904,27 @@
  
         .blog-post h3 {
             margin-top: 0;
+            letter-spacing: -0.01em;
         }
  
         .blog-post .post-meta {
-            font-size: 0.9rem;
-            color: var(--color-text-light);
-            font-style: italic;
-            margin-bottom: 1.25rem;
+            font-family: var(--font-utility);
+            font-size: var(--step--1);
+            color: var(--color-accent-primary);
+            opacity: 0.75;
+            font-style: normal;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-rule);
         }
  
         .blog-post .post-cta {
-            margin-top: 1.5rem;
-            padding: 1rem 1.25rem;
-            background: linear-gradient(135deg, var(--color-accent-secondary) 0%, #d4e8ed 100%);
-            border-left: 4px solid var(--color-accent-primary);
-            border-radius: 4px;
+            margin-top: 1.75rem;
+            padding: 1.25rem 0 0;
+            background: transparent;
+            border-top: 1px solid var(--color-rule);
         }
  
         .blog-post .post-cta p {
@@ -532,12 +934,18 @@
         /* Responsive */
         @media (max-width: 768px) {
             nav {
-                padding: 1rem 1.5rem;
+                padding: 1rem 1.25rem;
                 flex-wrap: wrap;
+                gap: 0.75rem 0;
             }
- 
+            .logo {
+                order: 0;
+                flex: 1 1 auto;
+                font-size: var(--step-1);
+            }
             .hamburger {
                 display: flex;
+                order: 1;
             }
  
             .nav-links {
@@ -547,19 +955,34 @@
                 text-align: center;
                 width: 100%;
                 padding: 1rem 0;
+                order: 3;
             }
  
             .nav-links.active {
                 display: flex;
             }
  
+            /* force a full-width break, then center a compact inline pill */
+            .hamburger { margin-left: auto; }
+            nav::after {
+                content: "";
+                flex-basis: 100%;
+                height: 0;
+                order: 1;
+            }
             .language-switch {
-                order: -1;
+                order: 2;
+                margin: 0.25rem auto 0;
             }
  
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: var(--step-3);
+                max-width: 100%;
             }
+            .hero p { font-size: var(--step-1); }
+            /* let text use the full column on small screens */
+            .content p, .content ul, .content ol, .content h4,
+            .blog-post p, .plain-summary, .legal-text { max-width: 100%; }
  
             .container {
                 padding: 0 1rem;
@@ -598,7 +1021,7 @@
             <li><a onclick="showSection('getting-started'); closeMenu()" class="nav-text" data-en="Start Mapping" data-ja="マッピングを始める"></a></li>
             <li><a onclick="showSection('team'); closeMenu()" class="nav-text" data-en="Team and Partners" data-ja="チームとパートナー"></a></li>
             <li><a onclick="showSection('blog'); closeMenu()" class="nav-text" data-en="Blog" data-ja="ブログ"></a></li>
-            <li><a onclick="showSection('contact'); closeMenu()" class="nav-text" data-en="Contact" data-ja="お問い合わせ"></a></li>
+            <li><a onclick="showSection('contact'); closeMenu()" class="nav-text" data-en="Contact &amp; Legal" data-ja="お問い合わせ・規約"></a></li>
         </ul>
         <div class="language-switch">
             <button class="active" onclick="setLanguage('en')">English</button>
@@ -609,9 +1032,12 @@
     <!-- Hero Section -->
     <div class="hero">
         <div class="container">
-            <h1 data-en="Mapping Japan's Historical Landscapes" data-ja="日本の歴史的景観のマッピング"></h1>
+            <h1 data-en="Mapping Japan’s Historical Landscapes" data-ja="日本の歴史的景観のマッピング"></h1>
             <p data-en="Help Us Rediscover Japan Through Historic Prints" data-ja="歴史的な版画を通じて日本を再発見しませんか"></p>
-            <button class="btn" onclick="openSmapshot()" data-en="Get Started →" data-ja="参加する →">Get Started →</button>
+            <div class="hero-actions">
+                <a class="btn" href="#" onclick="showSection('getting-started'); return false;" data-en="See how it works →" data-ja="進め方を見る →">See how it works →</a>
+                <a class="btn btn-secondary" href="#" onclick="openSmapshot(); return false;" data-en="Open the mapping tool →" data-ja="マッピングツールを開く →">Open the mapping tool →</a>
+            </div>
         </div>
     </div>
  
@@ -622,28 +1048,26 @@
                 <!-- English content -->
                 <div class="lang-en">
                     <h2><em>Drawing from the Crowd</em>: A Citizen Science Platform for Mapping <em>Ukiyo-e</em> Cultural Geography</h2>
-                    <p class="tagline">Where art history meets citizen science—and everyone can contribute</p>
-                    <p><strong>Welcome!</strong> Whether you're an art enthusiast, a Japan lover, or simply curious about historical landscapes, we're glad you're here. Our project brings together people from around the world to explore how Edo-period artists depicted Japan's famous places—and you can be part of it.</p>
-                    <p><em>Drawing from the Crowd</em> began as a research initiative funded by The Nippon Foundation's Social Innovators Collaboration (NSIC), developed with the University of Zurich's Chair of East Asian Art History. The platform launched in October 2025, and our growing community of citizen scientists is now helping to reveal how historic prints (<em>ukiyo-e</em>) positioned viewers to experience Japan's landscapes.</p>
-                    <p>By matching depicted landscapes with modern topography, we deepen our understanding of Japan's historical geography while highlighting the importance of cultural preservation. Every contribution—yours included—helps scholars refine our understanding of spatial representation in early modern Japanese visual culture.</p>
                     
                     <figure class="featured-image">
                         <img src="smapshotScreenshot.png" alt="Smapshot platform showing a Hokusai print of Lake Suwa aligned with modern 3D terrain">
-                        <figcaption>The Smapshot platform in action: aligning Hokusai's view of Lake Suwa with modern terrain data</figcaption>
+                        <figcaption>The Smapshot platform in action: aligning Hokusai’s view of Lake Suwa with modern terrain data</figcaption>
                     </figure>
+                    <p><strong>Welcome!</strong> Whether you are enthusiastic about art, love traveling Japan, or are curious about historical landscapes, we are glad you have found us. Through our project, we aim to bring together people from around the globe in order to jointly explore how <em>ukiyo-e</em>, Japanese prints (you might be familiar with the Great Wave or the Red Fuji as representants of this genre) depicted Japan’s famous places. And your participation helps us do that at scale! By joining our growing community of citizen scientists, you help reveal how historic prints of early modern Japan position viewers to experience Japan’s landscapes.</p>
+                    <p>The platform launched in October 2025. It grew out of research at the University of Zurich (UZH)’s Chair of East Asian Art History, where The Nippon Foundation’s Social Innovation Collaboration project first supported its prototype (August 2024–February 2025), and the UZH Graduate Research Campus (GRC)’s Career Funding allowed its implementation (July 2025–June 2026).</p>
+                    <p>By matching depicted landscapes with modern topography, we deepen our understanding of Japan’s historical, artistic and cultural geography while highlighting the importance of nuanced cultural preservation. Every contribution, yours included, helps scholars refine our understanding of spatial representation in early modern Japanese visual culture.</p>
                 </div>
                 <!-- Japanese content -->
                 <div class="lang-ja hidden japanese-text">
                     <h2>「集合知を描く（Drawing from the Crowd）」：市民科学による浮世絵文化地理マッピングプラットフォーム</h2>
-                    <p class="tagline">美術史と市民科学の出会い—誰もが貢献できるプロジェクト</p>
-                    <p><strong>ようこそ！</strong>美術愛好家の方も、日本文化に興味をお持ちの方も、歴史的な風景に好奇心を抱く方も、このサイトをご覧いただきありがとうございます。私たちのプロジェクトは、江戸時代の絵師たちが日本の名所をどのように描いたかを探求するため、世界中の人々が参加しています。ぜひご一緒に。</p>
-                    <p>「集合知を描く（Drawing from the Crowd）」は、日本財団ソーシャル・イノベーター・コラボレーション（NSIC）の助成を受け、チューリッヒ大学東洋美術史講座との協力の下で始まりました。2025年10月にプラットフォームを公開し、現在、市民科学者のコミュニティが、浮世絵が鑑賞者をどのような視点に置いて日本の風景を体験させたかを解明しています。</p>
-                    <p>描かれた風景と現代の地形を照合することで、日本の歴史的地理への理解を深め、文化遺産保全の重要性を浮き彫りにします。皆様一人ひとりのご協力が、近世日本の視覚文化における空間表現の研究に貢献します。</p>
                     
                     <figure class="featured-image">
                         <img src="smapshotScreenshot.png" alt="Smapshotプラットフォーム：北斎が描いた諏訪湖を現代の3D地形に重ねた様子">
                         <figcaption>Smapshotプラットフォームの画面：北斎が描いた諏訪湖を現代の地形データに重ねた様子</figcaption>
                     </figure>
+                    <p><strong>ようこそ！</strong>美術に関心をお持ちの方も、日本を旅するのがお好きな方も、歴史的な風景に興味を抱く方も、このサイトを見つけてくださってうれしく思います。このプロジェクトでは、世界中の人々が力を合わせ、浮世絵、つまり日本の版画（「神奈川沖浪裏（グレート・ウェーブ）」や「赤富士」がこの分野の代表として知られています）が日本の名所をどのように描いたかを、ともに探求していきます。あなたの参加が、それを大きな規模で進める力になります。市民科学者の輪に加わることで、近世日本の版画が鑑賞者をどのような視点に置いて日本の風景を体験させたかを、あなた自身が明らかにしていきます。</p>
+                    <p>プラットフォームは2025年10月に公開されました。本プロジェクトは、チューリッヒ大学（UZH）東洋美術史講座での研究から生まれました。日本財団のソーシャル・イノベーション・コラボレーション事業が試作段階（2024年8月〜2025年2月）を、UZH大学院研究キャンパス（GRC）のキャリア・ファンディングが実装段階（2025年7月〜2026年6月）を支援しました。</p>
+                    <p>描かれた風景と現代の地形を照合することで、日本の歴史的・芸術的・文化的な地理への理解を深め、細やかな文化遺産保全の重要性を浮き彫りにします。皆様一人ひとりのご協力が、近世日本の視覚文化における空間表現の研究に貢献します。</p>
                 </div>
             </div>
         </div>
@@ -654,155 +1078,100 @@
         <div class="container">
             <div class="content">
                 <!-- English -->
-                <div class="lang-en">
-                    <h2>About the Project</h2>
-                    <p>How did Edo-period artists position viewers to experience Japan's famous landscapes? That's the question at the heart of <em>Drawing from the Crowd</em>—and we're inviting curious minds from around the world to help us find the answer.</p>
-                    
-                    <h3>The Project</h3>
-                    <p>"<em>Drawing from the Crowd</em>: A Citizen Science Platform for Mapping <em>Ukiyo-e</em> Cultural Geography" began as one of five projects selected for the 2024 Nippon Social Innovator's Collaboration (NSIC), funded by The Nippon Foundation. As the funder's stipulation was to create a socially impactful project with other scholarship alumni, this not only led to the project, but to an incredibly fruitful <a href="#" onclick="showSection('team'); return false;">meeting of minds from interdisciplinary fields</a>. Building on this foundation, we secured implementation funding through a Career Grant from the Graduate Campus at the University of Zurich.</p>
-                    <p>The <a href="https://smapshot.heig-vd.ch/contribute/?owners=19#5.99/37.1868/141.8015" target="_blank">platform</a> launched publicly in October 2025, and we began citizen science outreach in December 2025. We are now actively building our community of contributors while expanding our print collection through partnerships with institutions worldwide.</p>
- 
-                    <h3>Goals</h3>
+                                <div class="lang-en">
+<h2>About the Project</h2>
+                    <p>How did the creators of historical images, print designers in the Edo period (1603–1868) and early photographers, position viewers to experience Japan’s famous landscapes? This question at the heart of <em>Drawing from the Crowd</em> is our invitation to curious minds from around the world: please help us to find the answer.</p>
+
+                    <h3>Why do we need to compare artistic with geographic data?</h3>
+                    <p>Print designers worked topography through convention, through what sold, through earlier pictures of the same place. What is interesting about <em>ukiyo-e</em> prints is that they did not conform to topographic ‘ground truth’, but instead combined information deriving from observed, from imagination, and from previous renderings of places in image and poetry. Some combine several views into one, or transport the viewer up to bird’s height to show a place’s spatial logic from a vantage no one could occupy. By contrasting the topography and its pictorial version, we notice the patterns of looking that the landscape asked, and asks, us, its viewers, to perform. We recover the historical gaze.</p>
+
+                    <h3>What does the project do?</h3>
+                    <p>Through georeferencing the prints with you, meaning through aligning prints against topography on a large scale and deriving insight from the contrast, we work to identify which elements of a print reflect actual topography and which stem from artistic convention. Two questions drive the work: how can we tell, collectively, which features are observed and which are conventional? And what does that reveal about how Edo-period prints positioned their viewers to experience Japan’s famous places (<em>meisho</em>)?</p>
+
+                    <h3>What is in it for you?</h3>
                     <ul>
-                        <li><strong>Build Community through Citizen Science:</strong> Foster appreciation for Japanese cultural heritage and awareness of historical landscapes at local and international levels.</li>
-                        <li><strong>Grow Knowledge Among Project Members:</strong> Enhance expertise in interdisciplinary, multilingual research at the intersection of art history and digital humanities.</li>
-                        <li><strong>Advance Print Scholarship:</strong> Establish a methodology to assess how <em>ukiyo-e</em> prints encoded spatial relationships and positioned viewers to experience landscapes.</li>
+                        <li><strong>Connect to likeminded people:</strong> Join a global community, attend events, and win prizes for taking part.</li>
+                        <li><strong>Grow your knowledge:</strong> Learn about Japanese art history and geography, including about the places you may have travelled, or come from.</li>
+                        <li><strong>Make a research impact:</strong> Your work feeds academic research, and can be credited to you if you wish.</li>
                     </ul>
- 
-                    <h3>Our Mission</h3>
-                    <p>To create an engaging, accessible platform where anyone interested in Japanese landscapes and culture can contribute to scholarship. Through collaborative georeferencing, we aim to identify which elements of a print reflect actual topography and which stem from artistic conventions—features that often coexist within the same image.</p>
-                    <p><strong>Why does this matter?</strong> These prints aren't unbiased documents of the past—they're carefully crafted views shaped by artistic convention, market demand, and centuries of visual tradition. A single image might blend faithful topography with imaginative flourishes, or show a famous site from an angle no one could actually stand. By looking closely and pooling our observations, we start to see what earlier viewers took for granted. That's the real discovery: not just the places, but the ways of seeing them.</p>
- 
-                    <h3>How You Can Contribute</h3>
-                    <p>We need your help to map Japan's historical landscapes! As a citizen scientist, you'll work with beautiful Edo-period prints and help us understand how artists depicted famous places. No prior experience or Japanese language skills required—just curiosity and attention to detail.</p>
-                    <p><strong>What you'll do:</strong></p>
-                    <ul>
-                        <li>Identify where you would stand to see the view depicted in a print</li>
-                        <li>Match terrain contours in prints with modern-day topography using our interactive 3D tools</li>
-                        <li>Document which prints engage with actual geography versus imaginary or composite landscapes</li>
-                    </ul>
-                    <p><strong>What you'll gain:</strong></p>
-                    <ul>
-                        <li>Learn about Japanese art history and geography</li>
-                        <li>Contribute to real academic research</li>
-                        <li>Join a global community of fellow enthusiasts</li>
-                        <li>See your contributions acknowledged in research outputs</li>
-                    </ul>
-                    <p>Each print takes just 15–30 minutes, and every contribution—even "unsuccessful" attempts—provides valuable data for our research.</p>
-                    <p>Discover something interesting? If your contributions inspire a seminar paper, thesis, or research project, you're welcome to develop your insights further. We simply ask that you cite the project in your work.</p>
-                    <p><strong>Recommended citation:</strong><br>
-                    Stephanie Santschi, Himanshu Panday, Hirohito Tsuji, and Drew Richardson, "Drawing from the Crowd: A Citizen Science Platform for Mapping Ukiyo-e Cultural Geography," <em>ThePrintLab</em>, accessed [date], https://landscapes.theprintlab.org.</p>
-                    <p><strong><a href="#" onclick="showSection('getting-started'); return false;">Ready to start? Visit our Start Mapping guide →</a></strong></p>
- 
-                    <h3>Research Framework</h3>
-                    <p>Our project addresses two key questions:</p>
-                    <ol>
-                        <li>How can we collectively identify which print features reflect actual topography and which are rooted in visual conventions?</li>
-                        <li>What can this reveal about how Edo-period prints positioned their viewers to experience Japan's famous places (<em>meisho</em>)?</li>
-                    </ol>
- 
-                    <h3>Platform Features</h3>
-                    <ul>
-                        <li>Bilingual interface (Japanese/English)</li>
-                        <li>Interactive georeferencing tools comparing prints with 3D terrain models</li>
-                        <li>Educational resources about spatial representation in Japanese visual culture</li>
-                        <li>Community features for sharing discoveries and discussing findings</li>
-                        <li>Step-by-step guides for participants of all backgrounds</li>
-                    </ul>
- 
+
+                    <h3>How the project began</h3>
+                    <p>“<em>Drawing from the Crowd</em>: A Citizen Science Platform for Mapping <em>Ukiyo-e</em> Cultural Geography” began as one of five projects selected for the 2024 Nippon Social Innovator’s Collaboration (NSIC), funded by The Nippon Foundation. The funder asked us to build something socially useful together with other scholarship alumni. That brief gave us the project, and it gave us something we did not expect: a <a href="#" onclick="showSection('team'); return false;">team that thinks across fields</a>. Building on this foundation, we secured implementation funding through a Career Grant from the Graduate Campus (GRC) at the University of Zurich (UZH), Switzerland.</p>
+                    <p>The platform launched publicly in October 2025, and we began citizen science outreach in December 2025. We are now actively building our community of contributors while expanding our print collection through partnerships with institutions worldwide.</p>
+
                     <h3>Partners</h3>
                     <p><em>Drawing from the Crowd</em> is made possible through collaboration with leading institutions in digital humanities and cultural heritage research.</p>
-                    <p><strong><a href="https://smapshot.heig-vd.ch/" target="_blank">Smapshot Lab (HEIG-VD, EPFL)</a></strong> — Our citizen science platform is built on Smapshot, a crowdsourcing tool developed by HEIG-VD that enables volunteers to locate historical images in a 3D virtual globe.</p>
-                    <p><strong><a href="https://www.dh-jac.net/db/nishikie/search_portal.php" target="_blank">Art Research Center, Ritsumeikan University</a></strong> — The project is registered at the International Joint Digital Archiving Center for Japanese Art and Culture (ARC-iJAC), and we utilize their comprehensive Japanese Prints Portal Database.</p>
- 
+                    <p><strong>Smapshot Lab (HEIG-VD), Switzerland:</strong> Our citizen science platform is built on Smapshot, a crowdsourcing platform and workflow developed by HEIG-VD that enables volunteers to locate historical images in a 3D virtual globe.</p>
+                    <p><strong>Art Research Center, Ritsumeikan University, Japan:</strong> The project is registered at the International Joint Digital Archiving Center for Japanese Art and Culture (ARC-iJAC), and we utilize their comprehensive Japanese Prints Portal Database in our research.</p>
+
                     <h3>Data Sources</h3>
-                    <p><strong>Image and metadata:</strong> <a href="https://www.metmuseum.org/art/collection/search" target="_blank">Metropolitan Museum of Art</a> (New York), <a href="https://www.dh-jac.net/db/nishikie/search_portal.php" target="_blank">Art Research Center, Ritsumeikan University</a> (Ukiyo-e Portal), <a href="https://jpsearch.go.jp/" target="_blank">Japan Search</a> (<a href="https://www.ndl.go.jp/en/" target="_blank">National Diet Library</a>, <a href="https://www.culture.city.taito.lg.jp/en" target="_blank">Taito City Lifelong Learning Center</a>)</p>
-                    <p><strong>Terrain data:</strong> <a href="https://www.gsi.go.jp/ENGLISH/" target="_blank">Geospatial Information Authority of Japan (GSI)</a></p>
-                    <p><strong>Data enrichment:</strong> <a href="https://www.wikidata.org/wiki/" target="_blank">Wikidata</a> and <a href="https://geohack.toolforge.org/" target="_blank">GeoHack Toolforge</a></p>
- 
+                    <p><strong>Prints:</strong> Metropolitan Museum of Art (New York), Taito City Lifelong Learning Center (Tokyo), National Diet Library (Tokyo)</p>
+                    <p><strong>Hiroshige sketchbook drawings:</strong> British Museum (London)</p>
+                    <p><strong>Book illustrations (<em>meisho-zue</em>):</strong> National Diet Library (Tokyo), National Archives of Japan (Tokyo)</p>
+                    <p><strong>Photographs and further material:</strong> Via Japan Search (ADEAC): National Diet Library; Taito City Lifelong Learning Center</p>
+                    <p><strong>Terrain data:</strong> Geospatial Information Authority of Japan (GSI)</p>
+                    <p><strong>Data enrichment:</strong> Wikidata and GeoHack Toolforge</p>
+
                     <h3>Sustainability Goals</h3>
                     <p>This project aligns with the United Nations Sustainable Development Goals:</p>
-                    <p><strong>SDG 4: Quality Education</strong> — Our platform makes academic research accessible to anyone with curiosity and an internet connection. Participants learn about Japanese art history, geography, and digital humanities while contributing to scholarship.</p>
-                    <p><strong>SDG 11: Sustainable Cities and Communities</strong> — By georeferencing historical prints, we create a digital record of how landscapes were perceived centuries ago, revealing environmental changes and supporting cultural preservation.</p>
-                    <p><strong>Bridging the Digital Divide</strong> — In an age of rapid AI advancement, <em>Drawing from the Crowd</em> demonstrates how citizen-generated data can bridge the gap between humanity and its digital environment. Our participatory approach shows that meaningful contributions to knowledge don't require technical expertise—just careful observation and cultural curiosity.</p>
+                    <p><strong>SDG 4: Quality Education:</strong> We build our platform to make academic research accessible to anyone with curiosity and an internet connection. Participants learn about Japanese art history, geography, and digital humanities while contributing to scholarship. Much knowledge is built through direct engagement, and the Principal Investigator is available for advice, guidance and feedback.</p>
+                    <p><strong>SDG 11: Sustainable Cities and Communities:</strong> By georeferencing historical prints, we create a digital record of how landscapes were perceived over centuries, revealing social and environmental changes and supporting cultural preservation.</p>
+                    <p><strong>Bridging the Digital Divide:</strong> In an age of rapid AI advancement, <em>Drawing from the Crowd</em> demonstrates how citizen-generated data can bridge the gap between humanity and its digital environment. Our participatory approach, which keeps the human in the loop, shows that meaningful contributions to knowledge do not require specialist technical expertise, but instead values careful observation and cultural curiosity.</p>
+
+                    <h3>Cite this project</h3>
+                    <p class="cite-line">Stephanie Santschi, Himanshu Panday, Hirohito Tsuji, and Drew Richardson, “Drawing from the Crowd: A Citizen Science Platform for Mapping Ukiyo-e Cultural Geography,” <em>ThePrintLab</em>, accessed [date], https://landscapes.theprintlab.org. If your contributions inspire a paper, thesis, or project, you are welcome to develop them further; we simply ask that you cite the project and appreciate if you let us know about it!</p>
                 </div>
+
  
                 <!-- Japanese -->
-                <div class="lang-ja hidden japanese-text">
+ 
+                                                <div class="lang-ja hidden japanese-text">
                     <h2>プロジェクト概要</h2>
-                    <p>江戸時代の絵師たちは、鑑賞者をどのような視点に置いて日本の名所を体験させたのでしょうか？これが「集合知を描く（Drawing from the Crowd）」の核心にある問いであり、世界中の好奇心あふれる方々と共にその答えを探求しています。</p>
-                    
-                    <h3>プロジェクト</h3>
-                    <p>「集合知を描く（Drawing from the Crowd）」は、2024年度日本財団ソーシャル・イノベーター・コラボレーション（NSIC）に採択された5つの事業のうちの1つとして始まりました。助成の条件として、他の奨学金同窓生と共に社会的インパクトのあるプロジェクトを創出することが求められ、これがプロジェクトの発足だけでなく、<a href="#" onclick="showSection('team'); return false;">学際的分野からの実りある知の出会い</a>につながりました。この基盤の上に、チューリッヒ大学大学院キャンパスからのキャリア・グラントによる実装資金を獲得しました。</p>
-                    <p><a href="https://smapshot.heig-vd.ch/contribute/?owners=19#5.99/37.1868/141.8015" target="_blank">プラットフォーム</a>は2025年10月に一般公開され、2025年12月より市民科学アウトリーチを開始しました。現在、世界中の機関とのパートナーシップを通じて版画コレクションを拡大しながら、貢献者コミュニティの構築を積極的に進めています。</p>
- 
-                    <h3>私たちの目標</h3>
+                    <p>歴史的な画像をつくった人々、すなわち江戸時代（1603〜1868年）の絵師や初期の写真家たちは、鑑賞者をどのような視点に置いて日本の名所を体験させたのでしょうか。「集合知を描く（Drawing from the Crowd）」の核心にあるこの問いは、世界中の好奇心あふれる方々へのお誘いです。ぜひ、その答えを一緒に探してください。</p>
+
+                    <h3>なぜ芸術のデータと地理のデータを比べる必要があるのか</h3>
+                    <p>絵師たちは、絵画的慣習を通じて、何が売れたかを通じて、そして同じ場所を描いた過去の絵を通じて、地形を描き上げていきました。浮世絵の興味深いところは、地形上の「グラウンド・トゥルース（正解）」に従うのではなく、観察されたもの、想像によるもの、そして絵や詩における過去の描写から得られた情報を組み合わせている点です。複数の眺めを一枚にまとめたものもあれば、鑑賞者を鳥の高さまで引き上げ、誰も立てない視点からその場所の空間的な論理を見せるものもあります。地形とその絵画的な表現を対比させることで、その風景が鑑賞者である私たちに求めた（そして今も求めている）まなざしの型が見えてきます。私たちは、歴史的なまなざしをたどり直すのです。</p>
+
+                    <h3>このプロジェクトは何をするのか</h3>
+                    <p>皆さんと一緒に版画をジオリファレンスすること、つまり版画を大きな規模で地形と重ね合わせ、その対比から洞察を引き出すことを通じて、版画のどの要素が実際の地形を反映し、どの要素が芸術的慣習に由来するのかを見分けていきます。二つの問いが作業を導いています。どの特徴が観察に基づき、どの特徴が慣習によるものかを、皆の力でどう見分けるか。そしてそれは、江戸時代の版画が鑑賞者をどのような視点で名所（<em>meisho</em>）へと導いたかについて、何を教えてくれるか。</p>
+
+                    <h3>参加するとどんな良いことがあるか</h3>
                     <ul>
-                        <li><strong>市民科学を通じたコミュニティの構築：</strong> 日本の文化遺産への理解と歴史的景観への関心を、国内外で育むこと。</li>
-                        <li><strong>プロジェクトメンバー間の知識の向上：</strong> 美術史とデジタル人文学との交差点における、複数言語による学際的研究プロジェクトの専門知識を向上させること。</li>
-                        <li><strong>日本の浮世絵研究の発展：</strong> 浮世絵版画がどのように空間関係を表現し、鑑賞者を風景体験へと導いたかを評価する方法論を確立し、版画がどのような地理的現実を表しているかの理解に貢献すること。</li>
+                        <li><strong>同じ関心を持つ仲間とつながる：</strong>世界的なコミュニティに加わり、イベントに参加し、参加を通じて賞を得ることもできます。</li>
+                        <li><strong>知識を広げる：</strong>日本の美術史や地理について学べます。あなたが旅した場所や、あなたの出身地についても知ることができます。</li>
+                        <li><strong>研究に貢献する：</strong>あなたの取り組みは学術研究の力になり、ご希望に応じてお名前が記されます。</li>
                     </ul>
- 
-                    <h3>私たちの使命</h3>
-                    <p>日本の風景や文化に興味を持つ人々が、学術研究に貢献できる、魅力的でアクセスし易いプラットフォームの構築に努めます。共同ジオリファレンスを通じて、版画のどの要素が実際の地形を反映し、どの要素が芸術的な表現技法に由来するのかを特定することを目指します。これらの特徴は、同じ作品の中に共存していることが多いのです。</p>
-                    <p><strong>なぜこれが重要なのでしょうか？</strong>これらの版画は、過去の客観的な記録ではありません。芸術的慣習、市場の需要、そして何世紀にもわたる視覚的伝統によって丁寧に作り上げられた眺めなのです。一枚の絵の中に、忠実な地形と想像力豊かな装飾が混在していたり、実際には立つことのできない角度から名所を描いていたりすることもあります。丁寧に観察し、皆で知見を持ち寄ることで、かつての鑑賞者が当然のように受け入れていたものが見えてきます。それこそが本当の発見です。場所だけでなく、それを見る方法の発見なのです。</p>
- 
-                    <h3>市民による貢献</h3>
-                    <p>日本の歴史的景観のマッピングにぜひご参加ください。市民科学者として、美しい江戸時代の版画に触れながら、絵師たちがどのように名所を描いたかを一緒に解き明かしていきます。事前の経験や日本語能力は必要ありません。必要なのは好奇心と少しの注意力だけです。</p>
-                    <p><strong>参加者の役割：</strong></p>
-                    <ul>
-                        <li>版画の景色が見える場所を見つける</li>
-                        <li>3Dツールで版画の地形と現代の地形を重ねる</li>
-                        <li>実際の地理に基づいた版画か、想像上の風景かを記録する</li>
-                    </ul>
-                    <p><strong>参加のメリット：</strong></p>
-                    <ul>
-                        <li>日本の美術史や地理について学べる</li>
-                        <li>学術研究に貢献できる</li>
-                        <li>世界中の仲間とつながれる</li>
-                        <li>研究成果に名前が載る</li>
-                    </ul>
-                    <p>1作品あたり15〜30分ほどで完了します。うまくいかなかった場合でも、それ自体が貴重なデータになります。</p>
-                    <p>面白い発見がありましたか？ご自身の研究やレポートに発展させていただくのも大歓迎です。その際は、本プロジェクトをご引用いただければ幸いです。</p>
-                    <p><strong>推奨引用形式：</strong><br>
-                    Stephanie Santschi, Himanshu Panday, Hirohito Tsuji, and Drew Richardson, "Drawing from the Crowd: A Citizen Science Platform for Mapping Ukiyo-e Cultural Geography," <em>ThePrintLab</em>, accessed [date], https://landscapes.theprintlab.org.</p>
-                    <p><strong><a href="#" onclick="showSection('getting-started'); return false;">さっそく始めましょう！マッピングガイドはこちら →</a></strong></p>
- 
-                    <h3>研究の枠組み</h3>
-                    <p>本プロジェクトでは、主に2つの問いに取り組んでいます：</p>
-                    <ol>
-                        <li>版画のどの部分が実際の地形を反映し、どの部分が絵画的な伝統に基づくものか、みんなの力でどう見分けられるか</li>
-                        <li>それによって、江戸時代の版画が鑑賞者にどのような視点で名所を見せようとしていたかが分かるか</li>
-                    </ol>
- 
-                    <h3>プラットフォームの特徴</h3>
-                    <ul>
-                        <li>日本語・英語の2か国語対応</li>
-                        <li>版画と3D地形モデルを比較できるマッピングツール</li>
-                        <li>日本の視覚文化における空間表現についての学習資料</li>
-                        <li>発見を共有し、議論できるコミュニティ機能</li>
-                        <li>初めての方にも分かりやすいステップガイド</li>
-                    </ul>
- 
+
+                    <h3>プロジェクトの始まり</h3>
+                    <p>「集合知を描く（Drawing from the Crowd）：市民科学による浮世絵文化地理マッピングプラットフォーム」は、2024年度日本財団ソーシャル・イノベーター・コラボレーション（NSIC）に採択された5つの事業のうちの一つとして始まりました。助成の条件は、他の奨学金同窓生とともに社会的に意義のあるものを築くことでした。その課題がプロジェクトを生み、そして予想しなかったものをもたらしました。<a href="#" onclick="showSection('team'); return false;">分野を越えて考えるチーム</a>です。この基盤の上に、チューリッヒ大学（UZH）大学院キャンパス（GRC）のキャリア・グラントによる実装資金を得ました。</p>
+                    <p>プラットフォームは2025年10月に一般公開され、2025年12月に市民科学のアウトリーチを開始しました。現在は、世界各地の機関との連携を通じてコレクションを拡充しながら、貢献者のコミュニティを積極的に育てています。</p>
+
                     <h3>協力機関</h3>
-                    <p>本プロジェクトは、デジタル人文学と文化遺産研究の分野をリードする機関との協力により実現しています。</p>
-                    <p><strong><a href="https://smapshot.heig-vd.ch/" target="_blank">Smapshot Lab（HEIG-VD、EPFL）</a></strong> — HEIG-VDが開発したクラウドソーシング・ツール「Smapshot」を基盤としています。歴史的な画像を3D仮想地球儀上で位置特定できるツールです。</p>
-                    <p><strong><a href="https://www.dh-jac.net/db/nishikie/search_portal.php" target="_blank">立命館大学アート・リサーチセンター</a></strong> — 本プロジェクトは日本文化資源デジタル・アーカイブ国際共同研究拠点（ARC-iJAC）に登録されており、同センターの浮世絵ポータルデータベースを活用しています。</p>
- 
+                    <p>「集合知を描く（Drawing from the Crowd）」は、デジタル人文学と文化遺産研究の分野をリードする機関との協力により実現しています。</p>
+                    <p><strong>Smapshot Lab（HEIG-VD、スイス）：</strong>本プロジェクトの市民科学プラットフォームは、HEIG-VDが開発したクラウドソーシング基盤・ワークフロー「Smapshot」の上に構築されています。ボランティアが歴史的な画像を3D仮想地球儀上で位置特定できるツールです。</p>
+                    <p><strong>立命館大学アート・リサーチセンター（日本）：</strong>本プロジェクトは日本文化資源デジタル・アーカイブ国際共同研究拠点（ARC-iJAC）に登録されており、同センターの浮世絵ポータルデータベースを研究に活用しています。</p>
+
                     <h3>データソース</h3>
-                    <p><strong>画像・メタデータ：</strong><a href="https://www.metmuseum.org/art/collection/search" target="_blank">メトロポリタン美術館</a>（ニューヨーク）、<a href="https://www.dh-jac.net/db/nishikie/search_portal.php" target="_blank">立命館大学アートリサーチセンター</a>（浮世絵ポータル）、<a href="https://jpsearch.go.jp/" target="_blank">ジャパンサーチ</a>（<a href="https://www.ndl.go.jp/en/" target="_blank">国立国会図書館</a>、<a href="https://www.culture.city.taito.lg.jp/en" target="_blank">台東区生涯学習センター</a>）</p>
-                    <p><strong>地形データ：</strong><a href="https://www.gsi.go.jp/ENGLISH/" target="_blank">国土地理院（GSI）</a></p>
-                    <p><strong>データエンリッチメント：</strong><a href="https://www.wikidata.org/wiki/" target="_blank">Wikidata</a>および<a href="https://geohack.toolforge.org/" target="_blank">GeoHack Toolforge</a></p>
- 
+                    <p><strong>版画：</strong>メトロポリタン美術館（ニューヨーク）、台東区生涯学習センター（東京）、国立国会図書館（東京）</p>
+                    <p><strong>広重の画帖（素描）：</strong>大英博物館（ロンドン）</p>
+                    <p><strong>挿絵（名所図会）：</strong>国立国会図書館（東京）、国立公文書館（東京）</p>
+                    <p><strong>写真その他の資料：</strong>ジャパンサーチ（ADEAC）経由：国立国会図書館、台東区生涯学習センター</p>
+                    <p><strong>地形データ：</strong>国土地理院（GSI）</p>
+                    <p><strong>データ拡充：</strong>Wikidata、GeoHack Toolforge</p>
+
                     <h3>持続可能な開発目標</h3>
                     <p>本プロジェクトは、国連の持続可能な開発目標（SDGs）に貢献しています。</p>
-                    <p><strong>SDG 4：質の高い教育をみんなに</strong> — インターネット環境と好奇心さえあれば、どなたでも学術研究に参加できます。日本美術史、地理学、デジタル人文学について学びながら、研究に貢献できる場です。</p>
-                    <p><strong>SDG 11：住み続けられるまちづくりを</strong> — 歴史的な版画の位置情報を記録することで、数百年前の風景がどのように見られていたかをデジタルで残し、環境の変化を可視化するとともに、文化遺産の保存に貢献します。</p>
-                    <p><strong>デジタルデバイドの橋渡し</strong> — AI技術が急速に発展する今、本プロジェクトは、市民の力で生み出されたデータが人と技術をつなぐ架け橋になれることを示しています。専門知識がなくても、丁寧な観察と文化への関心があれば、誰でも意義ある貢献ができるのです。</p>
+                    <p><strong>SDG 4：質の高い教育をみんなに：</strong>好奇心とインターネット環境さえあれば、どなたでも学術研究に参加できるよう、プラットフォームを構築しています。参加者は、研究に貢献しながら、日本美術史・地理学・デジタル人文学について学べます。多くの知識は直接の関わりを通じて育まれ、研究代表者が助言・指導・フィードバックを行います。</p>
+                    <p><strong>SDG 11：住み続けられるまちづくりを：</strong>歴史的な版画をジオリファレンスすることで、数世紀にわたって風景がどのように捉えられてきたかをデジタルに記録し、社会や環境の変化を可視化するとともに、文化遺産の保存に貢献します。</p>
+                    <p><strong>デジタルデバイドの橋渡し：</strong>AI技術が急速に発展する今、「集合知を描く」は、市民が生み出したデータが人とデジタル環境との隔たりを埋めうることを示しています。人を意思決定の輪の中に留めるこの参加型のアプローチは、意義ある知の貢献に専門的な技術は必ずしも必要でなく、むしろ丁寧な観察と文化への関心が大切であることを示しています。</p>
+
+                    <h3>本プロジェクトの引用</h3>
+                    <p class="cite-line">Stephanie Santschi, Himanshu Panday, Hirohito Tsuji, and Drew Richardson, “Drawing from the Crowd: A Citizen Science Platform for Mapping Ukiyo-e Cultural Geography,” <em>ThePrintLab</em>, accessed [date], https://landscapes.theprintlab.org. ご自身の研究やレポートに発展させていただくのも大歓迎です。その際は、本プロジェクトをご引用いただき、あわせてお知らせいただけますと幸いです。</p>
                 </div>
             </div>
         </div>
-    </section>
+    
+</section>
  
     <!-- Team Section -->
     <section id="team">
@@ -811,15 +1180,15 @@
                 <!-- English -->
                 <div class="lang-en">
                     <h2>Meet Our Team &amp; Partners</h2>
-                    <h3>Principal Investigator</h3>
+                    <h4>Principal Investigator</h4>
                     <div class="team-grid">
                         <div class="team-member">
                             <img src="Photo_Santschi.jpg" alt="Dr. Stephanie Santschi" class="team-photo">
                             <h4>Dr. Stephanie Santschi</h4>
-                            <p><strong>Responsible for project conception, management, publishing, and networking; currently postdoctoral researcher at the <a href="https://www.khist.uzh.ch/en/chairs/ostasien/team/Stephanie-Santschi.html" target="_blank">Chair of East Asian Art History</a>, Department of Art History, University of Zurich (specializing in Japanese art history).</strong></p>
-                            <p>She received her PhD from the University of Zurich (2023), and holds an MA Museum Studies from the University of East Anglia (2016). Her research interests include art history and digital humanities, particularly the representation of Japanese geography in early modern reproductive visual culture. She also supports citizen science as a research methodology in the humanities.</p>
-                            <p><a href="mailto:stephanie@theprintlab.org" class="contact">stephanie@theprintlab.org</a></p>
-                            <p><em>"We see this research community as a way to connect academic research with the general public. Please contact us with any inquiries or suggestions about participation."</em></p>
+                            <p><strong>Responsible for project conception, management, publishing, and networking; 3/2024–1/2027 Postdoctoral Researcher at the <a href="https://www.khist.uzh.ch/en/chairs/ostasien/team/Stephanie-Santschi.html" target="_blank">Chair of East Asian Art History</a>, Department of Art History, University of Zurich.</strong></p>
+                            <p>PhD from the University of Zurich (2023) &amp; MA Museum Studies from the University of East Anglia (2016). Research interests include art history and digital humanities, particularly the representation of Japanese geography in early modern reproductive visual culture, and citizen science as a research methodology in the humanities.</p>
+                            <p><a href="#" class="contact" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a></p>
+                            <p><em>“Academic research should not stay behind institutional walls. This community is my attempt to share back with the communities that societally support research, with and for it — I’d welcome your questions and ideas about joining in and developing it further.”</em></p>
                         </div>
                     </div>
  
@@ -834,19 +1203,19 @@
                             <h4>Himanshu Panday</h4>
                             <p><strong>Co-founder of <a href="https://www.dignityindifference.org/" target="_blank">Dignity in Difference</a>, specializing in digital prototyping, coding, and AI-assisted workflows</strong></p>
                             <p>Specializes in digital anthropology, particularly citizen science platform development.</p>
-                            <p><em>"I'm interested in curating and exploring new algorithms for citizen science in this project."</em></p>
+                            <p><em>“I am interested in curating and exploring new algorithms for citizen science in this project.”</em></p>
                         </div>
                         <div class="team-member">
                             <h4>Hirohito Tsuji</h4>
                             <p><strong>PhD Candidate, Networking, Background Research and Japanese Translations</strong></p>
                             <p>PhD Candidate at the University of East Anglia specializing in the Imperial Family of Japan. Interests include Japanese history, culture, arts, geography and Japanese studies from the perspective of digital humanities.</p>
-                            <p><a href="mailto:h.tsuji@uea.ac.uk" class="contact">h.tsuji@uea.ac.uk</a></p>
+                            <p><a href="#" class="contact" data-u="h.tsuji" data-d="uea.ac.uk" data-label="1" onclick="return mailTo(this)"></a></p>
                         </div>
                     </div>
  
                     <h3>Funding and Support</h3>
-                    <p><strong>Prototype Development:</strong> Generously provided by The Nippon Foundation Scholars Association (TNFSA), an alumni network of Nippon Foundation Scholarship recipients.</p>
-                    <p><strong>Implementation Funding:</strong> Generously provided as a Career Grant for PI Santschi by the Graduate Campus at the University of Zurich.</p>
+                    <p><strong>Prototype Development (August 2024–February 2025):</strong> Generously provided by The Nippon Foundation Scholars Association (TNFSA), an alumni network of Nippon Foundation Scholarship recipients.</p>
+                    <p><strong>Implementation Funding (July 2025–June 2026):</strong> Generously provided as a Career Grant for PI Santschi by the Graduate Campus at the University of Zurich.</p>
                     <p><em>We are deeply grateful for the support of both institutions.</em></p>
                     <p class="funder-logos"><img src="nf_logo.png" alt="Supported by The Nippon Foundation" class="funder-logo"><img src="grc_logo.png" alt="UZH Graduate Campus" class="funder-logo"></p>
                 </div>
@@ -854,15 +1223,15 @@
                 <!-- Japanese -->
                 <div class="lang-ja hidden japanese-text">
                     <h2>チーム紹介</h2>
-                    <h3>研究代表者</h3>
+                    <h4>研究代表者</h4>
                     <div class="team-grid">
                         <div class="team-member">
                             <img src="Photo_Santschi.jpg" alt="サンチ・ステファニー" class="team-photo">
                             <h4>サンチ・ステファニー博士</h4>
-                            <p><strong>プロジェクトの企画・運営・発信・ネットワーキングを担当。チューリッヒ大学美術史学科<a href="https://www.khist.uzh.ch/en/chairs/ostasien/team/Stephanie-Santschi.html" target="_blank">東洋美術史講座</a>博士研究員（日本美術史専門）。</strong></p>
-                            <p>チューリッヒ大学で博士号取得（2023年）、イースト・アングリア大学で博物館学修士号取得（2016年）。美術史とデジタル人文学を研究しており、特に近世の複製視覚文化における日本地理の表現に関心がある。人文学における市民科学の活用も推進している。</p>
-                            <p><a href="mailto:stephanie@theprintlab.org" class="contact">stephanie@theprintlab.org</a></p>
-                            <p>「このプロジェクトを通じて、学術研究と一般の方々をつなげたいと考えています。ご質問やご提案がございましたら、お気軽にご連絡ください。」</p>
+                            <p><strong>プロジェクトの企画・運営・発信・ネットワーキングを担当。2024年3月〜2027年1月、チューリッヒ大学美術史学科<a href="https://www.khist.uzh.ch/en/chairs/ostasien/team/Stephanie-Santschi.html" target="_blank">東洋美術史講座</a>博士研究員。</strong></p>
+                            <p>チューリッヒ大学で博士号取得（2023年）、イースト・アングリア大学で博物館学修士号取得（2016年）。研究関心は美術史とデジタル人文学、とりわけ近世の複製視覚文化における日本地理の表現、そして人文学における研究方法としての市民科学。</p>
+                            <p><a href="#" class="contact" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a></p>
+                            <p>「学術研究は、大学の壁の内側にとどまるべきではありません。このコミュニティは、研究を支えてくれる社会のコミュニティへ、その研究とともに、そしてその研究のために還元しようとする私自身の試みです。参加すること、そしてさらに発展させていくことについて、ご質問やアイデアをぜひお寄せください。」</p>
                         </div>
                     </div>
  
@@ -883,13 +1252,13 @@
                             <h4>辻 博仁</h4>
                             <p><strong>博士課程在籍。ネットワーキング、時代背景調査、翻訳・翻刻を担当</strong></p>
                             <p>イースト・アングリア大学大学院博士課程在籍。皇室制度史・皇室文化史を専門とする。日本の歴史、文化、芸術、地理、そしてデジタル人文学の観点からの日本研究に関心がある。</p>
-                            <p><a href="mailto:h.tsuji@uea.ac.uk" class="contact">h.tsuji@uea.ac.uk</a></p>
+                            <p><a href="#" class="contact" data-u="h.tsuji" data-d="uea.ac.uk" data-label="1" onclick="return mailTo(this)"></a></p>
                         </div>
                     </div>
  
                     <h3>助成・ご支援</h3>
-                    <p><strong>プロトタイプ開発：</strong>日本財団奨学金受給者の同窓会ネットワークである日本財団スカラーズ・アソシエーション（TNFSA）より助成を受けました。</p>
-                    <p><strong>本格実装：</strong>チューリッヒ大学大学院キャンパスより、研究代表者サンチへのキャリア・グラントとして助成を受けました。</p>
+                    <p><strong>プロトタイプ開発（2024年8月〜2025年2月）：</strong>日本財団奨学金受給者の同窓会ネットワークである日本財団スカラーズ・アソシエーション（TNFSA）より助成を受けました。</p>
+                    <p><strong>本格実装（2025年7月〜2026年6月）：</strong>チューリッヒ大学大学院キャンパスより、研究代表者サンチへのキャリア・グラントとして助成を受けました。</p>
                     <p>両機関のご支援に心より感謝申し上げます。</p>
                     <p class="funder-logos"><img src="nf_logo.png" alt="日本財団の支援を受けています" class="funder-logo"><img src="grc_logo.png" alt="チューリッヒ大学大学院キャンパス" class="funder-logo"></p>
                 </div>
@@ -904,161 +1273,116 @@
                 <!-- English -->
                 <div class="lang-en">
                     <h2>Start Mapping</h2>
-                    <p><strong>How to Participate</strong></p>
-                    
-                    <p>Watch this short tutorial to see the georeferencing process in action:</p>
-                    
-                    <div class="video-container">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/4uSqNAOrpeY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
- 
-                    <p class="tagline">Three simple steps to contribute to our research!</p>
- 
+                    <p>You look at a print, work out where the artist positioned the viewer, and match that viewpoint to the 3D model of the landscape by placing corresponding markers on both. It takes about 15 to 30 minutes.</p>
+
                     <div class="steps-container">
                         <div class="step">
                             <span class="step-number">1</span>
                             <div class="step-content">
-                                <strong>SELECT</strong>
-                                <p>Choose a print from our collection</p>
-                                <img src="select.png" alt="Step 1: Select a print from the collection" class="step-image">
+                                <strong>Select</strong>
+                                <p>Choose a print from the collection.</p>
+                                <img src="select.png" alt="Selecting a print from the collection" class="step-image">
                             </div>
                         </div>
                         <div class="step">
                             <span class="step-number">2</span>
                             <div class="step-content">
-                                <strong>LOCATE</strong>
-                                <p>Identify where you would stand to see this view</p>
-                                <img src="point-direction.png" alt="Step 2: Indicate viewing direction on the map" class="step-image">
+                                <strong>Locate</strong>
+                                <p>Find where you would have stood to see this view.</p>
+                                <img src="point-direction.png" alt="Marking the viewing position on the map" class="step-image">
                             </div>
                         </div>
                         <div class="step">
                             <span class="step-number">3</span>
                             <div class="step-content">
-                                <strong>ALIGN</strong>
-                                <p>Match the print with modern terrain</p>
-                                <img src="geoalign.png" alt="Step 3: Align matching points between print and 3D terrain" class="step-image">
+                                <strong>Align</strong>
+                                <p>Match the print to the modern terrain.</p>
+                                <img src="geoalign.png" alt="Aligning the print with 3D terrain" class="step-image">
                             </div>
                         </div>
                     </div>
- 
-                    <figure class="featured-image result-image">
-                        <img src="result.png" alt="Completed georeferencing showing the print aligned with modern terrain">
-                        <figcaption><strong>The Result:</strong> A successfully georeferenced print showing Hiroshige's view of the Naruto Whirlpool aligned with modern terrain data</figcaption>
-                    </figure>
- 
-                    <p>Want to see the full process? Check out our <a href="https://docs.google.com/document/d/1L7O5tMp37jLTeEAryeUKlki5N8v0qTrIXv9ugi_bIR0/edit?usp=sharing" target="_blank">extended case study</a> showing the research process step by step.</p>
- 
-                    <h3>Your Contribution Matters!</h3>
-                    <div class="checkmark-list">
-                        <p>✓ No Japanese language required</p>
-                        <p>✓ No art history expertise needed</p>
-                        <p>✓ 15–30 minutes per print</p>
-                        <p>✓ Every attempt helps—even "failed" ones provide valuable data!</p>
+
+                    <p class="start-reassure">No Japanese and no art-history background required. Even attempts that do not resolve are useful: they tell us which prints resist geolocalization.</p>
+
+                    <div class="start-cta">
+                        <button class="btn" onclick="openSmapshot()">Go to the Smapshot platform →</button>
+                        <p class="start-need">Chrome or Edge browsers work best. An account is optional, but signing in lets you track your own contributions, be cited in publications, and take part in competitions.</p>
                     </div>
- 
-                    <h3>What You'll Need</h3>
-                    <ul>
-                        <li>Google Chrome or Microsoft Edge browser (Edge has been working well recently)</li>
-                        <li><em>Tip: If you encounter errors, try clearing your browser cache</em></li>
-                        <li>15–30 minutes of your time</li>
-                        <li>Curiosity about Japanese culture and landscapes</li>
-                        <li>Optional: Create an account to track your contributions</li>
-                    </ul>
- 
-                    <h3>Quality Assurance &amp; Data Usage</h3>
-                    <p><strong>How We Ensure Quality:</strong></p>
-                    <p>Every submission is reviewed by the project's Principal Investigator before being incorporated into the dataset. This verification process helps maintain research integrity while providing learning opportunities for contributors.</p>
-                    <ul>
-                        <li>Verification may take some time—if your contribution doesn't appear immediately on the map, please be patient</li>
-                        <li>If a submission needs correction, we'll share feedback via comments to support your learning</li>
-                        <li>Even "unsuccessful" attempts provide valuable data about which prints are difficult to locate</li>
-                    </ul>
- 
-                    <p><strong>By Contributing:</strong></p>
-                    <p>By submitting to the platform, you agree that your contributions and username may be used by the project for non-commercial and educational purposes, including research publications and educational materials.</p>
- 
-                    <h3>Ready to Start?</h3>
-                    <button class="btn" onclick="openSmapshot()">Go to Smapshot Platform →</button>
+
+                    <figure class="featured-image result-image">
+                        <img src="result.png" alt="A completed georeferencing: the print aligned with modern terrain">
+                        <figcaption>A finished result: Hiroshige’s view of the Naruto whirlpools, aligned to modern terrain.</figcaption>
+                    </figure>
+
+                    <h3>What happens after you submit</h3>
+                    <p>Every submission is checked by the project’s lead before it joins the dataset, so it may not appear on the map straight away. If something needs adjusting, you will get a comment explaining how, which is also how you learn to read the prints more closely.</p>
+                    <p>By submitting, you agree that your contributions and username may be used for non-commercial research and teaching. The full terms are under <a href="#" onclick="showSection('contact'); return false;">Contact, Privacy Policy and Terms of Use</a>.</p>
+
+                    <details class="start-extra">
+                        <summary>Watch the tutorial and read a worked example</summary>
+                        <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/4uSqNAOrpeY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <p>For the full research process, see the <a href="https://docs.google.com/document/d/1L7O5tMp37jLTeEAryeUKlki5N8v0qTrIXv9ugi_bIR0/edit?usp=sharing" target="_blank">extended case study</a>. If the platform throws an error, clearing your browser cache usually fixes it.</p>
+                    </details>
                 </div>
  
                 <!-- Japanese -->
+
                 <div class="lang-ja hidden japanese-text">
                     <h2>参加方法</h2>
-                    <p><strong>ガイド</strong></p>
-                    
-                    <p>こちらの短い動画で、位置情報を特定する流れをご覧ください：</p>
-                    
-                    <div class="video-container">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/fH88coFDb6w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
- 
-                    <p class="tagline">3つの簡単なステップで研究に貢献できます！</p>
- 
+                    <p>版画を見て、絵師が鑑賞者をどこに立たせようとしたかを読み取り、版画と3D地形モデルの両方に対応するマーカーを置くことで、その視点を地形モデルと重ね合わせます。1点あたり15〜30分ほどです。</p>
+
                     <div class="steps-container">
                         <div class="step">
                             <span class="step-number">1</span>
                             <div class="step-content">
                                 <strong>選ぶ</strong>
-                                <p>コレクションから版画を選ぶ</p>
-                                <img src="select.png" alt="ステップ1：コレクションから版画を選ぶ" class="step-image">
+                                <p>コレクションから版画を選びます。</p>
+                                <img src="select.png" alt="コレクションから版画を選ぶ" class="step-image">
                             </div>
                         </div>
                         <div class="step">
                             <span class="step-number">2</span>
                             <div class="step-content">
-                                <strong>位置を決める</strong>
-                                <p>この景色が見える場所を探す</p>
-                                <img src="point-direction.png" alt="ステップ2：この景色が見える場所を探す" class="step-image">
+                                <strong>探す</strong>
+                                <p>この景色が見えた場所を探します。</p>
+                                <img src="point-direction.png" alt="地図上で視点の位置を示す" class="step-image">
                             </div>
                         </div>
                         <div class="step">
                             <span class="step-number">3</span>
                             <div class="step-content">
-                                <strong>合わせる</strong>
-                                <p>版画を現代の地形に重ねる</p>
-                                <img src="geoalign.png" alt="ステップ3：版画を現代の地形に重ねる" class="step-image">
+                                <strong>重ねる</strong>
+                                <p>版画を現代の地形に合わせます。</p>
+                                <img src="geoalign.png" alt="版画を3D地形に重ねる" class="step-image">
                             </div>
                         </div>
                     </div>
- 
+
+                    <p class="start-reassure">日本語も美術史の知識も必要ありません。うまく解けなかった試みも役に立ちます。どの版画が位置特定（ジオローカライゼーション）に馴染みにくいかを教えてくれるからです。</p>
+
+                    <div class="start-cta">
+                        <button class="btn" onclick="openSmapshot()">Smapshotプラットフォームへ →</button>
+                        <p class="start-need">ブラウザはChromeまたはEdgeが最適です。アカウントは任意ですが、サインインすると、ご自身の投稿を記録し、出版物で引用され、コンペティションに参加することができます。</p>
+                    </div>
+
                     <figure class="featured-image result-image">
                         <img src="result.png" alt="完成したジオリファレンス：版画が現代の地形と重なった状態">
-                        <figcaption><strong>完成！</strong> 広重が描いた鳴門の渦潮が、現代の地形データと重なりました</figcaption>
+                        <figcaption>完成した例：広重が描いた鳴門の渦潮を、現代の地形に重ね合わせたものです。</figcaption>
                     </figure>
- 
-                    <p>詳しいプロセスをご覧になりたい方は、研究過程をステップバイステップで紹介した<a href="https://docs.google.com/document/d/1L7O5tMp37jLTeEAryeUKlki5N8v0qTrIXv9ugi_bIR0/edit?usp=sharing" target="_blank">詳細なケーススタディ</a>をご参照ください。</p>
- 
-                    <h3>皆様のご参加が力になります！</h3>
-                    <div class="checkmark-list">
-                        <p>✓ 英語が分からなくても大丈夫</p>
-                        <p>✓ 美術史の知識は必要ありません</p>
-                        <p>✓ 1作品あたり15〜30分</p>
-                        <p>✓ うまくいかなくても、それも大切なデータです</p>
-                    </div>
- 
-                    <h3>必要なもの</h3>
-                    <ul>
-                        <li>Google ChromeまたはMicrosoft Edgeブラウザ（最近はEdgeが安定しています）</li>
-                        <li>ヒント：エラーが出たら、ブラウザのキャッシュをクリアしてみてください</li>
-                        <li>15〜30分ほどのお時間</li>
-                        <li>日本の文化や風景への興味</li>
-                        <li>参加履歴を残したい方は、アカウント作成も可能です</li>
-                    </ul>
- 
-                    <h3>品質管理とデータの利用について</h3>
-                    <p><strong>品質管理について：</strong></p>
-                    <p>すべての投稿は、データセットに組み込む前に研究代表者が確認しています。これにより研究の信頼性を保ちつつ、参加者の皆様にとっても学びの機会となるようにしています。</p>
-                    <ul>
-                        <li>確認には少しお時間をいただく場合があります。投稿がすぐに地図に反映されなくても、少々お待ちください</li>
-                        <li>修正が必要な場合は、コメント欄でフィードバックをお伝えします</li>
-                        <li>うまくいかなかった投稿も、「どの版画が難しいか」を知る貴重なデータになります</li>
-                    </ul>
- 
-                    <p><strong>ご投稿にあたって：</strong></p>
-                    <p>プラットフォームへの投稿をもって、ご投稿内容およびユーザー名が、研究出版物や教育資料など、非営利・教育目的で使用されることに同意いただいたものとします。</p>
- 
-                    <h3>さっそく始めましょう！</h3>
-                    <button class="btn" onclick="openSmapshot()">Smapshotプラットフォームへ →</button>
+
+                    <h3>投稿したあとの流れ</h3>
+                    <p>すべての投稿は、データセットに加えられる前にプロジェクト代表が確認します。そのため、すぐには地図に表示されないことがあります。修正が必要な場合は、その方法をコメントでお伝えします。これは、版画をより深く読み取るための手がかりにもなります。</p>
+                    <p>投稿された時点で、ご投稿とユーザー名が非営利の研究および教育目的で利用されることに同意したものといたします。詳しくは<a href="#" onclick="showSection('contact'); return false;">お問い合わせ・プライバシーポリシー・利用規約</a>をご覧ください。</p>
+
+                    <details class="start-extra">
+                        <summary>チュートリアル動画と作業例を見る</summary>
+                        <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/4uSqNAOrpeY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <p>研究の全体的な流れは<a href="https://docs.google.com/document/d/1L7O5tMp37jLTeEAryeUKlki5N8v0qTrIXv9ugi_bIR0/edit?usp=sharing" target="_blank">詳細なケーススタディ</a>をご覧ください。エラーが出る場合は、ブラウザのキャッシュを消去すると解決することが多いです。</p>
+                    </details>
                 </div>
             </div>
         </div>
@@ -1073,60 +1397,92 @@
                     <h2>Blog</h2>
                     <p><strong>Project updates and research insights</strong></p>
  
+                    <!-- POST: June 2026 — implementation phase ends + dataset doubled -->
+                    <details class="blog-card" id="post-2026-06" open>
+                        <summary>
+                            <span class="card-date">June 2026 <span class="card-author">Dr. Stephanie Santschi</span></span>
+                            <span class="card-title">Wrapping up the implementation phase means you can now find book illustrations, drawings and photos on the page in addition to prints!</span>
+                            <span class="card-teaser">The collection doubles, and now includes sketchbooks, photographs and gazetteer pages, not just prints.</span>
+                        </summary>
+                        <div class="card-body">
+                        <p>After collecting and processing more data (concretely, 1,345 additional records), we have now uploaded a second batch. This doubles the available collection which we can georeference together. Together with this upload, we have also formally wrapped up the GRC-funded Implementation Phase. Its result is this website, a bilingual platform on Smapshot, a small but growing community of contributors, and equally, a dataset that continues to expand and which has inspired first insight.</p>
+                        <p>I am particularly excited that it now includes sketchbooks, photographs and gazetteer pages beyond the prints which we uploaded in a previous step. Remember, until June this was a collection of single-sheet <em>ukiyo-e</em> landscape prints. You will now find two Hiroshige sketchbooks from the <strong>British Museum</strong>, pages from <em>meisho-zue</em> (the illustrated gazetteers of famous places) from the <strong>National Diet Library</strong> and the <strong>National Archives of Japan</strong>, and a set of historical photographs.</p>
+                        <p>These additional records widen the field for discovery and help us answer our research question, how the images mediate the gaze onto the landscape, through now allowing comparison between media. Think about it: even if referring to the same place, a camera, a hand drawing on the spot, and a publisher’s woodblock do something different to the same view. A photograph replicates the geometry it was made with: a camera stood somewhere, whatever the framing, and that precise location can be calculated. In comparison to that, a sketchbook page potentially follows paths and places to rest for a short while, if drawn in front of the thing. In comparison to that, the print studio, with its production team of the print designer, block-cutter, printer and the publisher, were following a sense of what would sell. And even further removed from the place, a <em>meisho-zue</em> illustration was ever understood as an informative illustration of a place, an image conveying spatial, historical, cultural or spiritual truths about a place, not topographical in a statistic sense, so all these media would have different things to say about the visual logic of a place.</p>
+                        <p>Set them along that range, from geometry at one end to composition at the other, and the research question becomes tractable. We have been asking which parts of a print follow the terrain and which follow pictorial convention. Now we can put it across media, and where a sketchbook page and a finished print show the same view, we can watch the change happen and measure it. The photographs close a loop, too.</p>
+                        <p>And while this part of the funding phase has ended, the project has not. Some funding applications that would take the project into the direction of tourism research and of collaboration with text-based citizen science are currently in preparation; and soon, I will also be able to announce a substantial, exciting step in my career.</p>
+                        <p>And in the project, verification carries on, contributions are still very much wanted, and for that we of course invite you warmly! <strong><a href="#" onclick="showSection('getting-started'); return false;">Start mapping →</a></strong></p>
+                        </div>
+                    </details>
+
+
                     <!-- POST: March 25 2026 — SADiLaR -->
-                    <article class="blog-post">
-                        <h3>Drawing from the Crowd at SADiLaR's DH Colloquium (March 2026)</h3>
-                        <p class="post-meta">March 2026 | By Dr. Stephanie Santschi</p>
-                        <p><em>Drawing from the Crowd</em>—our citizen science platform for georeferencing Edo-period <em>ukiyo-e</em>—was the subject of an hour-long talk at the <strong>South African Centre for Digital Language Resources (SADiLaR) DH Colloquium</strong> on 25 March. SADiLaR runs a monthly online series where DH researchers from across the world share what they're working on, and I was glad to be part of it.</p>
+                    <details class="blog-card" id="post-2026-03-sadilar">
+                        <summary>
+                            <span class="card-date">March 2026 <span class="card-author">Dr. Stephanie Santschi</span></span>
+                            <span class="card-title">Drawing from the Crowd at SADiLaR’s DH Colloquium (March 2026)</span>
+                            <span class="card-teaser">A talk at SADiLaR's digital-humanities colloquium, and the questions that came out of it.</span>
+                        </summary>
+                        <div class="card-body">
+                        <p><em>Drawing from the Crowd</em>, our citizen science platform for georeferencing Edo-period <em>ukiyo-e</em>, was the subject of an hour-long talk at the <strong>South African Centre for Digital Language Resources (SADiLaR) DH Colloquium</strong> on 25 March. SADiLaR runs a monthly online series where DH researchers from across the world share what they are working on, and I was glad to be part of it.</p>
  
-                        <p>An hour is long enough to walk through the whole thing properly: where the art historical questions come from, why <em>ukiyo-e</em> prints are difficult to georeference (artists moved Mt. Fuji around to suit their compositions), what the Smapshot adaptation looks like, and what we're hoping citizen scientists will help us figure out. If you've been wanting a fuller picture of the project than the website can offer, the recording is the easiest way in:</p>
+                        <p>An hour is long enough to walk through the whole thing properly: where the art historical questions come from, why <em>ukiyo-e</em> prints are difficult to georeference (artists moved Mt. Fuji around to suit their compositions), what the Smapshot adaptation looks like, and what we are hoping citizen scientists will help us figure out. If you have been wanting a fuller picture of the project than the website can offer, the recording is the easiest way in:</p>
  
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/QsMyFBDcJOQ" title="Drawing from the Crowd at SADiLaR DH Colloquium" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
  
-                        <p>Thanks to the SADiLaR team for the invitation, and to everyone who showed up with questions—several of which I'm still thinking about.</p>
+                        <p>Thanks to the SADiLaR team for the invitation, and to everyone who showed up with questions, several of which I am still thinking about.</p>
  
                         <div class="post-cta">
-                            <p>Watched the video and want to try it yourself? You don't need a specialist background. <strong><a href="#" onclick="showSection('getting-started'); return false;">Here's how to start →</a></strong></p>
+                            <p>Watched the video and want to try it yourself? You do not need a specialist background. <strong><a href="#" onclick="showSection('getting-started'); return false;">Here is how to start →</a></strong></p>
                         </div>
-                    </article>
+                        </div>
+                    </details>
  
                     <!-- POST: March 12-16 2026 — AAS Vancouver -->
-                    <article class="blog-post">
-                        <h3>Drawing from the Crowd at AAS 2026, Vancouver</h3>
-                        <p class="post-meta">March 2026 | By Dr. Stephanie Santschi</p>
-                        <p>From 12 to 16 March I was in Vancouver for the <strong>Association for Asian Studies Annual Conference</strong>. The best part was getting to be in the same room as <strong>Dr. Drew Richardson</strong> (UC Santa Cruz), who has been part of <em>Drawing from the Crowd</em> from very early on. Most of our collaboration happens across nine time zones, so a few days of working out ideas in person—over coffee, around the poster, in the corridors between sessions—was a treat.</p>
+                    <details class="blog-card">
+                        <summary>
+                            <span class="card-date">March 2026 <span class="card-author">Dr. Stephanie Santschi</span></span>
+                            <span class="card-title">Drawing from the Crowd at AAS 2026, Vancouver</span>
+                            <span class="card-teaser">Notes from the Association for Asian Studies conference in Vancouver.</span>
+                        </summary>
+                        <div class="card-body">
+                        <p>From 12 to 16 March I was in Vancouver for the <strong>Association for Asian Studies Annual Conference</strong>. The best part was getting to be in the same room as <strong>Dr. Drew Richardson</strong> (UC Santa Cruz), who has been part of <em>Drawing from the Crowd</em> from very early on. Most of our collaboration happens across nine time zones, so a few days of working out ideas in person, over coffee and around the poster and in the corridors between sessions, was a treat.</p>
  
                         <figure class="featured-image">
                             <img src="aas2026_poster.jpg" alt="Stephanie Santschi and Drew Richardson at AAS 2026 in Vancouver, standing in front of the Drawing from the Crowd poster">
                             <figcaption>With Drew at AAS 2026, Vancouver</figcaption>
                         </figure>
  
-                        <p>What stood out at AAS was how often the conversation came back to the same question: <em>how do I get involved?</em> Curators wanting to test the platform on their own collections, graduate students looking for thesis angles, librarians thinking about outreach, regional specialists curious about the methodology—people kept asking. Which is what we'd hoped for.</p>
+                        <p>What stood out at AAS was how often the conversation came back to the same question: <em>how do I get involved?</em> Curators wanting to test the platform on their own collections, graduate students looking for thesis angles, librarians thinking about outreach, regional specialists curious about the methodology. People kept asking, which is what we had hoped for.</p>
  
-                        <p>If you missed it, this followed an hour-long version of the same project at <a href="#" onclick="showSection('blog'); return false;">SADiLaR's DH Colloquium</a> earlier in March.</p>
+                        <p>If you missed it, this followed an hour-long version of the same project at <a href="#post-2026-03-sadilar">SADiLaR’s DH Colloquium</a> earlier in March.</p>
  
                         <div class="post-cta">
-                            <p>If we talked in Vancouver and you've been meaning to give it a try, this is your nudge. And if we didn't meet—come say hello anyway. <strong><a href="#" onclick="showSection('getting-started'); return false;">Start mapping →</a></strong></p>
+                            <p>If we talked in Vancouver and you have been meaning to give it a try, this is your nudge. And if we did not meet, come say hello anyway. <strong><a href="#" onclick="showSection('getting-started'); return false;">Start mapping →</a></strong></p>
                         </div>
-                    </article>
+                        </div>
+                    </details>
  
                     <!-- POST: February 2026 — FAN Award + platform registrations -->
-                    <article class="blog-post">
-                        <h3>Drawing from the Crowd receives the UZH FAN Award 2026</h3>
-                        <p class="post-meta">February 2026 | By Dr. Stephanie Santschi</p>
-                        <p>In early February, <em>Drawing from the Crowd</em> received the <strong><a href="https://www.grc.uzh.ch/en/engagement/awards/fan-awardees/fan-awardees26.html#Stephanie_Santschi" target="_blank">University of Zurich FAN Award 2026</a></strong> in the humanities and social sciences. The FAN Awards are given by UZH Alumni each year to early-career researchers, and the ceremony took place at the "Sparkling Research" event on 3 February.</p>
+                    <details class="blog-card">
+                        <summary>
+                            <span class="card-date">February 2026 <span class="card-author">Dr. Stephanie Santschi</span></span>
+                            <span class="card-title">Drawing from the Crowd receives the UZH FAN Award 2026</span>
+                            <span class="card-teaser">The project receives the University of Zurich FAN Award 2026.</span>
+                        </summary>
+                        <div class="card-body">
+                        <p>In early February, <em>Drawing from the Crowd</em> received the <strong><a href="https://www.grc.uzh.ch/en/engagement/awards/fan-awardees/fan-awardees26.html#Stephanie_Santschi" target="_blank">University of Zurich FAN Award 2026</a></strong> in the humanities and social sciences. The FAN Awards are given by UZH Alumni each year to early-career researchers, and the ceremony took place at the “Sparkling Research” event on 3 February.</p>
  
                         <figure class="featured-image">
                             <a href="https://www.news.uzh.ch/en/articles/news/2026/sparkling-research.html" target="_blank"><img src="fan_award.jpg" alt="Stephanie Santschi receiving the UZH FAN Award 2026 at the Sparkling Research event"></a>
-                            <figcaption>At the "Sparkling Research" ceremony, 3 February 2026 (photo: <a href="https://www.nicolaszonvi.com/" target="_blank">Nicolas Zonvi</a> / <a href="https://www.news.uzh.ch/en/articles/news/2026/sparkling-research.html" target="_blank">UZH News</a>)</figcaption>
+                            <figcaption>At the “Sparkling Research” ceremony, 3 February 2026 (photo: <a href="https://www.nicolaszonvi.com/" target="_blank">Nicolas Zonvi</a> / <a href="https://www.news.uzh.ch/en/articles/news/2026/sparkling-research.html" target="_blank">UZH News</a>)</figcaption>
                         </figure>
  
-                        <p>I feel honoured, and happy. But this kind of recognition is never about one person—it's about a team, partners, funders, and (especially) the citizen scientists who have already started georeferencing prints. Thank you to everyone who has shown up. Citizen science only works because you do.</p>
+                        <p>I feel honoured, and happy. But this kind of recognition is never about one person: it is about a team, partners, funders, and above all the citizen scientists who have already started georeferencing prints. Thank you to everyone who has shown up. Citizen science only works because you do.</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">And: easier to find us now</h4>
-                        <p>Around the same time, the project was officially registered on two of the most widely used citizen science directories. If you've been looking for a project to join, or want to share <em>Drawing from the Crowd</em> with someone who might enjoy it, these are good places to point them:</p>
+                        <h4 class="sub-heading">And: easier to find us now</h4>
+                        <p>Around the same time, the project was officially registered on two of the most widely used citizen science directories. If you have been looking for a project to join, or want to share <em>Drawing from the Crowd</em> with someone who might enjoy it, these are good places to point them:</p>
                         <ul>
                             <li><strong><a href="https://colabfield.org/project/drawing-from-the-crowd/" target="_blank">CoLabField (Japan)</a></strong> — a Japanese-language hub for citizen science. Useful for connecting with contributors in Japan.</li>
                             <li><strong><a href="https://scistarter.org/drawing-from-the-crowd-a-citizen-science-platform-" target="_blank">SciStarter</a></strong> — one of the largest international citizen science directories. Educators, researchers, and curious volunteers across the world use it to find projects.</li>
@@ -1135,60 +1491,70 @@
                         <div class="post-cta">
                             <p>Whichever route you come in by, the work is the same: looking carefully at a print, figuring out where the artist stood, and helping us understand how Edo Japan pictured itself. <strong><a href="#" onclick="showSection('getting-started'); return false;">Come and have a go →</a></strong></p>
                         </div>
-                    </article>
+                        </div>
+                    </details>
  
                     <!-- POST: January 2026 — Three talks in Japan -->
-                    <article class="blog-post">
-                        <h3>Drawing from the Crowd in Japan: three January talks (Tokyo, Chuo, Keio)</h3>
-                        <p class="post-meta">January 2026 | By Dr. Stephanie Santschi</p>
-                        <p>January took me to Japan for three weeks, and inside that stretch I gave three talks to three different audiences: TNFSA scholarship alumni, a DH-and-AI crowd at Chuo University, and museum professionals at Keio Museum Commons. One of the things I like about <em>Drawing from the Crowd</em> is that it can hold a conversation with all of them. Here's a quick look at where I went and what I talked about.</p>
+                    <details class="blog-card">
+                        <summary>
+                            <span class="card-date">January 2026 <span class="card-author">Dr. Stephanie Santschi</span></span>
+                            <span class="card-title">Drawing from the Crowd in Japan: three January talks (Tokyo, Chuo, Keio)</span>
+                            <span class="card-teaser">Three weeks in Japan, three talks to three very different audiences.</span>
+                        </summary>
+                        <div class="card-body">
+                        <p>January took me to Japan for three weeks, and inside that stretch I gave three talks to three different audiences: TNFSA scholarship alumni, a DH-and-AI crowd at Chuo University, and museum professionals at Keio Museum Commons. One of the things I like about <em>Drawing from the Crowd</em> is that it can hold a conversation with all of them. Here is a quick look at where I went and what I talked about.</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">13 January — Nippon Foundation Scholars Association Webinar (virtual)</h4>
-                        <p>"Drawing from the Crowd Project Update." A check-in with the community that backed the original prototype—what's happened since the platform went live, and where we're headed next.</p>
+                        <h4 class="sub-heading">13 January — Nippon Foundation Scholars Association Webinar (virtual)</h4>
+                        <p>“Drawing from the Crowd Project Update.” A check-in with the community that backed the original prototype: what has happened since the platform went live, and where we are headed next.</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">19 January — DALA2025 Keynote, Chuo University (Tokyo)</h4>
-                        <p>Keynote at <strong><a href="https://sites.google.com/view/chuodala2025" target="_blank">Digital Approach to Literary Analysis 2025 (DALA2025)</a></strong>, co-hosted by MEXT and the National Institute of Informatics (NII). My title was <em>"Making Computational Boundaries Visible: AI as Critical Tool in Japanese Visual Studies and Pedagogy"</em>—and the argument, in short, is that AI's most useful role in our field isn't answering our questions but showing us where its own answers run out. <em>Drawing from the Crowd</em> sits inside that argument: the things citizen scientists notice are the things algorithms miss.</p>
+                        <h4 class="sub-heading">19 January — DALA2025 Keynote, Chuo University (Tokyo)</h4>
+                        <p>Keynote at <strong><a href="https://sites.google.com/view/chuodala2025" target="_blank">Digital Approach to Literary Analysis 2025 (DALA2025)</a></strong>, co-hosted by MEXT and the National Institute of Informatics (NII). My title was <em>“Making Computational Boundaries Visible: AI as Critical Tool in Japanese Visual Studies and Pedagogy”</em>. The argument, in short, is that AI’s most useful role in our field is not answering our questions but showing us where its own answers run out. <em>Drawing from the Crowd</em> sits inside that argument: the things citizen scientists notice are the things algorithms miss.</p>
  
                         <figure class="featured-image">
                             <img src="chuo_presentation.jpg" alt="Stephanie Santschi presenting the DALA2025 keynote at Chuo University, Tokyo">
                             <figcaption>Presenting at DALA2025, Chuo University</figcaption>
                         </figure>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">22 January — Keio Museum Commons (Tokyo)</h4>
-                        <p>「市民科学で読み解く浮世絵の空間表現——Drawing from the Crowdプロジェクトの紹介」/ <em>"Reading Spatial Representation in Ukiyo-e through Citizen Science."</em> A Japanese-language presentation for museum professionals at <a href="https://kemco.keio.ac.jp/en/" target="_blank">Keio Museum Commons</a>, focused on the question driving the project: when we look at a <em>ukiyo-e</em> landscape, what are we actually seeing? Real terrain, an imagined composition, or—more often than not—something in between, shaped by what viewers of the time expected to see.</p>
+                        <h4 class="sub-heading">22 January — Keio Museum Commons (Tokyo)</h4>
+                        <p>「市民科学で読み解く浮世絵の空間表現——Drawing from the Crowdプロジェクトの紹介」/ <em>“Reading Spatial Representation in Ukiyo-e through Citizen Science.”</em> A Japanese-language presentation for museum professionals at <a href="https://kemco.keio.ac.jp/en/" target="_blank">Keio Museum Commons</a>, focused on the question driving the project: when we look at a <em>ukiyo-e</em> landscape, what are we actually seeing? Real terrain, an imagined composition, or, more often than not, something in between, shaped by what viewers of the time expected to see.</p>
  
                         <div class="post-cta">
                             <p>The fastest way to understand what these talks were about is to try a print yourself. Fifteen minutes is enough for a first one. <strong><a href="#" onclick="showSection('getting-started'); return false;">Give it a go →</a></strong></p>
                         </div>
-                    </article>
+                        </div>
+                    </details>
  
                     <!-- POST: December 2025 — original founding post -->
-                    <article class="blog-post">
-                        <h3>From Prototype to Platform: Our Journey So Far</h3>
-                        <p class="post-meta">December 2025 | By the Drawing from the Crowd Team</p>
-                        <p>We're excited to launch the blog for <em>Drawing from the Crowd</em>! This space will share project updates, research insights, and stories from our growing community of citizen scientists.</p>
+                    <details class="blog-card" id="post-2025-12">
+                        <summary>
+                            <span class="card-date">December 2025 <span class="card-author">Dr. Stephanie Santschi</span></span>
+                            <span class="card-title">From Prototype to Platform: Our Journey So Far</span>
+                            <span class="card-teaser">The first post: how the project went from a six-month prototype to a working platform.</span>
+                        </summary>
+                        <div class="card-body">
+                        <p>We are excited to launch the blog for <em>Drawing from the Crowd</em>! This space will share project updates, research insights, and stories from our growing community of citizen scientists.</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">Where It All Began</h4>
-                        <p>In August 2024, <em>Drawing from the Crowd</em> was selected as one of five projects for The Nippon Foundation's Social Innovators Collaboration (NSIC). This six-month grant enabled our interdisciplinary team—spanning digital anthropology, spatial history, and Japanese (art) history—to develop a prototype platform for georeferencing ukiyo-e prints.</p>
-                        <p>The challenge we set ourselves was ambitious: could we adapt existing crowdsourcing technology, designed for historical photographs, to work with stylized Japanese woodblock prints? Unlike photographs, <em>ukiyo-e</em> prints encode space through cultural conventions—artists might move Mt. Fuji for better composition, elongate beaches for dramatic effect, or combine multiple viewpoints into a single image.</p>
+                        <h4 class="sub-heading">Where It All Began</h4>
+                        <p>In August 2024, <em>Drawing from the Crowd</em> was selected as one of five projects for The Nippon Foundation’s Social Innovators Collaboration (NSIC). This six-month grant enabled our interdisciplinary team, spanning digital anthropology, spatial history, and Japanese art history, to develop a prototype platform for georeferencing ukiyo-e prints.</p>
+                        <p>The challenge we set ourselves was ambitious: could we adapt existing crowdsourcing technology, designed for historical photographs, to work with stylized Japanese woodblock prints? Unlike photographs, <em>ukiyo-e</em> prints encode space through cultural conventions: artists might move Mt. Fuji for better composition, elongate beaches for dramatic effect, or combine multiple viewpoints into a single image.</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">Building the Prototype (August 2024–January 2025)</h4>
-                        <p>Working with our technical partners at Smapshot Lab (HEIG-VD), we adapted their monoplotting technology for Japanese prints. We sourced images from the Metropolitan Museum of Art's Open Access collection and terrain data from Japan's Geospatial Information Authority. The PI's Postdoctoral Research at the University of Zurich's Chair of East Asian Art History provided the art historical expertise to understand how Edo-period prints encoded spatial relationships and positioned viewers.</p>
+                        <h4 class="sub-heading">Building the Prototype (August 2024–January 2025)</h4>
+                        <p>Working with our technical partners at Smapshot Lab (HEIG-VD), we adapted their monoplotting technology for Japanese prints. We sourced images from the Metropolitan Museum of Art’s Open Access collection and terrain data from Japan’s Geospatial Information Authority. The PI’s Postdoctoral Research at the University of Zurich’s Chair of East Asian Art History provided the art historical expertise to understand how Edo-period prints encoded spatial relationships and positioned viewers.</p>
                         <p>Beta testing revealed something exciting: while foreground elements in prints are often manipulated for artistic effect, middle and background terrain maintains consistent relationships with actual geography. This means citizen scientists can successfully georeference prints by focusing on terrain contours rather than iconic features like Mt. Fuji.</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">Sharing Our Work</h4>
+                        <h4 class="sub-heading">Sharing Our Work</h4>
                         <p>Throughout 2024–2025, PI Santschi, sometimes together with team members, presented <em>Drawing from the Crowd</em> at conferences and workshops across Europe, Japan, and online:</p>
                         
                         <p><strong>Late 2025 — Refining details:</strong></p>
                         <ul>
-                            <li>Sept 2025: "Moving Mountains: Analyzing Spatial Narratives in Ukiyo-e through Citizen Science," <em>International Symposium of the Nihon kinsei bungaku kai</em>, University of Cambridge (UK)</li>
-                            <li>Aug 2025: "<em>Drawing from the Crowd</em>," 19th Deutschsprachiger Japanologentag, Goethe-Universität Frankfurt (DE)</li>
-                            <li>July 2025: "Reconstructing Japan's Scenic Past from Prints," <em>ADHO Digital Humanities Conference</em> (DH2025), with Himanshu Panday, Lisbon (PT)</li>
+                            <li>Sept 2025: “Moving Mountains: Analyzing Spatial Narratives in Ukiyo-e through Citizen Science,” <em>International Symposium of the Nihon kinsei bungaku kai</em>, University of Cambridge (UK)</li>
+                            <li>Aug 2025: “<em>Drawing from the Crowd</em>,” 19th Deutschsprachiger Japanologentag, Goethe-Universität Frankfurt (DE)</li>
+                            <li>July 2025: “Reconstructing Japan’s Scenic Past from Prints,” <em>ADHO Digital Humanities Conference</em> (DH2025), with Himanshu Panday, Lisbon (PT)</li>
                         </ul>
                         
                         <p><strong>Early 2025 — Spreading the word:</strong></p>
                         <ul>
-                            <li>May 2025: "<a href="https://digitalorientalist.com/2025/12/12/from-print-to-place-creating-an-integrative-geolocalization-workflow-using-citizen-scientists-and-computer-vision-ai/" target="_blank">From Print to Place</a>," <em>The Digital Orientalist Virtual Conference</em>, with Drew Richardson (online)</li>
+                            <li>May 2025: “<a href="https://digitalorientalist.com/2025/12/12/from-print-to-place-creating-an-integrative-geolocalization-workflow-using-citizen-scientists-and-computer-vision-ai/" target="_blank">From Print to Place</a>,” <em>The Digital Orientalist Virtual Conference</em>, with Drew Richardson (online)</li>
                             <li>Feb 2025: Project report, <em>Ritsumeikan ARC FY2024 Annual Report Meeting</em>, Kyoto (JP)</li>
                             <li>Jan 2025: 9th Digital Humanities Research Meeting「浮世絵、市民科学、DH」, Hibiya Library, Tokyo (JP)</li>
                             <li>Jan 2025: <em>Citizen Science Webinar</em>, The Nippon Foundation Scholars Association, Tokyo (JP)</li>
@@ -1196,12 +1562,12 @@
                         
                         <p><strong>2024 — Conceiving the idea:</strong></p>
                         <ul>
-                            <li>July 2024: "Viewed at a distance: geography in ukiyo-e prints," <em>Charting the European D-SEA Conference</em>, Max Planck / Staatsbibliothek Berlin (DE)</li>
+                            <li>July 2024: “Viewed at a distance: geography in ukiyo-e prints,” <em>Charting the European D-SEA Conference</em>, Max Planck / Staatsbibliothek Berlin (DE)</li>
                         </ul>
                         
-                        <p>The response has been encouraging—scholars and non-specialists alike are excited about contributing to research that reveals how Edo-period prints positioned their viewers to experience landscapes.</p>
+                        <p>The response has been encouraging: scholars and non-specialists alike are excited about contributing to research that reveals how Edo-period prints positioned their viewers to experience landscapes.</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">Implementation Phase (August 2025–July 2026)</h4>
+                        <h4 class="sub-heading">Implementation Phase (August 2025–July 2026)</h4>
                         <p><em>Drawing from the Crowd</em> has secured implementation funding through a Career Grant from the Graduate Campus at the University of Zurich. This support allows us to move beyond the prototype stage and build a fully functional platform.</p>
                         <p><strong>In the last couple of months, we have:</strong></p>
                         <ul>
@@ -1215,9 +1581,10 @@
                             <li>Develop educational resources and community features</li>
                         </ul>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">Join Us</h4>
-                        <p>Whether you're a specialist in Japanese art, a geography enthusiast, or simply someone who enjoys visual puzzles, we'd love your help in mapping the landscapes of <em>ukiyo-e</em>. Visit our Start Mapping page to learn how to participate, and follow this blog for updates on our progress.</p>
-                    </article>
+                        <h4 class="sub-heading">Join Us</h4>
+                        <p>Whether you are a specialist in Japanese art, a geography enthusiast, or simply someone who enjoys visual puzzles, we would love your help in mapping the landscapes of <em>ukiyo-e</em>. Visit our Start Mapping page to learn how to participate, and follow this blog for updates on our progress.</p>
+                        </div>
+                    </details>
                 </div>
  
                 <!-- Japanese -->
@@ -1225,10 +1592,32 @@
                     <h2>ブログ</h2>
                     <p><strong>プロジェクトの最新情報</strong></p>
  
+                    <!-- POST: 2026年6月 — 実装フェーズ終了・データセット倍増 -->
+                    <details class="blog-card" id="post-2026-06-ja" open>
+                        <summary>
+                            <span class="card-date">2026年6月 <span class="card-author">サンチ・ステファニー</span></span>
+                            <span class="card-title">実装フェーズが一区切りを迎え、版画に加えて、挿絵・素描・写真もページ上でご覧いただけるようになりました！</span>
+                            <span class="card-teaser">コレクションが倍増し、版画に加えて画帖・写真・名所図会が加わりました。</span>
+                        </summary>
+                        <div class="card-body">
+                        <p>さらにデータを収集・処理し（具体的には1,345件の追加レコード）、このたび第二弾をアップロードしました。これにより、皆さんと一緒にジオリファレンスできるコレクションが倍増します。あわせて、GRCの助成による実装フェーズも正式に一区切りを迎えました。その成果が、このウェブサイト、Smapshot上のバイリンガル・プラットフォーム、小さくとも着実に広がる貢献者のコミュニティ、そして拡大を続け、最初の洞察を生み出したデータセットです。</p>
+                        <p>とりわけうれしいのは、以前アップロードした版画に加えて、画帖・写真・名所図会のページが加わったことです。6月まで、これは一枚摺の浮世絵風景版画のコレクションでした。今では、<strong>大英博物館</strong>所蔵の広重の画帖二点、<strong>国立国会図書館</strong>と<strong>国立公文書館</strong>による<em>名所図会</em>（名所を描いた挿絵入りの案内書）のページ、そして歴史的な写真の一群をご覧いただけます。</p>
+                        <p>これらの追加レコードは発見の場を広げ、メディア同士の比較を可能にすることで、私たちの研究上の問い、すなわち画像が風景へのまなざしをどう媒介するのか、という問いに答える助けになります。考えてみてください。同じ場所を指していても、カメラ、その場で描く手、そして版元の木版は、同じ景色に対してそれぞれ異なることを行います。写真は、撮影時の幾何学をそのまま写し取ります。構図がどうであれ、カメラはどこかに立っていたのであり、その正確な位置は計算できます。それに対して、画帖の一葉は、対象を前にして描かれた場合、道筋をたどり、しばし立ち止まった場所を写している可能性があります。さらにそれに対して、版元の工房は、絵師・彫師・摺師・版元からなる制作チームとともに、「何が売れるか」という感覚に従っていました。そして場所からさらに遠く離れて、<em>名所図会</em>の図版は、常に場所を伝えるための挿絵として理解されてきました。統計的な意味で地形的なのではなく、場所についての空間的・歴史的・文化的・精神的な真実を伝える図像です。つまり、これらのメディアはそれぞれ、ある場所の視覚的な論理について異なることを語ってくれるのです。</p>
+                        <p>これらを、一方の端に幾何学、もう一方の端に構成を置いた幅に沿って並べると、研究上の問いが扱えるものになります。私たちは、版画のどの部分が地形に従い、どの部分が絵画的慣習に従うのかを問うてきました。今はメディアをまたいで問えます。そして画帖の一葉と完成した版画が同じ景色を描いていれば、その変化が起きる様を見て、測ることができます。写真もまた、一つの環を閉じてくれます。</p>
+                        <p>そして、この助成フェーズは終わりましたが、プロジェクトは終わっていません。観光研究の方向へ、そしてテキストベースの市民科学との連携へとプロジェクトを進める助成申請を、現在いくつか準備しています。そして間もなく、私自身のキャリアにおける大きく、心躍る一歩をお知らせできる見込みです。</p>
+                        <p>プロジェクトでは検証が続いており、皆さんのご投稿を引き続き心よりお待ちしています。ぜひ、あたたかくお迎えします！<strong><a href="#" onclick="showSection('getting-started'); return false;">マッピングを始める →</a></strong></p>
+                        </div>
+                    </details>
+
+
                     <!-- POST: 2026年3月25日 — SADiLaR -->
-                    <article class="blog-post">
-                        <h3>SADiLaR DHコロキアムで「Drawing from the Crowd」を発表（2026年3月）</h3>
-                        <p class="post-meta">2026年3月 | サンチ・ステファニー</p>
+                    <details class="blog-card" id="post-2026-03-sadilar-ja">
+                        <summary>
+                            <span class="card-date">2026年3月 <span class="card-author">サンチ・ステファニー</span></span>
+                            <span class="card-title">SADiLaR DHコロキアムで「Drawing from the Crowd」を発表（2026年3月）</span>
+                            <span class="card-teaser">SADiLaRのデジタル人文学コロキアムでの講演と、そこで出た問い。</span>
+                        </summary>
+                        <div class="card-body">
                         <p>3月25日、南アフリカ・デジタル言語資源センター（SADiLaR）が主催するデジタル・ヒューマニティーズ・コロキアムで、本プロジェクト「Drawing from the Crowd」について1時間ほど発表する機会をいただきました。江戸時代の浮世絵をジオリファレンスする市民科学プラットフォームについてのお話です。SADiLaRのコロキアムは、世界各地のDH研究者が毎月オンラインで研究を共有する場で、その一員に加えていただけたことを嬉しく思います。</p>
  
                         <p>1時間あれば、プロジェクトの全体像を一通りお伝えできます。美術史的な問いがどこから来ているのか、浮世絵のジオリファレンスがなぜ難しいのか（絵師たちは構図に合わせて富士山を動かしてしまうのです）、Smapshotをどのように浮世絵向けに調整したのか、そして市民科学の力で何を解明したいのか。ウェブサイトだけではお伝えしきれない部分も、動画にまとめていますのでご覧ください。</p>
@@ -1242,12 +1631,17 @@
                         <div class="post-cta">
                             <p>動画をご覧になって、ご自身でも試してみたくなった方へ。専門知識は必要ありません。<strong><a href="#" onclick="showSection('getting-started'); return false;">参加方法はこちら →</a></strong></p>
                         </div>
-                    </article>
+                        </div>
+                    </details>
  
                     <!-- POST: 2026年3月12-16日 — AAS Vancouver -->
-                    <article class="blog-post">
-                        <h3>AAS 2026バンクーバー大会で「Drawing from the Crowd」を発表</h3>
-                        <p class="post-meta">2026年3月 | サンチ・ステファニー</p>
+                    <details class="blog-card">
+                        <summary>
+                            <span class="card-date">2026年3月 <span class="card-author">サンチ・ステファニー</span></span>
+                            <span class="card-title">AAS 2026バンクーバー大会で「Drawing from the Crowd」を発表</span>
+                            <span class="card-teaser">バンクーバーで開かれたアジア研究協会年次大会からの報告。</span>
+                        </summary>
+                        <div class="card-body">
                         <p>3月12日から16日まで、アジア研究学会（Association for Asian Studies, AAS）の年次大会のためバンクーバーに滞在しました。今回いちばんよかったのは、プロジェクトの初期から関わってくださっているチームメンバーの<strong>リチャードソン・ドリュー博士</strong>（カリフォルニア大学サンタクルーズ校）と、同じ場所で時間を過ごせたことです。普段の共同作業は9時間の時差を挟んで進めているので、コーヒーを片手に、ポスターの前で、セッションの合間の廊下でと、直接顔を合わせてアイデアを練ることができた数日間は、本当にありがたい時間でした。</p>
  
                         <figure class="featured-image">
@@ -1257,17 +1651,22 @@
  
                         <p>AASで印象に残ったのは、何度も同じ質問を受けたことでした。「どうすれば参加できますか？」自館のコレクションでプラットフォームを試してみたいキュレーターの方、論文のテーマを探している大学院生、アウトリーチを考えている図書館員の方、方法論に関心を寄せてくださった地域研究者の方々。皆さん、足を止めて尋ねてくださいました。まさにこうなることを願っていたので、嬉しい反応です。</p>
  
-                        <p>なお、3月にはこれに先立ち、SADiLaRのDHコロキアムでも同じプロジェクトについて1時間ほど発表しています（<a href="#" onclick="showSection('blog'); return false;">こちらのブログ記事</a>をご覧ください）。</p>
+                        <p>なお、3月にはこれに先立ち、SADiLaRのDHコロキアムでも同じプロジェクトについて1時間ほど発表しています（<a href="#post-2026-03-sadilar-ja">こちらのブログ記事</a>をご覧ください）。</p>
  
                         <div class="post-cta">
                             <p>バンクーバーでお話しした方も、お会いできなかった方も、よろしければぜひ。<strong><a href="#" onclick="showSection('getting-started'); return false;">マッピングを始める →</a></strong></p>
                         </div>
-                    </article>
+                        </div>
+                    </details>
  
                     <!-- POST: 2026年2月 — FAN Award + プラットフォーム登録 -->
-                    <article class="blog-post">
-                        <h3>「Drawing from the Crowd」がチューリッヒ大学FAN賞2026を受賞しました</h3>
-                        <p class="post-meta">2026年2月 | サンチ・ステファニー</p>
+                    <details class="blog-card">
+                        <summary>
+                            <span class="card-date">2026年2月 <span class="card-author">サンチ・ステファニー</span></span>
+                            <span class="card-title">「Drawing from the Crowd」がチューリッヒ大学FAN賞2026を受賞しました</span>
+                            <span class="card-teaser">本プロジェクトがチューリッヒ大学FAN賞2026を受賞しました。</span>
+                        </summary>
+                        <div class="card-body">
                         <p>2月初旬、本プロジェクト「Drawing from the Crowd」が<strong><a href="https://www.grc.uzh.ch/en/engagement/awards/fan-awardees/fan-awardees26.html#Stephanie_Santschi" target="_blank">チューリッヒ大学FAN賞2026</a></strong>（人文・社会科学部門）を受賞しました。FAN賞はチューリッヒ大学同窓会（UZH Alumni）が毎年若手研究者に贈っているもので、授賞式は2月3日の「Sparkling Research」イベントで行われました。</p>
  
                         <figure class="featured-image">
@@ -1277,7 +1676,7 @@
  
                         <p>とても嬉しく、光栄に思っています。ただ、こうした評価はひとりの研究者のものではありません。チームメンバー、パートナー機関、ご支援いただいた皆様、そしてなによりも、すでに版画のジオリファレンスに取り組んでくださっている市民科学者の皆様あっての受賞です。市民科学は、参加してくださる方がいて初めて成り立つもの。改めて、お礼を申し上げます。</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">プロジェクトを見つけやすくなりました</h4>
+                        <h4 class="sub-heading">プロジェクトを見つけやすくなりました</h4>
                         <p>同じ時期に、本プロジェクトは世界で広く利用されている2つの市民科学プラットフォームに正式に登録されました。「参加できるプロジェクトを探している」「興味を持ちそうな知人に紹介したい」という方は、こちらからもアクセスいただけます。</p>
                         <ul>
                             <li><strong><a href="https://colabfield.org/project/drawing-from-the-crowd/" target="_blank">CoLabField（日本）</a></strong> — 日本語の市民科学プロジェクトを集めたハブ。日本国内の参加者の方とつながるのに便利です。</li>
@@ -1287,18 +1686,23 @@
                         <div class="post-cta">
                             <p>どの入口からいらしても、することは同じです。版画をじっくり眺め、絵師が立っていた場所を探し、江戸の人々が自分たちの土地をどう見ていたのかを一緒に解き明かしていきましょう。<strong><a href="#" onclick="showSection('getting-started'); return false;">参加してみる →</a></strong></p>
                         </div>
-                    </article>
+                        </div>
+                    </details>
  
                     <!-- POST: 2026年1月 — 日本での3つの講演 -->
-                    <article class="blog-post">
-                        <h3>「Drawing from the Crowd」を日本でご紹介：1月の3つの講演（東京・中央・慶應）</h3>
-                        <p class="post-meta">2026年1月 | サンチ・ステファニー</p>
+                    <details class="blog-card">
+                        <summary>
+                            <span class="card-date">2026年1月 <span class="card-author">サンチ・ステファニー</span></span>
+                            <span class="card-title">「Drawing from the Crowd」を日本でご紹介：1月の3つの講演（東京・中央・慶應）</span>
+                            <span class="card-teaser">日本での3週間、3つの異なる聴衆に向けた3つの講演。</span>
+                        </summary>
+                        <div class="card-body">
                         <p>1月は3週間ほど日本に滞在し、その間に3つの講演を行いました。聴衆はそれぞれ異なります。日本財団スカラーズ・アソシエーション（TNFSA）の奨学生コミュニティ、中央大学のDH・AI関係者の皆様、そして慶應義塾ミュージアム・コモンズの博物館関係者の方々です。本プロジェクト「Drawing from the Crowd」が、これだけ異なる聴衆の方々と対話を持てるのは、このプロジェクトの面白いところのひとつだと思います。以下、簡単にご報告します。</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">1月13日 — 日本財団スカラーズ・アソシエーション ウェビナー（オンライン）</h4>
+                        <h4 class="sub-heading">1月13日 — 日本財団スカラーズ・アソシエーション ウェビナー（オンライン）</h4>
                         <p>「Drawing from the Crowd プロジェクト・アップデート」。プロトタイプ開発を支援してくださったコミュニティへのご報告です。プラットフォームの一般公開後の進捗と、これからの展望についてお話ししました。</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">1月19日 — DALA2025 基調講演、中央大学（東京）</h4>
+                        <h4 class="sub-heading">1月19日 — DALA2025 基調講演、中央大学（東京）</h4>
                         <p>文部科学省・国立情報学研究所（NII）共催の<a href="https://sites.google.com/view/chuodala2025" target="_blank">「Digital Approach to Literary Analysis 2025（DALA2025）」</a>で基調講演を行いました。タイトルは「Making Computational Boundaries Visible: AI as Critical Tool in Japanese Visual Studies and Pedagogy（計算の境界を可視化する——日本視覚文化研究と教育におけるAIの批判的活用）」。ひとことで言えば、AIがこの分野で最も役立つのは、私たちの問いに答えてくれるときではなく、自らの答えがどこで通用しなくなるかを示してくれるときなのではないか、と私は考えています。「Drawing from the Crowd」も、まさにこの問いの中にあります。市民科学者が気づくものこそ、アルゴリズムが見落とすものだからです。</p>
  
                         <figure class="featured-image">
@@ -1306,42 +1710,47 @@
                             <figcaption>中央大学・DALA2025での基調講演にて</figcaption>
                         </figure>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">1月22日 — 慶應義塾ミュージアム・コモンズ（東京）</h4>
+                        <h4 class="sub-heading">1月22日 — 慶應義塾ミュージアム・コモンズ（東京）</h4>
                         <p>「市民科学で読み解く浮世絵の空間表現」。<a href="https://kemco.keio.ac.jp/en/" target="_blank">慶應義塾ミュージアム・コモンズ</a>の博物館関係者の方々を対象に、日本語で発表を行いました。テーマは、本プロジェクトを駆動する問いそのものです。浮世絵の風景を見るとき、私たちは実際に何を見ているのか。実在の地形なのか、想像上の構図なのか、それとも当時の鑑賞者の期待によって形づくられた、その中間にある何かなのか。</p>
  
                         <div class="post-cta">
                             <p>これらの講演で何を話したのかをいちばん早く理解する方法は、ご自身で版画を一枚試してみることです。最初の1枚は15分もあれば十分です。<strong><a href="#" onclick="showSection('getting-started'); return false;">やってみる →</a></strong></p>
                         </div>
-                    </article>
+                        </div>
+                    </details>
  
                     <!-- 元の2025年12月の投稿はこの下に続きます -->
  
-                    <article class="blog-post">
-                        <h3>プロトタイプからプラットフォームへ：これまでの道のり</h3>
-                        <p class="post-meta">2025年12月 | 「Drawing from the Crowd」チーム</p>
+                    <details class="blog-card" id="post-2025-12-ja">
+                        <summary>
+                            <span class="card-date">2025年12月 <span class="card-author">サンチ・ステファニー</span></span>
+                            <span class="card-title">プロトタイプからプラットフォームへ：これまでの道のり</span>
+                            <span class="card-teaser">最初の投稿。6か月の試作から稼働するプラットフォームへ。</span>
+                        </summary>
+                        <div class="card-body">
                         <p>ブログを開設しました！ここでは、プロジェクトの進捗や研究で分かったこと、そして参加してくださる市民科学者の皆さんからの声を共有していきます。</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">始まり</h4>
+                        <h4 class="sub-heading">始まり</h4>
                         <p>2024年8月、本プロジェクトは日本財団ソーシャル・イノベーター・コラボレーション（NSIC）の5つのプロジェクトの一つに選ばれました。6か月間の助成により、デジタル人類学、空間史、日本美術史にまたがる学際的なチームで、浮世絵の位置情報を特定するプロトタイプを開発することができました。</p>
                         <p>私たちが挑んだのは野心的な課題でした。歴史的写真向けに作られたクラウドソーシング技術を、様式化された日本の木版画にも使えるようにできるか？写真と違い、浮世絵は文化的な約束事を通じて空間を表現します。絵師は構図のために富士山を動かしたり、迫力を出すために海岸を引き伸ばしたり、複数の視点を一つの絵に織り込んだりしていたのです。</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">プロトタイプの開発（2024年8月〜2025年1月）</h4>
+                        <h4 class="sub-heading">プロトタイプの開発（2024年8月〜2025年1月）</h4>
                         <p>技術パートナーのSmapshot Lab（HEIG-VD）と協力し、彼らのモノプロッティング技術を日本の版画用に調整しました。画像はメトロポリタン美術館のオープンアクセス・コレクションから、地形データは国土地理院から取得。研究代表者がチューリッヒ大学東洋美術史講座で培った専門知識が、江戸時代の版画における空間表現を読み解く基盤となりました。</p>
                         <p>ベータテストで面白い発見がありました。版画の前景は芸術的な演出で変形されていることが多いものの、中景や背景の地形は実際の地理と整合していることが分かったのです。つまり、富士山のような象徴的なモチーフではなく、地形の輪郭に注目すれば、市民科学者の皆さんでも版画の位置を特定できるということです。</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">研究発表</h4>
+                        <h4 class="sub-heading">研究発表</h4>
                         <p>2024年から2025年にかけて、研究代表者サンチは、時にチームメンバーとともに、ヨーロッパ、日本、オンラインの学会やワークショップで本プロジェクトを発表してきました。</p>
                         
                         <p><strong>2025年後半：</strong></p>
                         <ul>
-                            <li>9月："Moving Mountains" 日本近世文学会国際シンポジウム、ケンブリッジ大学（英国）</li>
+                            <li>9月：“Moving Mountains” 日本近世文学会国際シンポジウム、ケンブリッジ大学（英国）</li>
                             <li>8月：「Drawing from the Crowd」第19回ドイツ語圏日本学会、フランクフルト（独）</li>
-                            <li>7月："Reconstructing Japan's Scenic Past" ADHO DH2025、パンダイと共同発表、リスボン（ポルトガル）</li>
+                            <li>7月：“Reconstructing Japan’s Scenic Past” ADHO DH2025、パンダイと共同発表、リスボン（ポルトガル）</li>
                         </ul>
                         
                         <p><strong>2025年前半：</strong></p>
                         <ul>
-                            <li>5月："<a href="https://digitalorientalist.com/2025/12/12/from-print-to-place-creating-an-integrative-geolocalization-workflow-using-citizen-scientists-and-computer-vision-ai/" target="_blank">From Print to Place</a>" The Digital Orientalist Virtual Conference、リチャードソンと共同発表（オンライン）</li>
+                            <li>5月：“<a href="https://digitalorientalist.com/2025/12/12/from-print-to-place-creating-an-integrative-geolocalization-workflow-using-citizen-scientists-and-computer-vision-ai/" target="_blank">From Print to Place</a>” The Digital Orientalist Virtual Conference、リチャードソンと共同発表（オンライン）</li>
                             <li>2月：立命館ARC 2024年度成果報告会、京都</li>
                             <li>1月：第9回DH研究会「浮世絵、市民科学、DH」日比谷図書文化館、東京</li>
                             <li>1月：市民科学ウェビナー、日本財団スカラーズ・アソシエーション、東京</li>
@@ -1349,12 +1758,12 @@
                         
                         <p><strong>2024年：</strong></p>
                         <ul>
-                            <li>7月："Viewed at a distance" Charting the European D-SEA会議、マックス・プランク研究所／ベルリン国立図書館（独）</li>
+                            <li>7月：“Viewed at a distance” Charting the European D-SEA会議、マックス・プランク研究所／ベルリン国立図書館（独）</li>
                         </ul>
                         
                         <p>専門家の方にも、そうでない方にも、江戸時代の版画が描いた視点を解き明かす研究に興味を持っていただけているようで、嬉しく思っています。</p>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">本格実装フェーズ（2025年8月〜2026年7月）</h4>
+                        <h4 class="sub-heading">本格実装フェーズ（2025年8月〜2026年7月）</h4>
                         <p>チューリッヒ大学大学院キャンパスからキャリア・グラントをいただき、プロトタイプから本格的なプラットフォームへと発展させることができました。</p>
                         <p><strong>最近の進捗：</strong></p>
                         <ul>
@@ -1368,68 +1777,551 @@
                             <li>学習コンテンツやコミュニティ機能を充実</li>
                         </ul>
  
-                        <h4 style="color: var(--color-accent-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.15rem;">ぜひご参加ください</h4>
+                        <h4 class="sub-heading">ぜひご参加ください</h4>
                         <p>日本美術に詳しい方も、地理が好きな方も、パズルを解くのが楽しいという方も、どなたでも大歓迎です。参加方法は「マッピングを始める」ページをご覧ください。最新情報はこのブログでお届けします。</p>
-                    </article>
+                        </div>
+                    </details>
                 </div>
             </div>
         </div>
     </section>
  
-    <!-- Contact Section -->
+    <!-- Privacy Policy & Terms of Use Section -->
     <section id="contact">
         <div class="container">
             <div class="content">
                 <!-- English -->
                 <div class="lang-en">
-                    <h2>Contact</h2>
-                    <p>We'd love to hear from you! Whether you're a first-time visitor, an experienced researcher, or somewhere in between—if you have questions about participating, suggestions for the project, or ideas for collaboration, please get in touch.</p>
+                    <h2>Contact, Privacy Policy and Terms of Use</h2>
+
+                    <h3>Contact</h3>
+                    <p>We would love to hear from you! Whether you are a first-time visitor, an experienced researcher, or somewhere in between—if you have questions about participating, suggestions for the project, or ideas for collaboration, please get in touch.</p>
                     
-                    <h3>General Inquiries</h3>
-                    <p><a href="mailto:stephanie@theprintlab.org">stephanie@theprintlab.org</a></p>
+                    <h4>General Inquiries</h4>
+                    <p><a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a></p>
                     
-                    <h3>Principal Investigator</h3>
+                    <h4>Principal Investigator</h4>
                     <p><strong>Dr. Stephanie Santschi</strong><br>
                     Postdoctoral Fellow<br>
                     University of Zurich (Switzerland)<br>
                     Department of Art History: Chair of East Asian Art History</p>
                     
-                    <h3>Follow the Project</h3>
+                    <h4>Follow the Project</h4>
                     <p>Check our <a href="#" onclick="showSection('blog'); return false;">Blog</a> for the latest updates and research insights.</p>
+
+                    <h3>Privacy Policy &amp; Terms of Use</h3>
+                    <p class="policy-meta"><em>Last updated: July 2026</em></p>
+
+                    <div class="plain-summary">
+                        <h4>The short version</h4>
+                        <ul>
+                            <li><strong>You can take part completely anonymously.</strong> No account, no email, no name &mdash; browsing and contributing both work without them. There is no minimum age.</li>
+                            <li>If you do register, we collect as little as we can: your account details, what you submit, and anonymous usage statistics.</li>
+                            <li>We use it to run the platform, do the research, credit you, and build the community. We do not sell it and we do not advertise.</li>
+                            <li>Your contributions are published as open research data, with credit to you unless you ask otherwise. Open data cannot be recalled &mdash; so please keep personal recollections out, and email them to us instead.</li>
+                            <li>Accounts live on Smapshot, not on this website. Deleting an account means asking Smapshot, and we will help.</li>
+                            <li>You can ask us to see, correct, or delete your data at any time: <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a>.</li>
+                            <li>The images themselves (prints, sketchbooks, photographs, gazetteers) belong to the museums and archives that hold them. Their terms apply, and each institution’s own declaration is the authority.</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-text">
+
+                    <h3>Legal notice</h3>
+                    <p><em>Drawing from the Crowd: A Citizen Science Platform for Mapping Ukiyo-e Cultural Geography</em> (the &ldquo;Project&rdquo;) is a research project led by <strong>Dr. Stephanie Santschi</strong> at the <a href="https://www.khist.uzh.ch/en/chairs/ostasien/team/Stephanie-Santschi.html" target="_blank">Chair of East Asian Art History</a>, Department of Art History, University of Zurich, and published under the name ThePrintLab.</p>
+                    <p>Dr. Stephanie Santschi<br>
+                    Chair of East Asian Art History, Department of Art History<br>
+                    University of Zurich<br>
+                    Rämistrasse 71, 8006 Zurich, Switzerland</p>
+                    <p>Contact: <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a></p>
+                    <p><strong>Funding.</strong> Prototype development was funded by The Nippon Foundation Scholars Association; implementation by a Career Grant from the UZH Graduate Campus.</p>
+                    <p><strong>Hosting.</strong> This website is a static site served by GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). GitHub records server logs, including IP addresses, when the site is visited. The Project does not operate analytics, advertising, or tracking cookies on this website.</p>
+                    <p><strong>Who is responsible for what.</strong> Two parties are involved, and this document covers only one of them. <strong>The Project</strong> (this website) is responsible for the content published here and for the research use of contributed data: how it is analysed, cited, and shared as open research. <strong>Smapshot</strong>, a separate platform created and operated by HEIG-VD (Haute École d’Ingénierie et de Gestion du Canton de Vaud), Yverdon-les-Bains, Switzerland, is responsible for the mapping platform itself: user accounts, login credentials, storage of your contributions, and its own handling of that data. Accounts and submissions live on Smapshot’s systems, not on this website. For anything to do with your account or the data held there, <a href="https://smapshot.heig-vd.ch/policy" target="_blank">Smapshot’s own data policy</a> governs (available in English and Japanese), and the contact is <a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a>. This document does not restate Smapshot’s terms; where the two touch, Smapshot governs the platform and the Project governs the research use.</p>
+
+                    
+
+                    <h3>Definitions</h3>
+                    <dl>
+                        <dt>Project</dt>
+                        <dd>the research project described above, and the team responsible for it.</dd>
+                        <dt>Website</dt>
+                        <dd>landscapes.theprintlab.org and its pages.</dd>
+                        <dt>Platform</dt>
+                        <dd>the Project’s collection on Smapshot, operated by HEIG-VD, where georeferencing is carried out.</dd>
+                        <dt>Services</dt>
+                        <dd>the Website and the Platform together, and the functionality each provides.</dd>
+                        <dt>Contributor</dt>
+                        <dd>any person who submits a Contribution to the Platform, with or without an account.</dd>
+                        <dt>Contribution</dt>
+                        <dd>any georeference, alignment, annotation, geographic reference, comment, or other material submitted by a Contributor through the Platform, including unsuccessful attempts.</dd>
+                        <dt>Collection Images</dt>
+                        <dd>the digitised historical images made available through the Platform, together with their catalogue metadata, sourced from the collections listed under <a href="#" onclick="showSection('about'); return false;">About</a>. These include single-sheet <em>ukiyo-e</em> prints, sketchbook drawings, historical photographs, and illustrated gazetteer (<em>meisho-zue</em>) pages.</dd>
+                        <dt>Project Content</dt>
+                        <dd>the text, images, guides, videos, and other material produced by the Project and made available through the Services, excluding Collection Images and Contributions.</dd>
+                    </dl>
+
+                    
+
+                    <details class="legal-part">
+                    <summary>
+                        <span class="part-label">Part I</span>
+                        <span class="part-name">Privacy Policy</span>
+                        <span class="part-desc">What the Project does with your personal data. Articles 1&ndash;7.</span>
+                    </summary>
+                    <div class="part-body">
+
+                    <h4>Article 1 &mdash; Purpose, scope, and applicable law</h4>
+                    <p>The Project respects your privacy and is committed to protecting your personal data and being transparent about how it is collected and used. &ldquo;Personal data&rdquo; means any information relating to an identified or identifiable natural person. This Privacy Policy informs you how the Project, acting as data controller, collects and uses your personal data in connection with the Services.</p>
+                    <p>This Policy is governed by the Swiss Federal Act on Data Protection (FADP); by Regulation (EU) 2016/679 (GDPR) where it applies to you; and by the Act on the Protection of Personal Information of Japan (APPI, Act No. 57 of 30 May 2003) in respect of participants in Japan, whom this Project actively expects and invites.</p>
+
+                    
+
+                    <h4>Article 2 &mdash; Personal data collected</h4>
+                    <p>This Policy describes what <em>the Project</em> does with your personal data. Registration, sign-in, cookies, and the operation of the Platform itself are HEIG-VD’s, and are described in their <a href="https://smapshot.heig-vd.ch/policy" target="_blank">data policy</a>, in English and Japanese. That document governs those matters; this one does not repeat it, and where the two appear to differ about the Platform, theirs is the accurate one.</p>
+                    <p><strong>Browsing.</strong> No personal data is collected by the Project when you browse.</p>
+                    <p><strong>What reaches the Project.</strong> The Project is a collection owner on Smapshot. Where you are signed in and contribute to its collection <em>without</em> selecting the anonymous option, HEIG-VD may share your username and email address with the Project. That is the only route by which your identity reaches the Project. If you contribute anonymously &mdash; which you may do at any time, signed in or not &mdash; nothing identifying you reaches the Project at all.</p>
+                    <p><strong>Contributions.</strong> Where you make a Contribution, the Project receives the annotations and analyses produced, the geographic references recorded, and any research comments left. See Article 4 on publication.</p>
+                    <p><strong>Statistics.</strong> The Project collects statistical information concerning interaction with the Platform, patterns of participation, and technical metrics, in a form that does not identify individual users.</p>
+                    <p><strong>Correspondence.</strong> Where you contact the Project by email, your message and email address are retained for as long as needed to deal with your enquiry.</p>
+                    <p><strong>This Website.</strong> Sets no cookies, runs no analytics, and collects nothing. It is a static site; GitHub records server logs as described above.</p>
+
+                    
+
+                    <h4>Article 3 &mdash; Purposes and legal basis</h4>
+                    <p>The Project uses the personal data it collects in order to improve the platform, to pursue the research goals of the Project, to acknowledge contributions, and to build a research community.</p>
+                    <p>Where GDPR applies, the legal basis for processing account and contribution data is your consent, given when you register and when you submit; the legal basis for processing anonymous usage statistics and for publishing anonymised research data is the legitimate interest of the Project in carrying out and reporting scientific research. You may withdraw consent at any time, which does not affect the lawfulness of processing already carried out.</p>
+                    <p>Personal data is not sold, is not used for advertising, and is not used for automated decision-making or profiling.</p>
+
+                    
+
+                    <h4>Article 4 &mdash; Publication and disclosure</h4>
+<p><strong>Contributions are public by default.</strong> Publishing Contributions as open data (on Smapshot and through its Open Data API) is done by Smapshot, under its policy, as a condition of using the platform, not by the Project. Contribute anonymously if you would rather your Contributions not be linked to you.</p>
+                    <p>Separately, the Project uses collected data for academic research: it may publish findings and datasets in anonymised form, under controlled access and with clear attribution. That research use is the Project’s responsibility and is what this document covers.</p>
+                    <p>Where a Contributor is credited by username in a research output, dataset, or educational material, that credit is a disclosure of the username only, and is made in accordance with Article 13 below. A Contributor who prefers not to be credited may say so at any time, or may simply contribute anonymously.</p>
+                    <p>Personal data is otherwise disclosed only to HEIG-VD as operator of the Platform, and to service providers acting on the Project’s instructions, each bound by obligations of security and confidentiality.</p>
+
+                    
+
+                    <h4>Article 5 &mdash; Transfers</h4>
+                    <p>The Project and HEIG-VD are both located in Switzerland.</p>
+                    <p>Personal data received from the Platform is accessed by the Principal Investigator. Other members of the research team may be given access in future, for research purposes and on the same terms as this Policy sets out. Where access involves a transfer outside Switzerland or the European Economic Area, the Project ensures that an adequate level of protection is maintained, whether through an adequacy decision or through appropriate safeguards.</p>
+
+                    
+
+                    <h4>Article 6 &mdash; Retention</h4>
+                    <p>Account data is held by HEIG-VD, and its retention is governed by their <a href="https://smapshot.heig-vd.ch/policy" target="_blank">data policy</a> rather than by this one.</p>
+                    <p>Contributions, once verified, form part of the research record and are retained indefinitely as research data. Where an account is deleted, Contributions already published through the Open Data API remain published, and the Project retains them in anonymised form. Anonymous usage statistics are retained indefinitely. Correspondence is retained for as long as needed to deal with the enquiry.</p>
+
+                    
+
+                    <h4>Article 7 &mdash; Your rights, and how to exercise them</h4>
+                    <p>You have the right to access your personal data, to have it corrected, to have it erased, to restrict or object to its processing, to withdraw consent, and to receive a copy of it in a portable format.</p>
+                    <p>You may modify your personal data directly in your Platform account at <a href="https://smapshot.heig-vd.ch/backoffice" target="_blank">smapshot.heig-vd.ch/backoffice</a>. Requests to access, update, rectify, or delete personal data held on the Platform go to HEIG-VD at <a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a>. For data held by the Project, write to <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a>; the Project will forward anything it cannot action itself and will tell you when it has done so.</p>
+                    <p>If you consider that your rights have not been respected, you may complain to the Swiss Federal Data Protection and Information Commissioner (FDPIC) or, where GDPR applies, to the supervisory authority in your country of residence.</p>
+
+                    
+<p><strong>Deleting your account.</strong> Your account, and the deletion of it, are Smapshot’s, not the Project’s. Sign in to change your details, or email <a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a> to request deletion; their <a href="https://smapshot.heig-vd.ch/policy" target="_blank">data policy</a> sets out how. If you would rather not approach them yourself, write to <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a> and the Project will pass the request on.</p>
+                    <p><strong>What deletion does not undo.</strong> Contributions already published as open data may have been copied, and deleting your account does not retract them. The Project retains verified Contributions in its research dataset in anonymised form. If this matters to you, contribute anonymously from the outset; that is the only step that is reliably reversible.</p>
+
+                    
+
+                    </div>
+                    </details>
+
+                    <details class="legal-part">
+                    <summary>
+                        <span class="part-label">Part II</span>
+                        <span class="part-name">Terms of Use</span>
+                        <span class="part-desc">The conditions on which you may use the Services. Articles 8&ndash;17.</span>
+                    </summary>
+                    <div class="part-body">
+
+                    <h4>Article 8 &mdash; Acceptance</h4>
+                    <p>These Terms of Use set forth the conditions under which you may access and use the Services and all the functionalities provided therein.</p>
+                    <p>By accessing or using the Services, you agree to be bound by these Terms of Use. You represent and warrant that you have the ability and means required to access and use the Services, and you acknowledge that you have read, understood, and accepted, without limitation or reservation, these Terms of Use and the Privacy Policy above.</p>
+                    <p>Please review these Terms of Use carefully before using the Services. If you do not agree with them, please do not use the Services.</p>
+                    <p>These Terms of Use apply to you from your first access to the Services.</p>
+
+                    
+
+                    <h4>Article 9 &mdash; What these Terms cover</h4>
+                    <p>These Terms of Use govern the Website and the Project’s collection on the Platform. They do not replace HEIG-VD’s <a href="https://smapshot.heig-vd.ch/policy" target="_blank">data policy</a>, which governs the Platform itself and to which you also agree when you use Smapshot. Where the two conflict in respect of the Platform, HEIG-VD’s provisions prevail, and the Project’s obligations to you extend only as far as its own control over the Services reaches.</p>
+
+                    
+
+                    <h4>Article 10 &mdash; The Services</h4>
+                    <p>The Services allow you to view digitised <em>ukiyo-e</em> prints, to identify the viewpoint from which each depicted scene would have been seen, to align the depicted terrain with modern 3D terrain models, and to record observations about the relationship between the depiction and the underlying geography. Contributions are reviewed by the Project’s Principal Investigator before being incorporated into the research dataset, and feedback may be given by comment.</p>
+                    <p>The Services are made available free of charge, excluding any connection costs, which depend on your electronic communications provider. It is your responsibility to have the hardware, software, browser configuration, and internet access required to use the Services, and to bear the cost of them.</p>
+
+                    
+
+                    <h4>Article 11 &mdash; Participation and accounts</h4>
+                    <p><strong>No account is required.</strong> You may browse and contribute anonymously. An account lets you track your own contributions and receive feedback on them, but it is optional, and even when signed in you may choose to contribute anonymously.</p>
+                    <p>Where you do create an account, it is created and held by HEIG-VD. You agree to provide accurate and complete information when creating or updating it, and to keep your login credentials confidential. You are responsible for activity carried out through your account. If you believe your account is being used by someone else, tell HEIG-VD at <a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a> and the Project promptly.</p>
+                    <p><strong>No minimum age.</strong> The Project sets no age limit on participation. Anyone who can look carefully at a picture and a landscape is welcome, and a contributor who works anonymously provides no personal data to anyone. Registration is HEIG-VD’s, and their terms govern who may open an account.</p>
+
+                    
+
+                    <h4>Article 12 &mdash; Intellectual property: Collection Images, terrain, and Project Content</h4>
+                    <p>The Collection Images are not the property of the Project. Each is held by an institution which sets its own terms for it, and those terms differ from one another. The Project does not restate them here: restating another party’s licence is how a statement of it goes quietly out of date. The holding institutions are listed under <a href="#" onclick="showSection('about'); return false;">About</a>. Each institution’s own declaration is the authority on what may be done with its images.</p>
+                    <p>Before reproducing, republishing, or otherwise reusing any Collection Image outside the Services, consult the declaration of the institution that holds it. The Project makes no representation and gives no warranty as to your right to reuse any Collection Image.</p>
+                    <p>Every image in the collection is one the Project is entitled to make available: photographs are included only where they are out of copyright, and all other material has been integrated under terms that permit at least educational use. The holding institution’s declaration remains the authority on what you, in turn, may do with an image outside the Services.</p>
+                    <p>Terrain data is supplied by the Geospatial Information Authority of Japan (GSI) and is subject to GSI’s terms of use.</p>
+                    <p>Project Content belongs to the Project or its licensors and is protected by copyright and other intellectual property laws. You are granted a limited, non-exclusive, non-transferable, revocable licence to use the Services and Project Content for personal, non-commercial, educational, and research purposes. All rights not expressly granted are reserved.</p>
+                    <p>You may not use the name ThePrintLab, the name of the Project, or the marks or logos of the Project’s funders and partners without prior written permission.</p>
+
+                    
+
+                    <h4>Article 13 &mdash; Your Contributions</h4>
+                    <p>Contributions are not all of one kind, and rights in them do not all sit in one place.</p>
+                    <p><strong>Georeference data</strong> &mdash; camera position, orientation, and the point correspondences from which the Platform computes them &mdash; is measurement. It records where a viewpoint lies, and it is arrived at through the Platform’s mechanism operating on the points you identify. Copyright protects original expression, not facts, measurements, or results dictated by the function that produces them. The Project therefore does not treat georeference data as anyone’s literary property, and neither claims it nor asks you to give it up. It is data, and it is published as open data.</p>
+                    <p><strong>Written material</strong> &mdash; observations, research comments, and any recollections you choose to share &mdash; is different. It is expression, and it is yours. By submitting it, you grant the Project a non-exclusive, royalty-free licence to reproduce, quote, and publish it for non-commercial research and educational purposes, with attribution to your username. You may withdraw this licence for future use at any time; material already published cannot be unpublished.</p>
+                    <p><strong>The assembled dataset</strong> &mdash; the collection of verified georeferences, the metadata around them, and the structure imposed on them &mdash; results from the investment of the Project and of HEIG-VD. Any rights subsisting in the compilation, as distinct from its contents, belong to them.</p>
+                    <p>All Contributions submitted through the Platform are published by HEIG-VD on Smapshot and through the Smapshot Open Data API, and, as HEIG-VD’s data policy provides, may be used by partners in their research projects. The Project is such a partner, and its use rests on that publication.</p>
+                    <p>Where you contribute while signed in and without selecting the anonymous option, you agree that the Project may credit you by username in research publications, datasets, presentations, and teaching materials. Credit already given in published work cannot be withdrawn; you may ask at any time not to be credited in future work, or contribute anonymously.</p>
+                    <p>Publication through the Platform is governed by HEIG-VD’s <a href="https://smapshot.heig-vd.ch/policy" target="_blank">data policy</a>. The research dataset the Project derives and publishes from those Contributions carries its own licence, stated in the Project’s data repository.</p>
+                    <p>You represent and warrant that you own the rights in your Contributions, or are licensed to submit them, and that they do not infringe the rights of any third party. You agree to indemnify and hold the Project harmless against claims by third parties arising from your Contributions.</p>
+                    <p>Contributions are treated as non-confidential. Do not submit anything you are not willing to see published.</p>
+
+                    
+
+                    <h4>Article 14 &mdash; Rules of conduct</h4>
+                    <p>You must not submit, post, or distribute through the Services any content that is unlawful, defamatory, obscene, hateful, harassing, misleading, or that infringes the rights of any third party.</p>
+                    <p><strong>Personal information in Contributions.</strong> Contributions are published openly (Article 4). Share only what you are content to see published under your username or anonymously, and remember that open data is copied and cannot be recalled.</p>
+                    <p>Contributions are for observations about the depiction and the terrain. Please do not submit personal recollections, or personal information about yourself or anyone else &mdash; and in particular do not submit health information, or information revealing religious, political, or philosophical beliefs, ethnic origin, or sexual orientation. The Project does not collect this material and has no basis to hold it. If you have a recollection of a place that bears on a Collection Image, the Project would be glad to hear it by email rather than through the Platform: <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a>.</p>
+                    <p>You must not defame, stalk, bully, abuse, harass, threaten, impersonate, or intimidate any person through the Services.</p>
+                    <p>You must not create an account by automated means, or use a script, bot, crawler, or scraper to submit Contributions. Automated submission defeats the purpose of the exercise, which is human observation.</p>
+                    <p>You may make non-commercial use of the Services only. You must not probe, scan, or test the vulnerability of any system, interfere with security measures, or disrupt the operation of the Services.</p>
+
+                    
+
+                    <h4>Article 15 &mdash; Review, moderation, and removal</h4>
+                    <p>Every Contribution is reviewed by the Project’s Principal Investigator before being incorporated into the dataset. Verification may take time; a Contribution that does not appear on the map immediately has not been rejected. Where a Contribution needs correction, feedback is given by comment. Unsuccessful attempts are retained, since they are themselves evidence about which prints resist location.</p>
+                    <p>The Project reserves the right, but assumes no obligation, to edit, remove, or decline any Contribution, and to suspend or terminate participation where these Terms of Use are breached. If you see content on the Services that you believe breaches these Terms, please write to <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a> with the date, a description of the content, and your reasons.</p>
+
+                    
+
+                    <h4>Article 16 &mdash; Disclaimers and liability</h4>
+                    <p>The Services and their content are provided &ldquo;as is&rdquo;, without warranties of any kind, express or implied, and in particular without any warranty that the material available through them is complete or accurate. The Project is a research project, not a reference work; the georeferences it publishes are scholarly interpretations, subject to revision, and are not authoritative statements of historical or geographical fact.</p>
+                    <p>The Project is not responsible for your device, your internet connection, or any technical problem arising from either. The Project does not endorse any Contribution, and the views expressed by Contributors are their own.</p>
+                    <p>To the fullest extent permitted by applicable law, the Project is not liable for any indirect, incidental, consequential, special, or punitive damages arising from your use of or inability to use the Services. No monetary cap is placed on the Project’s liability. Nothing in these Terms excludes liability that cannot lawfully be excluded, including liability for death or personal injury caused by negligence, or for fraud, wilful misconduct, or gross negligence.</p>
+
+                    
+
+                    <h4>Article 17 &mdash; External links</h4>
+                    <p>The Services link to websites operated by third parties. The Project does not endorse and accepts no responsibility for the content of those sites, and cannot be held liable for any damage arising from your use of them. A link does not imply affiliation.</p>
+
+                    
+
+                    </div>
+                    </details>
+
+                    <details class="legal-part">
+                    <summary>
+                        <span class="part-label">Part III</span>
+                        <span class="part-name">Provisions common to both</span>
+                        <span class="part-desc">These apply to the Privacy Policy and the Terms of Use alike. Articles 18&ndash;22.</span>
+                    </summary>
+                    <div class="part-body">
+
+                    <h4>Article 18 &mdash; Contact</h4>
+                    <p>Questions about this document, whether about privacy or about the Terms, go to the address given under Contact at the top of this page. Questions about the Platform itself &mdash; your account, your login, deletion of data held there &mdash; go to HEIG-VD at <a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a>.</p>
+
+                    <h4>Article 19 &mdash; Amendments</h4>
+                    <p>This document may be amended from time to time. The version published on this page takes precedence over all previous versions, and the date at the top records when it last changed. Amendments to the Terms of Use take effect when posted, and continued use of the Services after an amendment constitutes acceptance of it; if you do not accept an amendment, you may stop using the Services and delete your account under Article 7. Where a change materially affects how your personal data is used, the Project will say so on this page and, where it holds your address, by email.</p>
+
+                    <h4>Article 20 &mdash; Governing law and jurisdiction</h4>
+                    <p>These Terms of Use are governed by the substantive law of Switzerland, without regard to its conflict-of-laws rules. The ordinary courts of Zurich have jurisdiction over disputes arising from them.</p>
+                    <p>Nothing in the preceding paragraph deprives you of the protection of provisions that cannot be derogated from by agreement under the law of the country where you habitually reside. Where you take part from a country whose mandatory rules give you rights these Terms do not, those rules apply and you may bring proceedings before the courts of your own country.</p>
+                    <p>This choice of law governs these Terms of Use as a contract. It does not determine which data protection law applies to you: the applicable data protection regimes are named in Article 1 above and apply of their own force, whatever this Article says.</p>
+                    
+
+                    <h4>Article 21 &mdash; Governing language</h4>
+                    <p>In the event of any discrepancy between the English and Japanese texts of this document, the English text prevails.</p>
+
+                    <h4>Article 22 &mdash; Severability and survival</h4>
+<p>If any provision of these Terms of Use is held invalid or unenforceable, the remaining provisions continue in effect.</p>
+                    
+                    <p>Articles 12, 13, 16, and 20 to 22 survive the deletion of your account.</p>
+                    </div>
+                    </details>
+
+                    </div>
                 </div>
- 
+
                 <!-- Japanese -->
                 <div class="lang-ja hidden japanese-text">
-                    <h2>お問い合わせ</h2>
+                    <h2>お問い合わせ・プライバシーポリシー・利用規約</h2>
+
+                    <h3>お問い合わせ</h3>
                     <p>初めてご訪問の方も、研究者の方も、どなたでも大歓迎です。ご参加に関するご質問、プロジェクトへのご提案、コラボレーションのアイデアなど、ぜひお気軽にお問い合わせください。</p>
                     
-                    <h3>一般的なお問い合わせ</h3>
-                    <p><a href="mailto:stephanie@theprintlab.org">stephanie@theprintlab.org</a></p>
+                    <h4>一般的なお問い合わせ</h4>
+                    <p><a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a></p>
                     
-                    <h3>研究代表者</h3>
+                    <h4>研究代表者</h4>
                     <p><strong>サンチ・ステファニー博士</strong><br>
                     博士研究員<br>
                     チューリッヒ大学（スイス）<br>
                     美術史学科：東洋美術史講座</p>
                     
-                    <h3>プロジェクトをフォロー</h3>
+                    <h4>プロジェクトをフォロー</h4>
                     <p>最新情報や研究の知見については<a href="#" onclick="showSection('blog'); return false;">ブログ</a>をご覧ください。</p>
+
+                    <h3>プライバシーポリシー・利用規約</h3>
+                    <p class="policy-meta"><em>最終更新日：2026年7月</em></p>
+
+                    <div class="plain-summary">
+                        <h4>要点</h4>
+                        <ul>
+                            <li><strong>匿名で参加できます。</strong>アカウントも、メールアドレスも、お名前も不要です。閲覧も投稿も匿名のまま行えます。年齢制限もありません。</li>
+                            <li>ご登録いただく場合も、収集する情報は最小限です。アカウント情報、ご投稿の内容、そして個人を特定しない利用統計のみです。</li>
+                            <li>収集した情報は、プラットフォームの運営、研究の遂行、貢献者の顕彰、コミュニティの構築のために使用します。販売も広告利用もいたしません。</li>
+                            <li>ご投稿はオープンな研究データとして公開されます。その際、ご希望がない限りお名前（ユーザー名）を明記します。オープンデータは取り消せません。個人的な記憶はご投稿に含めず、電子メールにてお知らせください。</li>
+                            <li>アカウントは本ウェブサイトではなくSmapshot上に存在します。アカウントの削除はSmapshotへの請求となります。本プロジェクトがお手伝いいたします。</li>
+                            <li>ご自身のデータの開示・訂正・削除は、いつでも <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a> よりご請求いただけます。</li>
+                            <li>コレクション画像（版画・画帖・写真・名所図会）の権利は所蔵機関に帰属します。各機関の定める条件が適用され、その宣言が唯一の典拠となります。</li>
+                        </ul>
+                    </div>
+
+                    <div class="legal-text">
+
+                    <h3>事業者情報</h3>
+                    <p>「集合知を描く: 市民科学浮世絵マッピングプラットフォーム」（以下、「本プロジェクト」といいます）は、チューリッヒ大学美術史学科<a href="https://www.khist.uzh.ch/en/chairs/ostasien/team/Stephanie-Santschi.html" target="_blank">東洋美術史講座</a>のサンチ・ステファニー博士が代表を務める研究プロジェクトであり、ThePrintLabの名において公開されています。</p>
+                    <p>サンチ・ステファニー博士<br>
+                    東洋美術史講座、美術史学科<br>
+                    チューリッヒ大学<br>
+                    Rämistrasse 71, 8006 Zurich, Switzerland</p>
+                    <p>連絡先：<a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a></p>
+                    <p><strong>助成</strong>　プロトタイプ開発は日本財団スカラーズ・アソシエーション、本格実装はチューリッヒ大学大学院キャンパスのキャリア・グラントによる助成を受けた。</p>
+                    <p><strong>ホスティング</strong>　本ウェブサイトは、GitHub Pages（GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA）により配信される静的サイトである。GitHubは、本ウェブサイトへのアクセスに際し、IPアドレスを含むサーバーログを記録する。本プロジェクトは、本ウェブサイト上でアクセス解析・広告・トラッキングクッキーを一切使用しない。</p>
+                    <p><strong>どの主体が何に責任を負うか</strong>　二つの主体が関わっており、本書はそのうちの一方のみを対象とする。<strong>本プロジェクト</strong>（本ウェブサイト）は、ここで公開される内容と、提供されたデータの研究上の利用、すなわちその分析・引用・オープンな研究としての共有について責任を負う。<strong>Smapshot</strong>は、HEIG-VD（ヴォー州工学経営大学、スイス・イヴェルドン＝レ＝バン）が開発・運営する別個のプラットフォームであり、マッピング・プラットフォームそのもの、すなわちユーザーアカウント・ログイン認証情報・投稿の保存、およびそのデータの取り扱いについて責任を負う。アカウントおよび投稿は、本ウェブサイトではなくSmapshotのシステム上に保持される。アカウントやそこに保持されるデータに関する事項については、<a href="https://smapshot.heig-vd.ch/policy" target="_blank">Smapshotのデータポリシー</a>（英語・日本語）が適用され、連絡先は<a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a>である。本書はSmapshotの規約を繰り返さない。両者が接する場面では、プラットフォームについてはSmapshotが、研究上の利用については本プロジェクトが、それぞれ規律する。</p>
+
+                    
+
+                    <h3>定義</h3>
+                    <dl>
+                        <dt>本プロジェクト</dt>
+                        <dd>前記の研究プロジェクト、およびこれを運営するチームをいう。</dd>
+                        <dt>本ウェブサイト</dt>
+                        <dd>landscapes.theprintlab.org およびその各ページをいう。</dd>
+                        <dt>本プラットフォーム</dt>
+                        <dd>HEIG-VDが運営するSmapshot上の本プロジェクトのコレクションであって、ジオリファレンス作業が行われる場をいう。</dd>
+                        <dt>本サービス</dt>
+                        <dd>本ウェブサイトおよび本プラットフォームを併せたもの、ならびにそれぞれが提供する機能をいう。</dd>
+                        <dt>投稿者</dt>
+                        <dd>アカウントの有無を問わず、本プラットフォームに投稿を行う者をいう。</dd>
+                        <dt>投稿</dt>
+                        <dd>投稿者が本プラットフォームを通じて提出したジオリファレンス・位置合わせ・注釈・地理的参照情報・コメントその他の成果物をいい、不成功に終わった試行を含む。</dd>
+                        <dt>コレクション画像</dt>
+                        <dd>本プラットフォームを通じて提供されるデジタル化された歴史的画像およびその目録メタデータであって、<a href="#" onclick="showSection('about'); return false;">概要</a>に掲げる所蔵機関に由来するものをいう。一枚摺の浮世絵版画、画帖の図、歴史的写真、および名所図会の図版を含む。</dd>
+                        <dt>本プロジェクトコンテンツ</dt>
+                        <dd>本プロジェクトが制作し本サービスを通じて提供する文章・画像・ガイド・動画その他の資料をいい、コレクション画像および投稿を除く。</dd>
+                    </dl>
+
+                    
+
+                    <details class="legal-part">
+                    <summary>
+                        <span class="part-label">第一部</span>
+                        <span class="part-name">プライバシーポリシー</span>
+                        <span class="part-desc">本プロジェクトが個人データをいかに取り扱うかを定めます。第一条〜第七条。</span>
+                    </summary>
+                    <div class="part-body">
+
+                    <h4>第一条　目的、適用範囲および準拠法制</h4>
+                    <p>本プロジェクトは、利用者のプライバシーを尊重し、個人データの保護と、その収集・利用に関する透明性の確保に努める。「個人データ」とは、識別された、または識別され得る自然人に関する一切の情報をいう。本プライバシーポリシー（以下、「本ポリシー」という）は、本プロジェクトが管理者として本サービスに関連して個人データをいかに収集し利用するかを利用者に通知するものである。</p>
+                    <p>本ポリシーは、スイス連邦データ保護法（FADP）、利用者に適用される限りにおいて欧州連合一般データ保護規則（GDPR）、および日本国内の参加者に関しては個人情報の保護に関する法律（平成15年法律第57号）に準拠する。本プロジェクトは、日本からの参加を積極的に歓迎するものである。</p>
+
+                    
+
+                    <h4>第二条　収集する個人データの範囲</h4>
+                    <p>本ポリシーは、<em>本プロジェクト</em>が個人データをいかに取り扱うかを定めるものである。アカウント登録・サインイン・クッキー・本プラットフォーム自体の運営はHEIG-VDの所管であり、同社の<a href="https://smapshot.heig-vd.ch/policy" target="_blank">データポリシー</a>（英語・日本語）に記載されている。これらの事項については同ポリシーが適用され、本ポリシーはその内容を繰り返さない。本プラットフォームに関して両者の記載が異なると思われる場合、正確なのは同ポリシーである。</p>
+                    <p><strong>閲覧</strong>　利用者が閲覧を行う場合、本プロジェクトは個人データを一切収集しない。</p>
+                    <p><strong>本プロジェクトに提供される情報</strong>　本プロジェクトはSmapshot上のコレクション所有者である。利用者がサインインした状態で、匿名投稿を<em>選択せずに</em>本プロジェクトのコレクションに投稿した場合、HEIG-VDは、本プロジェクトに対し、利用者のユーザー名およびメールアドレスを提供することがある。利用者の身元が本プロジェクトに伝わる経路はこれのみである。利用者は、サインインの有無を問わず、いつでも匿名で投稿することができ、その場合、利用者を特定する情報は一切本プロジェクトに提供されない。</p>
+                    <p><strong>投稿</strong>　利用者が投稿を行った場合、本プロジェクトは、ユーザーの注釈と分析・地理的参照情報・リサーチコメントを受領する。公開については第四条を参照のこと。</p>
+                    <p><strong>統計情報</strong>　本プロジェクトは、プラットフォームとの相互作用・参加パターン・技術的指標に関する統計的情報を個人を特定しない範囲で収集する。</p>
+                    <p><strong>問い合わせ</strong>　利用者が電子メールにより本プロジェクトに連絡を行った場合、本プロジェクトは、当該問い合わせの対応に必要な期間、その内容およびメールアドレスを保持する。</p>
+                    <p><strong>本ウェブサイト</strong>　本ウェブサイトは、クッキーを使用せず、アクセス解析も行わず、いかなる情報も収集しない。静的サイトであり、GitHubが前記のとおりサーバーログを記録する。</p>
+
+                    
+
+                    <h4>第三条　利用目的および法的根拠</h4>
+                    <p>本プロジェクトは、収集した個人データを、本プラットフォームの改善・研究目標達成に向けた取り組み・投稿に対する評価・研究コミュニティーの構築を目的として利用する。</p>
+                    <p>GDPRが適用される場合、アカウント情報および投稿の処理の法的根拠は、登録時および投稿時に与えられた利用者の同意とする。個人を特定しない利用統計の処理、および匿名化された研究データの公開の法的根拠は、学術研究の遂行および公表に係る本プロジェクトの正当な利益とする。利用者はいつでも同意を撤回することができる。ただし、撤回は既に行われた処理の適法性に影響を及ぼさない。</p>
+                    <p>個人データは、販売されず、広告目的で利用されず、自動化された意思決定またはプロファイリングに供されない。</p>
+
+                    
+
+                    <h4>第四条　公開および第三者提供</h4>
+                    <p><strong>投稿は既定で公開される</strong>　投稿をオープンデータとして（Smapshot上およびそのオープンデータAPIを通じて）公開するのは、本プロジェクトではなくSmapshotであり、同社のポリシーに基づき、本プラットフォーム利用の条件として行われる。投稿と自己との結び付きを避けたい場合は、匿名で投稿されたい。</p>
+                    <p>これとは別に、本プロジェクトは収集したデータを学術研究に利用する。すなわち、匿名化された形式により、管理されたアクセスと明確な帰属表示の下で、研究成果やデータセットを公開することがある。この研究上の利用は本プロジェクトの責任に属し、本書が対象とするのはこの部分である。</p>
+                    <p>研究成果・データセット・教育資料において投稿者をユーザー名により顕彰する場合、当該開示はユーザー名に限られ、第十三条に従って行われる。顕彰を希望しない投稿者は、いつでもその旨を申し出ることができ、または単に匿名で投稿することができる。</p>
+                    <p>個人データは、上記のほか、本プラットフォームの運営者であるHEIG-VD、および本プロジェクトの指示に基づき業務を行う委託先に対してのみ提供される。これらの者は、いずれも安全管理および守秘の義務を負う。</p>
+
+                    
+
+                    <h4>第五条　国外移転</h4>
+                    <p>本プロジェクトおよびHEIG-VDは、いずれもスイスに所在する。</p>
+                    <p>本プラットフォームから受領した個人データには、研究代表者がアクセスする。研究チームの他の構成員が将来これにアクセスすることがあり得るが、その場合、研究目的のため、かつ本ポリシーの定める条件と同一の条件による。当該アクセスがスイスまたは欧州経済領域の域外への移転を伴う場合、本プロジェクトは、十分性認定または適切な保護措置により、十分な保護の水準が維持されることを確保する。</p>
+
+                    
+
+                    <h4>第六条　保存期間</h4>
+                    <p>アカウント情報はHEIG-VDが保持し、当該アカウントが存続する間保存される。検証を経た投稿は研究記録の一部を構成し、研究データとして無期限に保存される。アカウントが削除された場合であっても、オープンデータAPIを通じて既に公開された投稿は公開されたままとなり、本プロジェクトはこれを匿名化された形式で保存する。個人を特定しない利用統計は無期限に保存される。問い合わせの記録は、当該問い合わせの対応に必要な期間保持される。</p>
+
+                    
+
+                    <h4>第七条　利用者の権利およびその行使方法</h4>
+                    <p>利用者は、自己の個人データについて、開示・訂正・削除・処理の制限・処理への異議・同意の撤回・可搬な形式での複製の受領を求める権利を有する。</p>
+                    <p>利用者は、<a href="https://smapshot.heig-vd.ch/backoffice" target="_blank">smapshot.heig-vd.ch/backoffice</a> において自己の個人データを直接修正することができる。本プラットフォーム上に保持される個人データの開示・更新・訂正・削除の請求は、HEIG-VD（<a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a>）宛に行う。本プロジェクトが保持するデータについては <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a> 宛に連絡されたい。本プロジェクトは、自ら対応できない請求についてはこれを転送し、その旨を利用者に通知する。</p>
+                    <p>利用者は、自己の権利が尊重されていないと判断する場合、スイス連邦データ保護情報コミッショナー（FDPIC）、またはGDPRが適用される場合には居住国の監督機関に対し、苦情を申し立てることができる。</p>
+
+                    
+                    <p><strong>アカウントの削除</strong>　アカウント、およびその削除はSmapshotの所管であり、本プロジェクトの所管ではない。サインインして情報を変更するか、<a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a> 宛に削除を請求されたい。手続は同社の<a href="https://smapshot.heig-vd.ch/policy" target="_blank">データポリシー</a>に定めがある。自ら連絡することを望まない場合は <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a> 宛に連絡されたい。本プロジェクトが請求を取り次ぐ。</p>
+                    <p><strong>削除によっても元に戻らないもの</strong>　オープンデータとして既に公開された投稿は複製されている可能性があり、アカウントの削除はこれを撤回するものではない。本プロジェクトは、検証済みの投稿を匿名化された形式で研究データセットに保存する。この点を懸念する場合は、当初より匿名で投稿されたい。確実に元に戻せる唯一の方法である。</p>
+
+                    
+
+                    </div>
+                    </details>
+
+                    <details class="legal-part">
+                    <summary>
+                        <span class="part-label">第二部</span>
+                        <span class="part-name">利用規約</span>
+                        <span class="part-desc">利用者が本サービスを利用する条件を定めます。第八条〜第十七条。</span>
+                    </summary>
+                    <div class="part-body">
+
+                    <h4>第八条　規約への同意</h4>
+                    <p>本利用規約は、利用者が本サービスおよびそこで提供される全ての機能にアクセスし、これを利用する条件を定めるものである。</p>
+                    <p>利用者は、本サービスへのアクセスまたは利用を行ったことにより、本利用規約の遵守に同意したものと見做す。利用者は、本サービスの利用に必要な能力と手段を有していることを確認すると共に、本利用規約および前記プライバシーポリシーを、留保なく理解し、承諾したものとする。</p>
+                    <p>利用者は、本サービスの利用に先立ち、本利用規約を十分に確認するものとする。本利用規約に同意しない場合、本サービスを利用してはならない。</p>
+                    <p>本利用規約は、利用者による本サービスへの最初のアクセスの時点から適用される。</p>
+
+                    
+
+                    <h4>第九条　本規約の適用範囲</h4>
+                    <p>本利用規約は、本ウェブサイト、および本プラットフォーム上の本プロジェクトのコレクションについて定めるものである。本利用規約は、本プラットフォーム自体を規律するHEIG-VDの<a href="https://smapshot.heig-vd.ch/policy" target="_blank">データポリシー</a>に代わるものではなく、利用者はSmapshotの利用に際し当該ポリシーにも同意する。本プラットフォームに関して両者が抵触する場合、HEIG-VDの定めが優先し、本プロジェクトが利用者に対して負う義務は、本サービスに対する本プロジェクトの支配が及ぶ範囲に限られる。</p>
+
+                    
+
+                    <h4>第十条　本サービスの内容</h4>
+                    <p>本サービスは、利用者がデジタル化された浮世絵版画を閲覧し、描かれた景観が見えたであろう視点を特定し、描かれた地形を現代の3D地形モデルと重ね合わせ、描写と実際の地理との関係について観察を記録することを可能にするものである。投稿は、研究データセットに組み入れられるに先立ち、本プロジェクトの研究代表者による検証を受ける。検証に際してはコメントによる助言が行われることがある。</p>
+                    <p>本サービスは無償で提供される。ただし、通信費用は利用者の電気通信事業者に応じて別途発生し、利用者の負担とする。本サービスの利用に必要な機器・ソフトウェア・ブラウザ設定・インターネット接続を備えること、およびその費用を負担することは、利用者の責任とする。</p>
+
+                    
+
+                    <h4>第十一条　参加およびアカウント</h4>
+                    <p><strong>アカウントは不要である</strong>　利用者は、匿名で閲覧および投稿を行うことができる。アカウントは、自己の投稿の記録や助言の受領を可能にするものであるが、任意であり、サインインした状態においても匿名投稿を選択することができる。</p>
+                    <p>利用者がアカウントを作成する場合、当該アカウントはHEIG-VDが作成・保持する。利用者は、アカウントの作成および更新に際し正確かつ完全な情報を提供し、ログイン認証情報を秘密に保つものとする。利用者は、自己のアカウントを通じて行われた活動について責任を負う。自己のアカウントが第三者により使用されていると信ずるに足りる理由がある場合、利用者は、速やかにHEIG-VD（<a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a>）および本プロジェクトに通知するものとする。</p>
+                    <p><strong>年齢制限は設けない</strong>　本プロジェクトは、参加に年齢の制限を設けない。絵と風景を丁寧に見ることができる方であれば、どなたでも歓迎する。匿名で作業する投稿者は、何人に対しても個人データを提供しない。アカウント登録はHEIG-VDの所管であり、誰が登録できるかは同社の定めるところによる。</p>
+
+                    
+
+                    <h4>第十二条　知的財産権：コレクション画像、地形データ、本プロジェクトコンテンツ</h4>
+                    <p>コレクション画像は、本プロジェクトの所有に属さない。各画像はそれぞれの所蔵機関が保持し、当該機関が自ら条件を定めており、その内容は機関ごとに異なる。本プロジェクトは、これをここに再掲しない。他者のライセンスを再掲することは、その記載が知らぬ間に古びていく原因となるからである。所蔵機関は<a href="#" onclick="showSection('about'); return false;">概要</a>に掲げる。各画像について何をなし得るかは、当該機関の宣言が唯一の典拠である。</p>
+                    <p>本サービスの外においてコレクション画像を複製・再公開その他の方法で再利用するに先立ち、当該画像を所蔵する機関の宣言を確認すること。本プロジェクトは、利用者がコレクション画像を再利用する権利について、いかなる表明も保証も行わない。</p>
+                    <p>コレクションに含まれる画像は、いずれも本プロジェクトが提供する権利を有するものである。写真は著作権が消滅しているもののみを収録し、その他の資料はすべて、少なくとも教育目的での利用を認める条件の下で統合されている。本サービスの外において利用者が当該画像に対し何をなし得るかは、引き続き所蔵機関の宣言が典拠となる。</p>
+                    <p>地形データは国土地理院（GSI）より提供されるものであり、同院の定める利用規約が適用される。</p>
+                    <p>本プロジェクトコンテンツは、本プロジェクトまたはそのライセンサーに帰属し、著作権その他の知的財産法により保護される。利用者には、個人的・非営利的・教育的および研究上の目的に限り、本サービスおよび本プロジェクトコンテンツを利用する、限定的・非独占的・譲渡不能かつ撤回可能なライセンスが付与される。明示的に許諾されない一切の権利は留保される。</p>
+                    <p>利用者は、事前の書面による許諾なく、ThePrintLabの名称、本プロジェクトの名称、または本プロジェクトの助成機関および協力機関の標章・ロゴを使用してはならない。</p>
+
+                    
+
+                    <h4>第十三条　投稿の取扱い</h4>
+                    <p>投稿はすべて同一の性質を有するものではなく、これに係る権利も一箇所に帰属するものではない。</p>
+                    <p><strong>ジオリファレンスデータ</strong>　すなわちカメラの位置・姿勢、およびプラットフォームがこれを算出する基礎となる対応点は、測定値である。それは視点の所在を記録するものであり、利用者が指示した点に対しプラットフォームの機構が作用することによって得られる。著作権が保護するのは独創的な表現であって、事実・測定値・またはこれを生む機能によって規定される結果ではない。したがって本プロジェクトは、ジオリファレンスデータを何人の著作物としても扱わず、これを主張することも、放棄を求めることもしない。それはデータであり、オープンデータとして公開される。</p>
+                    <p><strong>文章による成果</strong>　すなわち観察・リサーチコメント、および利用者が任意に共有する記憶は、これと異なる。それは表現であり、利用者に帰属する。利用者は、これを投稿することにより、本プロジェクトに対し、非営利の研究および教育目的で、ユーザー名の表示を伴い、これを複製・引用・公開する非独占的・無償のライセンスを許諾する。利用者は、いつでも今後の利用についてこのライセンスを撤回することができる。既に公表されたものを未公表に戻すことはできない。</p>
+                    <p><strong>集積されたデータセット</strong>　すなわち検証済みジオリファレンスの集合、これに付随するメタデータ、およびこれに与えられた構造は、本プロジェクトおよびHEIG-VDの投資の成果である。その内容と区別された編集物に権利が生ずる場合、当該権利はこれらの者に帰属する。</p>
+                    <p>本プラットフォームを通じて行われた投稿は、その全てがHEIG-VDによりSmapshot上およびSmapshotオープンデータAPIを通じて公開され、同社のデータポリシーの定めるところにより、パートナーがその研究プロジェクトにおいて利用することがある。本プロジェクトは当該パートナーの一であり、本プロジェクトによる利用は当該公開に基づく。</p>
+                    <p>利用者がサインインした状態で、匿名投稿を選択せずに投稿を行った場合、利用者は、本プロジェクトが研究成果の公表・データセット・発表・教育資料においてユーザー名により当該利用者を顕彰することに同意したものとする。既に公表された成果における顕彰を撤回することはできない。利用者は、いつでも今後の成果において顕彰しないよう求めることができ、または匿名で投稿することができる。</p>
+                    <p>投稿者は、投稿に係る権利を有すること、または投稿を行うことについて許諾を得ていること、および投稿が第三者の権利を侵害しないことを表明し、保証する。投稿者は、自己の投稿に起因して第三者から本プロジェクトに対してなされた請求について、本プロジェクトを免責し、損害を被らせないものとする。</p>
+                    <p>投稿は非秘密のものとして取り扱われる。公開されて差し支えないもののみを投稿すること。</p>
+
+                    
+
+                    <h4>第十四条　禁止行為</h4>
+                    <p>利用者は、本サービスを通じて、違法・名誉毀損的・わいせつ・差別的・嫌がらせに当たる・誤解を招く内容、または第三者の権利を侵害する内容を投稿・掲載・頒布してはならない。</p>
+                    <p><strong>投稿に含まれる個人情報について</strong>　投稿は公開されます（第四条）。ユーザー名を付して、または匿名で公開されて差し支えないもののみをご共有ください。オープンデータは複製され、後から取り消すことができません。</p>
+                    <p>投稿は、描写と地形に関する観察のためのものです。個人的な記憶、およびご自身または他の方に関する個人情報は投稿なさらないでください。特に、健康に関する情報、宗教的・政治的・思想的信条、民族的出自、性的指向を明らかにする情報はお控えください。本プロジェクトはこれらを収集しておらず、保持する法的根拠も有しません。コレクション画像に関わる土地の記憶をお持ちの場合は、本プラットフォームではなく電子メールにてお知らせいただければ幸いです：<a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a></p>
+                    <p>利用者は、本サービスを通じて、何人に対しても、名誉毀損・つきまとい・いじめ・罵倒・嫌がらせ・脅迫・なりすまし・威圧を行ってはならない。</p>
+                    <p>利用者は、自動的手段によりアカウントを作成し、またはスクリプト・ボット・クローラー・スクレイパーを用いて投稿を行ってはならない。自動化された投稿は、人間による観察という本取り組みの目的を損なうものである。</p>
+                    <p>利用者は、本サービスを非営利目的においてのみ利用することができる。利用者は、システムの脆弱性の探索・走査・試験、セキュリティ措置への干渉、または本サービスの運営の妨害を行ってはならない。</p>
+
+                    
+
+                    <h4>第十五条　検証、モデレーション、削除</h4>
+                    <p>全ての投稿は、データセットに組み入れられるに先立ち、本プロジェクトの研究代表者による検証を受ける。検証には時間を要することがあり、投稿が直ちに地図上に表示されないことは却下を意味しない。投稿に修正を要する場合、コメントにより助言が行われる。不成功に終わった試行も保存される。それ自体が、どの版画が位置特定を拒むかを示す証拠であるためである。</p>
+                    <p>本プロジェクトは、いかなる投稿についても、これを編集・削除・不受理とする権利を留保するが、その義務を負うものではない。また、本利用規約に違反があった場合、参加を停止または終了させることができる。本サービス上に本利用規約に違反すると思われる内容を発見した場合、日付・当該内容の説明・理由を添えて <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a> まで連絡されたい。</p>
+
+                    
+
+                    <h4>第十六条　免責および責任の制限</h4>
+                    <p>本サービスおよびその内容は「現状有姿」で提供され、明示または黙示を問わずいかなる保証も伴わない。特に、本サービスを通じて提供される資料が網羅的または正確であることは保証されない。本プロジェクトは研究プロジェクトであって参考図書ではない。本プロジェクトが公開するジオリファレンスは学術的解釈であり、改訂の対象となるものであって、歴史的または地理的事実に関する確定的な言明ではない。</p>
+                    <p>本プロジェクトは、利用者の機器、インターネット接続、およびこれらに起因する技術的問題について責任を負わない。本プロジェクトは、いかなる投稿をも是認するものではなく、投稿者の表明する見解は当該投稿者自身のものである。</p>
+                    <p>適用法が許容する最大限の範囲において、本プロジェクトは、本サービスの利用または利用不能に起因する間接的・付随的・結果的・特別または懲罰的損害について責任を負わない。本プロジェクトの責任に金額の上限は設けない。本利用規約のいかなる規定も、法律上排除し得ない責任、すなわち過失による死亡または身体傷害に係る責任、詐欺・故意の不正行為・重過失に係る責任を排除するものではない。</p>
+
+                    
+
+                    <h4>第十七条　外部リンク</h4>
+                    <p>本サービスは、第三者が運営するウェブサイトへのリンクを含む。本プロジェクトは、これらのサイトの内容を是認せず、その責任を負わず、利用者によるこれらの利用に起因する損害について責任を負わない。リンクは提携関係を意味しない。</p>
+
+                    
+
+                    </div>
+                    </details>
+
+                    <details class="legal-part">
+                    <summary>
+                        <span class="part-label">第三部</span>
+                        <span class="part-name">共通規定</span>
+                        <span class="part-desc">プライバシーポリシーおよび利用規約の双方に適用されます。第十八条〜第二十二条。</span>
+                    </summary>
+                    <div class="part-body">
+
+                    <h4>第十八条　問い合わせ先</h4>
+                    <p>本書に関する問い合わせは、プライバシーに関するものであれ利用規約に関するものであれ、本ページ冒頭の「お問い合わせ」に記載の宛先より受け付ける。本プラットフォーム自体に関する事項、すなわちアカウント・ログイン・同プラットフォーム上に保持されるデータの削除については、HEIG-VD（<a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a>）宛に連絡されたい。</p>
+
+                    <h4>第十九条　本書の変更</h4>
+                    <p>本書は、随時変更されることがある。本ページに掲載された版が従前の一切の版に優先し、冒頭の日付が最終変更時点を示す。利用規約の変更は掲載の時点で効力を生じ、変更後に本サービスの利用を継続した場合、当該変更に同意したものと見做す。変更に同意しない場合、利用者は本サービスの利用を中止し、第七条に従いアカウントを削除することができる。個人データの利用方法に重大な影響を及ぼす変更を行う場合、本プロジェクトは、本ページにおいてその旨を明示し、連絡先を保持している場合には電子メールによりこれを通知する。</p>
+
+                    <h4>第二十条　準拠法および管轄</h4>
+                    <p>本利用規約は、スイスの実質法を準拠法とし、その国際私法規定は適用しない。本利用規約に起因する紛争については、チューリッヒの通常裁判所が管轄権を有する。</p>
+                    <p>前項の定めは、利用者が常居所を有する国の法において合意により排除することができない規定による保護を、利用者から奪うものではない。利用者の常居所地の強行規定が本利用規約の定めを超える権利を利用者に与える場合、当該規定が適用され、利用者は自国の裁判所に訴えを提起することができる。</p>
+                    <p>本条の準拠法の選択は、契約としての本利用規約を規律するものである。利用者に適用される個人データ保護法を定めるものではない。適用される個人データ保護法制は第一条に掲げるとおりであり、本条の定めにかかわらず、それぞれの効力により適用される。</p>
+                    
+
+                    <h4>第二十一条　優先言語</h4>
+                    <p>本書の文意に関し、英文・和文で齟齬が生じた場合、英文が優先される。</p>
+
+                    <h4>第二十二条　可分性および存続</h4>
+<p>本利用規約のいずれかの規定が無効または執行不能と判断された場合であっても、その余の規定は引き続き効力を有する。</p>
+          
+                    <p>第十二条、第十三条、第十六条および第二十条から第二十二条までは、アカウントの削除後も存続する。</p>
+                    </div>
+                    </details>
+
+                    </div>
                 </div>
             </div>
         </div>
     </section>
- 
+
     <!-- Footer -->
     <footer>
         <p>&copy; ThePrintLab 2026. <span class="lang-en">All rights reserved.</span><span class="lang-ja hidden">無断転載を禁じます。</span></p>
         <p>
             <span class="lang-en">
                 <a href="https://smapshot.heig-vd.ch/contribute/?owners=19#5.99/37.1868/141.8015" target="_blank">Smapshot Platform</a> | 
-                <a href="mailto:stephanie@theprintlab.org">Contact Us</a>
+                <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="0" onclick="return mailTo(this)">Contact Us</a> | 
+                <a href="#" onclick="showSection('contact'); return false;">Privacy &amp; Terms</a>
             </span>
             <span class="lang-ja hidden">
                 <a href="https://smapshot.heig-vd.ch/contribute/?owners=19#5.99/37.1868/141.8015" target="_blank">Smapshotプラットフォーム</a> | 
-                <a href="mailto:stephanie@theprintlab.org">お問い合わせ</a>
+                <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="0" onclick="return mailTo(this)">お問い合わせ</a> | 
+                <a href="#" onclick="showSection('contact'); return false;">プライバシー・利用規約</a>
             </span>
         </p>
     </footer>
@@ -1460,16 +2352,51 @@
             });
         }
  
-        function showSection(sectionId) {
+        // Map section ids to clean hash names (getting-started -> start-mapping reads better in a cited URL)
+        const SECTION_HASH = {
+            'home': 'home', 'about': 'about', 'getting-started': 'start-mapping',
+            'team': 'team', 'blog': 'blog', 'contact': 'contact'
+        };
+        const HASH_SECTION = Object.fromEntries(Object.entries(SECTION_HASH).map(([k, v]) => [v, k]));
+
+        function showSection(sectionId, updateHash = true) {
             // Hide all sections except the requested one
             document.querySelectorAll('section').forEach(section => {
                 section.style.display = section.id === sectionId ? 'block' : 'none';
             });
-            
-            // Scroll to top
+            // Reflect the section in the URL so it can be bookmarked, cited, and shared
+            if (updateHash) {
+                const hash = SECTION_HASH[sectionId] || sectionId;
+                if (('#' + hash) !== window.location.hash) {
+                    history.pushState({ section: sectionId }, '', '#' + hash);
+                }
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Open the section named in the URL hash (on first load and on back/forward)
+        function showSectionFromHash() {
+            const raw = window.location.hash.replace('#', '');
+            const sectionId = HASH_SECTION[raw] || (document.getElementById(raw) ? raw : 'home');
+            showSection(sectionId, false);
+        }
+        window.addEventListener('popstate', showSectionFromHash);
  
+        // Email obfuscation: assemble addresses at runtime so scrapers do not see them
+        function mailAddr(el) {
+            return el.getAttribute('data-u') + String.fromCharCode(64) + el.getAttribute('data-d');
+        }
+        function mailTo(el) {
+            window.location.href = 'mailto:' + mailAddr(el);
+            return false;
+        }
+        // On load, fill in the visible text for links that should show the address
+        window.addEventListener('load', () => {
+            document.querySelectorAll('a[data-u][data-label="1"]').forEach(el => {
+                el.textContent = mailAddr(el);
+            });
+        });
+
         function openSmapshot() {
             window.open('https://smapshot.heig-vd.ch/contribute/?owners=19#5.99/37.1868/141.8015', '_blank');
         }
@@ -1487,11 +2414,9 @@
         // Initialize language on page load
         window.addEventListener('load', () => {
             setLanguage('en');
-            document.querySelectorAll('section').forEach(section => {
-                section.style.display = 'block';
-            });
+            // Open the section named in the URL (e.g. .../#about), or home by default
+            showSectionFromHash();
         });
     </script>
 </body>
 </html>
- 
