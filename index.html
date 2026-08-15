@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Noto+Serif+JP:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <title>Drawing from the Crowd: Mapping Japan's Historical Landscapes</title>
+    <title>Drawing from the Crowd: Mapping Japan’s Historical Landscapes</title>
     <meta name="description" content="A citizen science platform where anyone can help map how ukiyo-e prints, drawings and early photography pictured Japan's famous places. Also available in Japanese.">
 
     <!-- Favicon -->
@@ -103,6 +103,11 @@
             letter-spacing: -0.005em;
             color: var(--color-accent-primary);
         }
+        .logo a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .logo a:hover { opacity: 0.75; }
  
         .nav-links {
             display: flex;
@@ -908,7 +913,6 @@
         .blog-card[open] summary::after { content: "Close ↑"; }
         .card-body {
             padding: 0 1.75rem 1.75rem;
-            max-width: var(--measure);
         }
         .card-body > *:first-child { margin-top: 0; }
 
@@ -1034,7 +1038,7 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">ThePrintLab</div>
+        <div class="logo"><a href="#" onclick="showSection('home'); return false;">ThePrintLab</a></div>
         <div class="hamburger" onclick="toggleMenu()">
             <span></span>
             <span></span>
@@ -1240,11 +1244,34 @@
                         </div>
                     </div>
  
+                    <h3>Partners</h3>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <h4>Prof. Jens Ingensand</h4>
+                            <p><strong>Full Professor, HEIG-VD (Institut INSIT); Head of the Geomatics competence group</strong></p>
+                            <p>A co-creator of <a href="https://smapshot.heig-vd.ch/" target="_blank">Smapshot</a>, the crowdsourcing platform on which this project’s georeferencing takes place. His group develops and maintains the platform that lets volunteers locate historical images on a 3D globe.</p>
+                        </div>
+                        <div class="team-member">
+                            <h4>Prof. Stéphane Lecorney</h4>
+                            <p><strong>Associate Professor, HEIG-VD (Media Engineering Institute)</strong></p>
+                            <p>Contributor to <a href="https://smapshot.heig-vd.ch/" target="_blank">Smapshot</a>’s development at HEIG-VD, supporting the platform and its open API that this project builds on.</p>
+                        </div>
+                    </div>
+ 
                     <h3>Funding and Support</h3>
-                    <p><strong>Prototype Development (August 2024–February 2025):</strong> Generously provided by The Nippon Foundation Scholars Association (TNFSA), an alumni network of Nippon Foundation Scholarship recipients.</p>
-                    <p><strong>Implementation Funding (July 2025–June 2026):</strong> Generously provided as a Career Grant for PI Santschi by the Graduate Campus at the University of Zurich.</p>
+                    <div class="team-grid funder-grid">
+                        <div class="team-member funder-tile">
+                            <div class="funder-logo-wrap"><img src="nf_logo.png" alt="The Nippon Foundation Scholars Association" class="funder-logo"></div>
+                            <p><strong>Prototype Development (August 2024–February 2025)</strong></p>
+                            <p>Generously provided by The Nippon Foundation Scholars Association (TNFSA), an alumni network of Nippon Foundation Scholarship recipients.</p>
+                        </div>
+                        <div class="team-member funder-tile">
+                            <div class="funder-logo-wrap"><img src="grc_logo.png" alt="UZH Graduate Campus" class="funder-logo"></div>
+                            <p><strong>Implementation Funding (July 2025–June 2026)</strong></p>
+                            <p>Generously provided as a Career Grant for PI Santschi by the Graduate Campus at the University of Zurich.</p>
+                        </div>
+                    </div>
                     <p>We are deeply grateful for the support of both institutions.</p>
-                    <p class="funder-logos"><img src="nf_logo.png" alt="Supported by The Nippon Foundation" class="funder-logo"><img src="grc_logo.png" alt="UZH Graduate Campus" class="funder-logo"></p>
                 </div>
  
                 <!-- Japanese -->
@@ -1270,7 +1297,7 @@
                             <p>カリフォルニア大学サンタクルーズ校歴史学部およびコウェル・カレッジ講師。<em>Okinawa Memories Initiative</em>カリキュラム開発ディレクター。民俗学、特に妖怪や超自然的な歴史、地域のアイデンティティを研究。</p>
                         </div>
                         <div class="team-member">
-                            <h4>パンダイ・ヒマンシュ博士</h4>
+                            <h4>パンダイ・ヒマンシュ</h4>
                             <p><strong><a href="https://www.dignityindifference.org/" target="_blank">Dignity in Difference</a>共同創設者。デジタルプロトタイピング、コーディング、AI活用ワークフロー担当</strong></p>
                             <p>デジタル人類学、特に市民科学プラットフォームの開発を専門とする。</p>
                             <p>「このプロジェクトで、市民科学のための新しいアルゴリズムを探求・開発することに興味があります。」</p>
@@ -1283,11 +1310,34 @@
                         </div>
                     </div>
  
+                    <h3>パートナー</h3>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <h4>イェンス・インゲンザント教授</h4>
+                            <p><strong>正教授、HEIG-VD（INSIT研究所）、ジオマティクス・コンピテンスグループ長</strong></p>
+                            <p>本プロジェクトのジオリファレンス作業が行われるクラウドソーシング・プラットフォーム<a href="https://smapshot.heig-vd.ch/" target="_blank">Smapshot</a>の共同開発者。同氏のグループが、ボランティアが歴史的な画像を3D地球儀上で位置特定できるこのプラットフォームを開発・運営しています。</p>
+                        </div>
+                        <div class="team-member">
+                            <h4>ステファン・ルコルネ教授</h4>
+                            <p><strong>准教授、HEIG-VD（メディア工学研究所）</strong></p>
+                            <p>HEIG-VDにおける<a href="https://smapshot.heig-vd.ch/" target="_blank">Smapshot</a>の開発に携わり、本プロジェクトが基盤とするプラットフォームとそのオープンAPIを支えています。</p>
+                        </div>
+                    </div>
+ 
                     <h3>助成・ご支援</h3>
-                    <p><strong>プロトタイプ開発（2024年8月〜2025年2月）：</strong>日本財団奨学金受給者の同窓会ネットワークである日本財団スカラーズ・アソシエーション（TNFSA）より助成を受けました。</p>
-                    <p><strong>本格実装（2025年7月〜2026年6月）：</strong>チューリッヒ大学大学院キャンパスより、研究代表者サンチへのキャリア・グラントとして助成を受けました。</p>
+                    <div class="team-grid funder-grid">
+                        <div class="team-member funder-tile">
+                            <div class="funder-logo-wrap"><img src="nf_logo.png" alt="日本財団スカラーズ・アソシエーション" class="funder-logo"></div>
+                            <p><strong>プロトタイプ開発（2024年8月〜2025年2月）</strong></p>
+                            <p>日本財団奨学金受給者の同窓会ネットワークである日本財団スカラーズ・アソシエーション（TNFSA）より助成を受けました。</p>
+                        </div>
+                        <div class="team-member funder-tile">
+                            <div class="funder-logo-wrap"><img src="grc_logo.png" alt="チューリッヒ大学大学院キャンパス" class="funder-logo"></div>
+                            <p><strong>本格実装（2025年7月〜2026年6月）</strong></p>
+                            <p>チューリッヒ大学大学院キャンパスより、研究代表者サンチへのキャリア・グラントとして助成を受けました。</p>
+                        </div>
+                    </div>
                     <p>両機関のご支援に心より感謝申し上げます。</p>
-                    <p class="funder-logos"><img src="nf_logo.png" alt="日本財団の支援を受けています" class="funder-logo"><img src="grc_logo.png" alt="チューリッヒ大学大学院キャンパス" class="funder-logo"></p>
                 </div>
             </div>
         </div>
@@ -1448,7 +1498,7 @@
                         <summary>
                             <span class="card-date">March 2026 <span class="card-author">Dr. Stephanie Santschi</span></span>
                             <span class="card-title">Drawing from the Crowd at SADiLaR’s DH Colloquium (March 2026)</span>
-                            <span class="card-teaser">A talk at SADiLaR's digital-humanities colloquium, and the questions that came out of it.</span>
+                            <span class="card-teaser">A talk at SADiLaR’s digital-humanities colloquium, and the questions that came out of it.</span>
                         </summary>
                         <div class="card-body">
                         <p><em>Drawing from the Crowd</em>, our citizen science platform for georeferencing Edo-period <em>ukiyo-e</em>, was the subject of an hour-long talk at the <strong>South African Centre for Digital Language Resources (SADiLaR) DH Colloquium</strong> on 25 March. SADiLaR runs a monthly online series where DH researchers from across the world share what they are working on, and I was glad to be part of it.</p>
@@ -1844,10 +1894,10 @@
                     <div class="plain-summary">
                         <h4>The short version</h4>
                         <ul>
-                            <li><strong>You can take part completely anonymously.</strong> No account, no email, no name &mdash; browsing and contributing both work without them. There is no minimum age.</li>
+                            <li><strong>You can take part completely anonymously.</strong> Browsing and contributing both work without account, email, or name. There is no minimum age.</li>
                             <li>If you do register, we collect as little as we can: your account details, what you submit, and anonymous usage statistics.</li>
                             <li>We use it to run the platform, do the research, credit you, and build the community. We do not sell it and we do not advertise.</li>
-                            <li>Your contributions are published as open research data, with credit to you unless you ask otherwise. Open data cannot be recalled &mdash; so please keep personal recollections out, and email them to us instead.</li>
+                            <li>Your contributions are published as open research data, with credit to you unless you ask otherwise. Open data cannot be recalled, so please keep personal recollections out, and email them to us instead.</li>
                             <li>Accounts live on Smapshot, not on this website. Deleting an account means asking Smapshot, and we will help.</li>
                             <li>You can ask us to see, correct, or delete your data at any time: <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a>.</li>
                             <li>The images themselves (prints, sketchbooks, photographs, gazetteers) belong to the museums and archives that hold them. Their terms apply, and each institution’s own declaration is the authority.</li>
@@ -2344,12 +2394,12 @@
         <p>
             <span class="lang-en">
                 <a href="https://smapshot.heig-vd.ch/contribute/?owners=19#5.99/37.1868/141.8015" target="_blank">Smapshot Platform</a> | 
-                <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="0" onclick="return mailTo(this)">Contact Us</a> | 
+                <a href="#" onclick="showSection('contact'); return false;">Contact Us</a> | 
                 <a href="#" onclick="showSection('contact'); return false;">Privacy &amp; Terms</a>
             </span>
             <span class="lang-ja hidden">
                 <a href="https://smapshot.heig-vd.ch/contribute/?owners=19#5.99/37.1868/141.8015" target="_blank">Smapshotプラットフォーム</a> | 
-                <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="0" onclick="return mailTo(this)">お問い合わせ</a> | 
+                <a href="#" onclick="showSection('contact'); return false;">お問い合わせ</a> | 
                 <a href="#" onclick="showSection('contact'); return false;">プライバシー・利用規約</a>
             </span>
         </p>
