@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Noto+Serif+JP:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <title>Drawing from the Crowd: Mapping Japan’s Historical Landscapes</title>
     <meta name="description" content="A citizen science platform where anyone can help map how ukiyo-e prints, drawings and early photography pictured Japan's famous places. Also available in Japanese.">
 
@@ -40,9 +37,11 @@
             --color-accent-deep: #2D3820;
             --color-rule: #C9BFAE;
 
-            /* Booklike serif for reading; Inter as a quiet utility face for nav and labels */
-            --font-serif: 'Source Serif 4', 'Noto Serif JP', Georgia, 'Times New Roman', serif;
-            --font-utility: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            /* System fonts only: nothing is fetched from another server. Serif for reading; the system UI face for nav and labels */
+            --font-serif: Georgia, Cambria, "Times New Roman",
+                          "MS Mincho", "Hiragino Mincho ProN", "Noto Serif CJK JP", serif;
+            --font-utility: system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+                            "Hiragino Sans", "Yu Gothic", Meiryo, "Noto Sans CJK JP", sans-serif;
             --font-family: var(--font-serif);
 
             /* One modular scale (ratio ≈ 1.25). Every size in the site is one of these. */
@@ -513,6 +512,39 @@
             border-radius: 4px;
         }
  
+        /* Videos are linked, not embedded: nothing loads from YouTube until clicked */
+        .video-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 700px;
+            margin: 1.5rem 0;
+            padding: 1.1rem 1.25rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .content a.video-link { text-decoration: none; }
+        .video-link:hover { border-color: var(--color-accent-primary); }
+        .video-play {
+            flex: 0 0 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: var(--color-accent-primary);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        .video-label {
+            font-family: var(--font-utility);
+            font-size: var(--step--1);
+            font-weight: 500;
+            color: var(--color-accent-primary);
+        }
+ 
         .result-image {
             margin-top: 2.5rem;
             background: var(--color-surface);
@@ -803,7 +835,7 @@
         /* Language-specific styling */
         .japanese-text {
             font-feature-settings: 'palt' on;
-            font-family: 'Noto Serif JP', 'Source Serif 4', serif;
+            font-family: "MS Mincho", "Hiragino Mincho ProN", "Noto Serif CJK JP", serif;
             line-height: 1.85;
         }
  
@@ -1083,7 +1115,7 @@
                         <figcaption>The Smapshot platform in action: aligning Hokusai’s view of Lake Suwa with modern terrain data</figcaption>
                     </figure>
                     <p><strong>Welcome!</strong> Whether you are enthusiastic about art, love traveling Japan, or are curious about historical landscapes, we are glad you have found us. Through our project, we aim to bring together people from around the globe in order to jointly explore how <em>ukiyo-e</em>, Japanese prints (you might be familiar with the Great Wave or the Red Fuji as representants of this genre) depicted Japan’s famous places. And your participation helps us do that at scale! By joining our growing community of citizen scientists, you help reveal how historic prints of early modern Japan position viewers to experience Japan’s landscapes.</p>
-                    <p>The platform launched in October 2025. It grew out of research at the University of Zurich (UZH)’s Chair of East Asian Art History, where The Nippon Foundation’s Social Innovation Collaboration project first supported its prototype (August 2024–February 2025), and the UZH Graduate Research Campus (GRC)’s Career Funding allowed its implementation (July 2025–June 2026).</p>
+                    <p>The platform launched in October 2025. It grew out of research at the University of Zurich (UZH)’s Chair of East Asian Art History, where The Nippon Foundation’s Social Innovation Collaboration project first supported its prototype (August 2024–January 2025), and the UZH Graduate Research Campus (GRC)’s Career Funding allowed its implementation (July 2025–June 2026).</p>
                     <p>By matching depicted landscapes with modern topography, we deepen our understanding of Japan’s historical, artistic and cultural geography while highlighting the importance of nuanced cultural preservation. Every contribution, yours included, helps scholars refine our understanding of spatial representation in early modern Japanese visual culture.</p>
                 </div>
                 <!-- Japanese content -->
@@ -1095,7 +1127,7 @@
                         <figcaption>Smapshotプラットフォームの画面：北斎が描いた諏訪湖を現代の地形データに重ねた様子</figcaption>
                     </figure>
                     <p><strong>ようこそ！</strong>美術に関心をお持ちの方も、日本を旅するのがお好きな方も、歴史的な風景に興味を抱く方も、このサイトを見つけてくださってうれしく思います。このプロジェクトでは、世界中の人々が力を合わせ、浮世絵、つまり日本の版画（「神奈川沖浪裏（グレート・ウェーブ）」や「赤富士」がこの分野の代表として知られています）が日本の名所をどのように描いたかを、ともに探求していきます。あなたの参加が、それを大きな規模で進める力になります。市民科学者の輪に加わることで、近世日本の版画が鑑賞者をどのような視点に置いて日本の風景を体験させたかを、あなた自身が明らかにしていきます。</p>
-                    <p>プラットフォームは2025年10月に公開されました。本プロジェクトは、チューリッヒ大学（UZH）東洋美術史講座での研究から生まれました。日本財団のソーシャル・イノベーション・コラボレーション事業が試作段階（2024年8月〜2025年2月）を、UZH大学院研究キャンパス（GRC）のキャリア・ファンディングが実装段階（2025年7月〜2026年6月）を支援しました。</p>
+                    <p>プラットフォームは2025年10月に公開されました。本プロジェクトは、チューリッヒ大学（UZH）東洋美術史講座での研究から生まれました。日本財団のソーシャル・イノベーション・コラボレーション事業が試作段階（2024年8月〜2025年1月）を、UZH大学院研究キャンパス（GRC）のキャリア・ファンディングが実装段階（2025年7月〜2026年6月）を支援しました。</p>
                     <p>描かれた風景と現代の地形を照合することで、日本の歴史的・芸術的・文化的な地理への理解を深め、細やかな文化遺産保全の重要性を浮き彫りにします。皆様一人ひとりのご協力が、近世日本の視覚文化における空間表現の研究に貢献します。</p>
                 </div>
             </div>
@@ -1262,7 +1294,7 @@
                     <div class="team-grid funder-grid">
                         <div class="team-member funder-tile">
                             <div class="funder-logo-wrap"><img src="nf_logo.png" alt="The Nippon Foundation Scholars Association" class="funder-logo"></div>
-                            <p><strong>Prototype Development (August 2024–February 2025)</strong></p>
+                            <p><strong>Prototype Development (August 2024–January 2025)</strong></p>
                             <p>Generously provided by The Nippon Foundation Scholars Association (TNFSA), an alumni network of Nippon Foundation Scholarship recipients.</p>
                         </div>
                         <div class="team-member funder-tile">
@@ -1328,7 +1360,7 @@
                     <div class="team-grid funder-grid">
                         <div class="team-member funder-tile">
                             <div class="funder-logo-wrap"><img src="nf_logo.png" alt="日本財団スカラーズ・アソシエーション" class="funder-logo"></div>
-                            <p><strong>プロトタイプ開発（2024年8月〜2025年2月）</strong></p>
+                            <p><strong>プロトタイプ開発（2024年8月〜2025年1月）</strong></p>
                             <p>日本財団奨学金受給者の同窓会ネットワークである日本財団スカラーズ・アソシエーション（TNFSA）より助成を受けました。</p>
                         </div>
                         <div class="team-member funder-tile">
@@ -1397,9 +1429,10 @@
 
                     <div class="start-extra">
                         <h3>Watch the tutorial</h3>
-                        <div class="video-container">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/4uSqNAOrpeY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <a class="video-link" href="https://www.youtube.com/watch?v=4uSqNAOrpeY" target="_blank" rel="noopener">
+                            <span class="video-play" aria-hidden="true">▶</span>
+                            <span class="video-label">Watch the tutorial on YouTube →</span>
+                        </a>
                         <p>For the full research process, see the <a href="https://docs.google.com/document/d/1L7O5tMp37jLTeEAryeUKlki5N8v0qTrIXv9ugi_bIR0/edit?usp=sharing" target="_blank">extended case study</a>. If the platform throws an error, clearing your browser cache usually fixes it.</p>
                     </div>
                 </div>
@@ -1455,9 +1488,10 @@
 
                     <div class="start-extra">
                         <h3>チュートリアル動画</h3>
-                        <div class="video-container">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/4uSqNAOrpeY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <a class="video-link" href="https://www.youtube.com/watch?v=4uSqNAOrpeY" target="_blank" rel="noopener">
+                            <span class="video-play" aria-hidden="true">▶</span>
+                            <span class="video-label">YouTubeでチュートリアルを見る →</span>
+                        </a>
                         <p>研究の全体的な流れは<a href="https://docs.google.com/document/d/1L7O5tMp37jLTeEAryeUKlki5N8v0qTrIXv9ugi_bIR0/edit?usp=sharing" target="_blank">詳細なケーススタディ</a>をご覧ください。エラーが出る場合は、ブラウザのキャッシュを消去すると解決することが多いです。</p>
                     </div>
                 </div>
@@ -1505,9 +1539,10 @@
  
                         <p>An hour is long enough to walk through the whole thing properly: where the art historical questions come from, why <em>ukiyo-e</em> prints are difficult to georeference (artists moved Mt. Fuji around to suit their compositions), what the Smapshot adaptation looks like, and what we are hoping citizen scientists will help us figure out. If you have been wanting a fuller picture of the project than the website can offer, the recording is the easiest way in:</p>
  
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/QsMyFBDcJOQ" title="Drawing from the Crowd at SADiLaR DH Colloquium" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <a class="video-link" href="https://www.youtube.com/watch?v=QsMyFBDcJOQ" target="_blank" rel="noopener">
+                            <span class="video-play" aria-hidden="true">▶</span>
+                            <span class="video-label">Watch the SADiLaR talk on YouTube (about one hour) →</span>
+                        </a>
  
                         <p>Thanks to the SADiLaR team for the invitation, and to everyone who showed up with questions, several of which I am still thinking about.</p>
  
@@ -1645,7 +1680,7 @@
                         
                         <p>The response has been encouraging: scholars and non-specialists alike are excited about contributing to research that reveals how Edo-period prints positioned their viewers to experience landscapes.</p>
  
-                        <h4 class="sub-heading">Implementation Phase (August 2025–July 2026)</h4>
+                        <h4 class="sub-heading">Implementation Phase (July 2025–June 2026)</h4>
                         <p><em>Drawing from the Crowd</em> has secured implementation funding through a Career Grant from the Graduate Campus at the University of Zurich. This support allows us to move beyond the prototype stage and build a fully functional platform.</p>
                         <p><strong>In the last couple of months, we have:</strong></p>
                         <ul>
@@ -1701,9 +1736,10 @@
  
                         <p>1時間あれば、プロジェクトの全体像を一通りお伝えできます。美術史的な問いがどこから来ているのか、浮世絵のジオリファレンスがなぜ難しいのか（絵師たちは構図に合わせて富士山を動かしてしまうのです）、Smapshotをどのように浮世絵向けに調整したのか、そして市民科学の力で何を解明したいのか。ウェブサイトだけではお伝えしきれない部分も、動画にまとめていますのでご覧ください。</p>
  
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/QsMyFBDcJOQ" title="SADiLaR DHコロキアムでの「Drawing from the Crowd」講演" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
+                        <a class="video-link" href="https://www.youtube.com/watch?v=QsMyFBDcJOQ" target="_blank" rel="noopener">
+                            <span class="video-play" aria-hidden="true">▶</span>
+                            <span class="video-label">YouTubeで講演を見る（約1時間）→</span>
+                        </a>
  
                         <p>お招きくださったSADiLaRの皆様、そしてご質問をくださった参加者の皆様に、お礼申し上げます。質疑応答でいただいた問いの中には、今も考え続けているものがいくつかあります。</p>
  
@@ -1842,7 +1878,7 @@
                         
                         <p>専門家の方にも、そうでない方にも、江戸時代の版画が描いた視点を解き明かす研究に興味を持っていただけているようで、嬉しく思っています。</p>
  
-                        <h4 class="sub-heading">本格実装フェーズ（2025年8月〜2026年7月）</h4>
+                        <h4 class="sub-heading">本格実装フェーズ（2025年7月〜2026年6月）</h4>
                         <p>チューリッヒ大学大学院キャンパスからキャリア・グラントをいただき、プロトタイプから本格的なプラットフォームへと発展させることができました。</p>
                         <p><strong>最近の進捗：</strong></p>
                         <ul>
@@ -1889,7 +1925,7 @@
                     <p>Check our <a href="#" onclick="showSection('blog'); return false;">Blog</a> for the latest updates and research insights.</p>
 
                     <h3>Privacy Policy &amp; Terms of Use</h3>
-                    <p class="policy-meta">Last updated: July 2026</p>
+                    <p class="policy-meta">Last updated: September 2026</p>
 
                     <div class="plain-summary">
                         <h4>The short version</h4>
@@ -1914,7 +1950,7 @@
                     Rämistrasse 71, 8006 Zurich, Switzerland</p>
                     <p>Contact: <a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a></p>
                     <p><strong>Funding.</strong> Prototype development was funded by The Nippon Foundation Scholars Association; implementation by a Career Grant from the UZH Graduate Campus.</p>
-                    <p><strong>Hosting.</strong> This website is a static site served by GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). GitHub records server logs, including IP addresses, when the site is visited. The Project does not operate analytics, advertising, or tracking cookies on this website.</p>
+                    <p><strong>Hosting.</strong> This website is a static site hosted on DigitalOcean App Platform (DigitalOcean, LLC, New York, USA) in its Frankfurt region. DigitalOcean and the content-delivery network it uses may record server logs, including IP addresses, when the site is visited. The Project does not operate analytics, advertising, or tracking cookies on this website.</p>
                     <p><strong>Who is responsible for what.</strong> Two parties are involved, and this document covers only one of them. <strong>The Project</strong> (this website) is responsible for the content published here and for the research use of contributed data: how it is analysed, cited, and shared as open research. <strong>Smapshot</strong>, a separate platform created and operated by HEIG-VD (Haute École d’Ingénierie et de Gestion du Canton de Vaud), Yverdon-les-Bains, Switzerland, is responsible for the mapping platform itself: user accounts, login credentials, storage of your contributions, and its own handling of that data. Accounts and submissions live on Smapshot’s systems, not on this website. For anything to do with your account or the data held there, <a href="https://smapshot.heig-vd.ch/policy" target="_blank">Smapshot’s own data policy</a> governs (available in English and Japanese), and the contact is <a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a>. This document does not restate Smapshot’s terms; where the two touch, Smapshot governs the platform and the Project governs the research use.</p>
 
                     
@@ -1962,7 +1998,7 @@
                     <p><strong>Contributions.</strong> Where you make a Contribution, the Project receives the annotations and analyses produced, the geographic references recorded, and any research comments left. See Article 4 on publication.</p>
                     <p><strong>Statistics.</strong> The Project collects statistical information concerning interaction with the Platform, patterns of participation, and technical metrics, in a form that does not identify individual users.</p>
                     <p><strong>Correspondence.</strong> Where you contact the Project by email, your message and email address are retained for as long as needed to deal with your enquiry.</p>
-                    <p><strong>This Website.</strong> Sets no cookies, runs no analytics, and collects nothing. It is a static site; GitHub records server logs as described above.</p>
+                    <p><strong>This Website.</strong> Sets no cookies, runs no analytics, and collects nothing. It is a static site; DigitalOcean records server logs as described above. Videos are linked, not embedded, so nothing is loaded from YouTube unless you follow the link.</p>
 
                     
 
@@ -2148,7 +2184,7 @@
                     <p>最新情報や研究の知見については<a href="#" onclick="showSection('blog'); return false;">ブログ</a>をご覧ください。</p>
 
                     <h3>プライバシーポリシー・利用規約</h3>
-                    <p class="policy-meta">最終更新日：2026年7月</p>
+                    <p class="policy-meta">最終更新日：2026年9月</p>
 
                     <div class="plain-summary">
                         <h4>要点</h4>
@@ -2173,7 +2209,7 @@
                     Rämistrasse 71, 8006 Zurich, Switzerland</p>
                     <p>連絡先：<a href="#" data-u="stephanie" data-d="theprintlab.org" data-label="1" onclick="return mailTo(this)"></a></p>
                     <p><strong>助成</strong>　プロトタイプ開発は日本財団スカラーズ・アソシエーション、本格実装はチューリッヒ大学大学院キャンパスのキャリア・グラントによる助成を受けた。</p>
-                    <p><strong>ホスティング</strong>　本ウェブサイトは、GitHub Pages（GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA）により配信される静的サイトである。GitHubは、本ウェブサイトへのアクセスに際し、IPアドレスを含むサーバーログを記録する。本プロジェクトは、本ウェブサイト上でアクセス解析・広告・トラッキングクッキーを一切使用しない。</p>
+                    <p><strong>ホスティング</strong>　本ウェブサイトは、DigitalOcean App Platform（DigitalOcean, LLC、米国ニューヨーク）のフランクフルト・リージョンに置かれた静的サイトである。DigitalOceanおよび同社が利用するコンテンツ配信ネットワークは、本ウェブサイトへのアクセスに際し、IPアドレスを含むサーバーログを記録することがある。本プロジェクトは、本ウェブサイト上でアクセス解析・広告・トラッキングクッキーを一切使用しない。</p>
                     <p><strong>どの主体が何に責任を負うか</strong>　二つの主体が関わっており、本書はそのうちの一方のみを対象とする。<strong>本プロジェクト</strong>（本ウェブサイト）は、ここで公開される内容と、提供されたデータの研究上の利用、すなわちその分析・引用・オープンな研究としての共有について責任を負う。<strong>Smapshot</strong>は、HEIG-VD（ヴォー州工学経営大学、スイス・イヴェルドン＝レ＝バン）が開発・運営する別個のプラットフォームであり、マッピング・プラットフォームそのもの、すなわちユーザーアカウント・ログイン認証情報・投稿の保存、およびそのデータの取り扱いについて責任を負う。アカウントおよび投稿は、本ウェブサイトではなくSmapshotのシステム上に保持される。アカウントやそこに保持されるデータに関する事項については、<a href="https://smapshot.heig-vd.ch/policy" target="_blank">Smapshotのデータポリシー</a>（英語・日本語）が適用され、連絡先は<a href="#" data-u="smapshot" data-d="heig-vd.ch" data-label="1" onclick="return mailTo(this)"></a>である。本書はSmapshotの規約を繰り返さない。両者が接する場面では、プラットフォームについてはSmapshotが、研究上の利用については本プロジェクトが、それぞれ規律する。</p>
 
                     
@@ -2221,7 +2257,7 @@
                     <p><strong>投稿</strong>　利用者が投稿を行った場合、本プロジェクトは、ユーザーの注釈と分析・地理的参照情報・リサーチコメントを受領する。公開については第四条を参照のこと。</p>
                     <p><strong>統計情報</strong>　本プロジェクトは、プラットフォームとの相互作用・参加パターン・技術的指標に関する統計的情報を個人を特定しない範囲で収集する。</p>
                     <p><strong>問い合わせ</strong>　利用者が電子メールにより本プロジェクトに連絡を行った場合、本プロジェクトは、当該問い合わせの対応に必要な期間、その内容およびメールアドレスを保持する。</p>
-                    <p><strong>本ウェブサイト</strong>　本ウェブサイトは、クッキーを使用せず、アクセス解析も行わず、いかなる情報も収集しない。静的サイトであり、GitHubが前記のとおりサーバーログを記録する。</p>
+                    <p><strong>本ウェブサイト</strong>　本ウェブサイトは、クッキーを使用せず、アクセス解析も行わず、いかなる情報も収集しない。静的サイトであり、DigitalOceanが前記のとおりサーバーログを記録する。動画は埋め込まずリンクで示しており、リンクを開かない限りYouTubeから何も読み込まれない。</p>
 
                     
 
@@ -2247,7 +2283,8 @@
                     
 
                     <h4>第六条　保存期間</h4>
-                    <p>アカウント情報はHEIG-VDが保持し、当該アカウントが存続する間保存される。検証を経た投稿は研究記録の一部を構成し、研究データとして無期限に保存される。アカウントが削除された場合であっても、オープンデータAPIを通じて既に公開された投稿は公開されたままとなり、本プロジェクトはこれを匿名化された形式で保存する。個人を特定しない利用統計は無期限に保存される。問い合わせの記録は、当該問い合わせの対応に必要な期間保持される。</p>
+                    <p>アカウント情報はHEIG-VDが保持し、その保存期間は本ポリシーではなく同社の<a href="https://smapshot.heig-vd.ch/policy" target="_blank">データポリシー</a>の定めるところによる。</p>
+                    <p>検証を経た投稿は研究記録の一部を構成し、研究データとして無期限に保存される。アカウントが削除された場合であっても、オープンデータAPIを通じて既に公開された投稿は公開されたままとなり、本プロジェクトはこれを匿名化された形式で保存する。個人を特定しない利用統計は無期限に保存される。問い合わせの記録は、当該問い合わせの対応に必要な期間保持される。</p>
 
                     
 
