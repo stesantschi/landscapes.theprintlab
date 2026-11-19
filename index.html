@@ -139,6 +139,10 @@
         }
         .logo span { line-height: 1; padding-bottom: 0.18em; }
         .logo a:hover { opacity: 0.75; }
+        /* Lockup rule: as tall as the mark's drawn shapes (90% of its box, inset 4.9% top and bottom) */
+        .logo-rule { align-self: flex-end; width: 1px; height: calc(1.9em * 0.902); margin: 0 0.25rem calc(1.9em * 0.049); background: currentColor; opacity: 0.45; }
+        .logo .logo-site { font-weight: 700; white-space: nowrap; }
+        @media (max-width: 420px) { .logo-rule, .logo .logo-site { display: none; } }
  
         .nav-links {
             display: flex;
@@ -1112,7 +1116,7 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo"><a href="#" onclick="showSection('home'); return false;" aria-label="ThePrintLab, home"><svg class="logo-mark" viewBox="130 88 818 818" aria-hidden="true" focusable="false" fill="currentColor"><path fill-rule="evenodd" d="M674.3 332.6C674.3 200.4 599.1 128.0 461.5 128.0H170.0V788.0H305.8V552.6H475.1C596.4 552.6 674.3 466.6 674.3 332.6ZM538.5 340.8C538.5 407.8 505.0 439.4 432.6 439.4H305.8V241.2H432.6C505.0 241.2 538.5 272.9 538.5 340.8Z"/><path d="M170 812H357V866H170Z"/><path d="M429 812H854V600H908V866H429Z"/><path d="M318 249h30v30h-30zM318 287h30v30h-30zM318 325h30v30h-30zM318 363h30v30h-30zM318 401h30v30h-30zM356 249h30v30h-30zM356 325h30v30h-30zM356 363h30v30h-30zM356 401h30v30h-30zM394 249h30v30h-30zM394 325h30v30h-30zM394 401h30v30h-30zM432 287h30v30h-30zM432 363h30v30h-30zM470 325h30v30h-30z"/></svg><span>ThePrintLab</span></a></div>
+        <div class="logo"><a href="#" onclick="showSection('home'); return false;" aria-label="ThePrintLab, Drawing from the Crowd, home"><svg class="logo-mark" viewBox="130 88 818 818" aria-hidden="true" focusable="false" fill="currentColor"><path fill-rule="evenodd" d="M674.3 332.6C674.3 200.4 599.1 128.0 461.5 128.0H170.0V788.0H305.8V552.6H475.1C596.4 552.6 674.3 466.6 674.3 332.6ZM538.5 340.8C538.5 407.8 505.0 439.4 432.6 439.4H305.8V241.2H432.6C505.0 241.2 538.5 272.9 538.5 340.8Z"/><path d="M170 812H357V866H170Z"/><path d="M429 812H854V600H908V866H429Z"/><path d="M318 249h30v30h-30zM318 287h30v30h-30zM318 325h30v30h-30zM318 363h30v30h-30zM318 401h30v30h-30zM356 249h30v30h-30zM356 325h30v30h-30zM356 363h30v30h-30zM356 401h30v30h-30zM394 249h30v30h-30zM394 325h30v30h-30zM394 401h30v30h-30zM432 287h30v30h-30zM432 363h30v30h-30zM470 325h30v30h-30z"/></svg><span class="logo-brand">ThePrintLab</span><span class="logo-rule" aria-hidden="true"></span><span class="logo-site" data-en="Drawing from the Crowd" data-ja="集合知を描く">Drawing from the Crowd</span></a></div>
         <button type="button" class="hamburger" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
             <span></span>
             <span></span>
